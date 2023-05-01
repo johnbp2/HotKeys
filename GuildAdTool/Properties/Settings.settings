@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JohnBPearson.Windows.Forms.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AcceptanceMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Glad to have you here! Don't hesitate to ask for help. Our discord link is in the Guild window 'Description' (press G).</Value>
+    </Setting>
+    <Setting Name="UserHotKeyGuildAd" Type="System.Char" Scope="User">
+      <Value Profile="(Default)">s</Value>
+    </Setting>
+    <Setting Name="AllowedHotkeys" Type="System.String" Scope="User">
+      <Value Profile="(Default)">a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z</Value>
+    </Setting>
+    <Setting Name="GuildAd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Max XP + Active (optional) discord. 
+ Chill, friendly, helpful. No requirements/alt limits, just be kind/respectful. 
+ Rank + conquest rewards. Social + PvE + PvP Events. 
+ Get involved or focus on solo play! Whisper for info/inv.</Value>
+    </Setting>
+    <Setting Name="UserHotkeyAcceptance" Type="System.Char" Scope="User">
+      <Value Profile="(Default)">a</Value>
+    </Setting>
+    <Setting Name="HotkeyModifiers" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Alt + Shift + </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
