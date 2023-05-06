@@ -11,17 +11,17 @@
     <Setting Name="AllowedHotkeys" Type="System.String" Scope="User">
       <Value Profile="(Default)">a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z</Value>
     </Setting>
-    <Setting Name="GuildAd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Max XP + Active (optional) discord. 
- Chill, friendly, helpful. No requirements/alt limits, just be kind/respectful. 
- Rank + conquest rewards. Social + PvE + PvP Events. 
- Get involved or focus on solo play! Whisper for info/inv.</Value>
-    </Setting>
     <Setting Name="UserHotkeyAcceptance" Type="System.Char" Scope="User">
       <Value Profile="(Default)">a</Value>
     </Setting>
     <Setting Name="HotkeyModifiers" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Alt + Shift + </Value>
+    </Setting>
+    <Setting Name="GuildAd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Max XP + Active (optional) discord. 
+ Chill, friendly, helpful. No requirements/alt limits, just be kind/respectful. 
+ Rank + conquest rewards. Social + PvE + PvP Events. 
+ Get involved or focus on solo play! Whisper for info/inv.</Value>
     </Setting>
   </Settings>
 </SettingsFile>

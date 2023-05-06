@@ -72,9 +72,9 @@
             // btnSave
             // 
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnSave.Location = new System.Drawing.Point(466, 47);
+            this.btnSave.Location = new System.Drawing.Point(454, 54);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(14, 57);
+            this.btnSave.Size = new System.Drawing.Size(43, 20);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -126,9 +126,9 @@
             this.transparentFlowPanel1.Controls.Add(this.lblHotkeyGuildAd);
             this.transparentFlowPanel1.Controls.Add(this.cbHotkeyGuildAd);
             this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.transparentFlowPanel1.Location = new System.Drawing.Point(12, 79);
+            this.transparentFlowPanel1.Location = new System.Drawing.Point(29, 79);
             this.transparentFlowPanel1.Name = "transparentFlowPanel1";
-            this.transparentFlowPanel1.Size = new System.Drawing.Size(217, 42);
+            this.transparentFlowPanel1.Size = new System.Drawing.Size(146, 42);
             this.transparentFlowPanel1.TabIndex = 2;
             // 
             // lblHotkeyGuildAd
@@ -155,7 +155,7 @@
             this.transparentFlowPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.transparentFlowPanel2.Location = new System.Drawing.Point(263, 79);
             this.transparentFlowPanel2.Name = "transparentFlowPanel2";
-            this.transparentFlowPanel2.Size = new System.Drawing.Size(249, 44);
+            this.transparentFlowPanel2.Size = new System.Drawing.Size(144, 44);
             this.transparentFlowPanel2.TabIndex = 2;
             // 
             // lblHotkeyAcceptance
@@ -181,8 +181,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(524, 268);
-            this.Controls.Add(this.transparentFlowPanel2);
             this.Controls.Add(this.transparentFlowPanel1);
+            this.Controls.Add(this.transparentFlowPanel2);
             this.Controls.Add(this.transparentPanel2);
             this.Name = "Form1";
             this.Text = "Guild Ad";

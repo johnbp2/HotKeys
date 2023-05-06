@@ -62,20 +62,6 @@ namespace JohnBPearson.Windows.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Max XP + Active (optional) discord. \n Chill, friendly, helpful. No requirements/a" +
-            "lt limits, just be kind/respectful. \n Rank + conquest rewards. Social + PvE + Pv" +
-            "P Events. \n Get involved or focus on solo play! Whisper for info/inv.")]
-        public string GuildAd {
-            get {
-                return ((string)(this["GuildAd"]));
-            }
-            set {
-                this["GuildAd"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a")]
         public char UserHotkeyAcceptance {
             get {
@@ -92,6 +78,20 @@ namespace JohnBPearson.Windows.Forms.Properties {
         public string HotkeyModifiers {
             get {
                 return ((string)(this["HotkeyModifiers"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Max XP + Active (optional) discord. \r\n Chill, friendly, helpful. No requirements/" +
+            "alt limits, just be kind/respectful. \r\n Rank + conquest rewards. Social + PvE + " +
+            "PvP Events. \r\n Get involved or focus on solo play! Whisper for info/inv.")]
+        public string GuildAd {
+            get {
+                return ((string)(this["GuildAd"]));
+            }
+            set {
+                this["GuildAd"] = value;
             }
         }
     }
