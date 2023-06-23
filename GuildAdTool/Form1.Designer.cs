@@ -31,21 +31,26 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.lblGuildAd = new System.Windows.Forms.Label();
-            this.lblAcceptance = new System.Windows.Forms.Label();
-            this.tbAcceptance = new System.Windows.Forms.TextBox();
-            this.tbGuildAd = new System.Windows.Forms.TextBox();
+            this.transparentFlowPanel3 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
+            this.cmbPlanetGroups = new System.Windows.Forms.ComboBox();
+            this.btnCopyGuildLog = new System.Windows.Forms.Button();
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
             this.lblHotkeyGuildAd = new System.Windows.Forms.Label();
             this.cbHotkeyGuildAd = new System.Windows.Forms.ComboBox();
             this.transparentFlowPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
             this.lblHotkeyAcceptance = new System.Windows.Forms.Label();
             this.cbHotkeyAcceptance = new System.Windows.Forms.ComboBox();
-            this.transparentPanel2.SuspendLayout();
+            this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.lblGuildAd = new System.Windows.Forms.Label();
+            this.lblAcceptance = new System.Windows.Forms.Label();
+            this.tbAcceptance = new System.Windows.Forms.TextBox();
+            this.tbGuildAd = new System.Windows.Forms.TextBox();
+            this.lbPlanets = new System.Windows.Forms.ListBox();
+            this.transparentFlowPanel3.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentFlowPanel2.SuspendLayout();
+            this.transparentPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -56,6 +61,100 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // transparentFlowPanel3
+            // 
+            this.transparentFlowPanel3.Controls.Add(this.cmbPlanetGroups);
+            this.transparentFlowPanel3.Controls.Add(this.btnCopyGuildLog);
+            this.transparentFlowPanel3.Controls.Add(this.lbPlanets);
+            this.transparentFlowPanel3.Location = new System.Drawing.Point(12, 287);
+            this.transparentFlowPanel3.Name = "transparentFlowPanel3";
+            this.transparentFlowPanel3.Size = new System.Drawing.Size(501, 159);
+            this.transparentFlowPanel3.TabIndex = 3;
+            // 
+            // cmbPlanetGroups
+            // 
+            this.cmbPlanetGroups.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbPlanetGroups.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbPlanetGroups.FormattingEnabled = true;
+            this.cmbPlanetGroups.Items.AddRange(new object[] {
+            "A - Tython/Ord Mantell/Coruscant/Fleet",
+            "B - Korriban/Dromund Kaas/Hutta",
+            "C - Corellia/Alderaan/Balmorra/Taris",
+            "D - Yavin 4/Onderon/Manaan",
+            "E - Voss/Ossus/Quesh",
+            "F - Nar Shaddaa/Makeb/Rishi",
+            "G - Tatooine/Belsavis/Hoth",
+            "H - Ruhnuk/Odessen/Ilum/CZ-198",
+            " I  - Ziost, Oricon, Dantooine"});
+            this.cmbPlanetGroups.Location = new System.Drawing.Point(3, 3);
+            this.cmbPlanetGroups.Name = "cmbPlanetGroups";
+            this.cmbPlanetGroups.Size = new System.Drawing.Size(266, 21);
+            this.cmbPlanetGroups.TabIndex = 4;
+            // 
+            // btnCopyGuildLog
+            // 
+            this.btnCopyGuildLog.Location = new System.Drawing.Point(275, 3);
+            this.btnCopyGuildLog.Name = "btnCopyGuildLog";
+            this.btnCopyGuildLog.Size = new System.Drawing.Size(138, 23);
+            this.btnCopyGuildLog.TabIndex = 5;
+            this.btnCopyGuildLog.Text = "Copy log info to clipboard";
+            this.btnCopyGuildLog.UseVisualStyleBackColor = true;
+            this.btnCopyGuildLog.Click += new System.EventHandler(this.btnCopyGuildLog_Click);
+            // 
+            // transparentFlowPanel1
+            // 
+            this.transparentFlowPanel1.Controls.Add(this.lblHotkeyGuildAd);
+            this.transparentFlowPanel1.Controls.Add(this.cbHotkeyGuildAd);
+            this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.transparentFlowPanel1.Location = new System.Drawing.Point(29, 79);
+            this.transparentFlowPanel1.Name = "transparentFlowPanel1";
+            this.transparentFlowPanel1.Size = new System.Drawing.Size(146, 42);
+            this.transparentFlowPanel1.TabIndex = 2;
+            // 
+            // lblHotkeyGuildAd
+            // 
+            this.lblHotkeyGuildAd.AutoSize = true;
+            this.lblHotkeyGuildAd.Location = new System.Drawing.Point(3, 0);
+            this.lblHotkeyGuildAd.Name = "lblHotkeyGuildAd";
+            this.lblHotkeyGuildAd.Size = new System.Drawing.Size(72, 13);
+            this.lblHotkeyGuildAd.TabIndex = 0;
+            this.lblHotkeyGuildAd.Text = "Alt +  Shift + s";
+            // 
+            // cbHotkeyGuildAd
+            // 
+            this.cbHotkeyGuildAd.FormattingEnabled = true;
+            this.cbHotkeyGuildAd.Location = new System.Drawing.Point(3, 16);
+            this.cbHotkeyGuildAd.Name = "cbHotkeyGuildAd";
+            this.cbHotkeyGuildAd.Size = new System.Drawing.Size(121, 21);
+            this.cbHotkeyGuildAd.TabIndex = 0;
+            // 
+            // transparentFlowPanel2
+            // 
+            this.transparentFlowPanel2.Controls.Add(this.lblHotkeyAcceptance);
+            this.transparentFlowPanel2.Controls.Add(this.cbHotkeyAcceptance);
+            this.transparentFlowPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.transparentFlowPanel2.Location = new System.Drawing.Point(263, 79);
+            this.transparentFlowPanel2.Name = "transparentFlowPanel2";
+            this.transparentFlowPanel2.Size = new System.Drawing.Size(144, 44);
+            this.transparentFlowPanel2.TabIndex = 2;
+            // 
+            // lblHotkeyAcceptance
+            // 
+            this.lblHotkeyAcceptance.AutoSize = true;
+            this.lblHotkeyAcceptance.Location = new System.Drawing.Point(3, 0);
+            this.lblHotkeyAcceptance.Name = "lblHotkeyAcceptance";
+            this.lblHotkeyAcceptance.Size = new System.Drawing.Size(72, 13);
+            this.lblHotkeyAcceptance.TabIndex = 2;
+            this.lblHotkeyAcceptance.Text = "Alt +  Shift + s";
+            // 
+            // cbHotkeyAcceptance
+            // 
+            this.cbHotkeyAcceptance.FormattingEnabled = true;
+            this.cbHotkeyAcceptance.Location = new System.Drawing.Point(3, 16);
+            this.cbHotkeyAcceptance.Name = "cbHotkeyAcceptance";
+            this.cbHotkeyAcceptance.Size = new System.Drawing.Size(121, 21);
+            this.cbHotkeyAcceptance.TabIndex = 1;
             // 
             // transparentPanel2
             // 
@@ -121,66 +220,32 @@
             this.tbGuildAd.TabStop = false;
             this.tbGuildAd.TextChanged += new System.EventHandler(this.tbGuildAd_TextChanged);
             // 
-            // transparentFlowPanel1
+            // lbPlanets
             // 
-            this.transparentFlowPanel1.Controls.Add(this.lblHotkeyGuildAd);
-            this.transparentFlowPanel1.Controls.Add(this.cbHotkeyGuildAd);
-            this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.transparentFlowPanel1.Location = new System.Drawing.Point(29, 79);
-            this.transparentFlowPanel1.Name = "transparentFlowPanel1";
-            this.transparentFlowPanel1.Size = new System.Drawing.Size(146, 42);
-            this.transparentFlowPanel1.TabIndex = 2;
-            // 
-            // lblHotkeyGuildAd
-            // 
-            this.lblHotkeyGuildAd.AutoSize = true;
-            this.lblHotkeyGuildAd.Location = new System.Drawing.Point(3, 0);
-            this.lblHotkeyGuildAd.Name = "lblHotkeyGuildAd";
-            this.lblHotkeyGuildAd.Size = new System.Drawing.Size(72, 13);
-            this.lblHotkeyGuildAd.TabIndex = 0;
-            this.lblHotkeyGuildAd.Text = "Alt +  Shift + s";
-            // 
-            // cbHotkeyGuildAd
-            // 
-            this.cbHotkeyGuildAd.FormattingEnabled = true;
-            this.cbHotkeyGuildAd.Location = new System.Drawing.Point(3, 16);
-            this.cbHotkeyGuildAd.Name = "cbHotkeyGuildAd";
-            this.cbHotkeyGuildAd.Size = new System.Drawing.Size(121, 21);
-            this.cbHotkeyGuildAd.TabIndex = 0;
-            // 
-            // transparentFlowPanel2
-            // 
-            this.transparentFlowPanel2.Controls.Add(this.lblHotkeyAcceptance);
-            this.transparentFlowPanel2.Controls.Add(this.cbHotkeyAcceptance);
-            this.transparentFlowPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.transparentFlowPanel2.Location = new System.Drawing.Point(263, 79);
-            this.transparentFlowPanel2.Name = "transparentFlowPanel2";
-            this.transparentFlowPanel2.Size = new System.Drawing.Size(144, 44);
-            this.transparentFlowPanel2.TabIndex = 2;
-            // 
-            // lblHotkeyAcceptance
-            // 
-            this.lblHotkeyAcceptance.AutoSize = true;
-            this.lblHotkeyAcceptance.Location = new System.Drawing.Point(3, 0);
-            this.lblHotkeyAcceptance.Name = "lblHotkeyAcceptance";
-            this.lblHotkeyAcceptance.Size = new System.Drawing.Size(72, 13);
-            this.lblHotkeyAcceptance.TabIndex = 2;
-            this.lblHotkeyAcceptance.Text = "Alt +  Shift + s";
-            // 
-            // cbHotkeyAcceptance
-            // 
-            this.cbHotkeyAcceptance.FormattingEnabled = true;
-            this.cbHotkeyAcceptance.Location = new System.Drawing.Point(3, 16);
-            this.cbHotkeyAcceptance.Name = "cbHotkeyAcceptance";
-            this.cbHotkeyAcceptance.Size = new System.Drawing.Size(121, 21);
-            this.cbHotkeyAcceptance.TabIndex = 1;
+            this.lbPlanets.FormattingEnabled = true;
+            this.lbPlanets.Items.AddRange(new object[] {
+            "A - Tython/Ord Mantell/Coruscant/Fleet",
+            "B - Korriban/Dromund Kaas/Hutta",
+            "C - Corellia/Alderaan/Balmorra/Taris",
+            "D - Yavin 4/Onderon/Manaan",
+            "E - Voss/Ossus/Quesh",
+            "F - Nar Shaddaa/Makeb/Rishi",
+            "G - Tatooine/Belsavis/Hoth",
+            "H - Ruhnuk/Odessen/Ilum/CZ-198",
+            "I  - Ziost, Oricon, Dantooine"});
+            this.lbPlanets.Location = new System.Drawing.Point(3, 32);
+            this.lbPlanets.Name = "lbPlanets";
+            this.lbPlanets.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbPlanets.Size = new System.Drawing.Size(214, 95);
+            this.lbPlanets.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(524, 268);
+            this.ClientSize = new System.Drawing.Size(524, 570);
+            this.Controls.Add(this.transparentFlowPanel3);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentFlowPanel2);
             this.Controls.Add(this.transparentPanel2);
@@ -189,12 +254,13 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.transparentPanel2.ResumeLayout(false);
-            this.transparentPanel2.PerformLayout();
+            this.transparentFlowPanel3.ResumeLayout(false);
             this.transparentFlowPanel1.ResumeLayout(false);
             this.transparentFlowPanel1.PerformLayout();
             this.transparentFlowPanel2.ResumeLayout(false);
             this.transparentFlowPanel2.PerformLayout();
+            this.transparentPanel2.ResumeLayout(false);
+            this.transparentPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -214,6 +280,10 @@
         private Controls.TransparentFlowPanel transparentFlowPanel2;
         private System.Windows.Forms.Label lblHotkeyAcceptance;
         private System.Windows.Forms.ComboBox cbHotkeyAcceptance;
+        private Controls.TransparentFlowPanel transparentFlowPanel3;
+        private System.Windows.Forms.ComboBox cmbPlanetGroups;
+        private System.Windows.Forms.Button btnCopyGuildLog;
+        private System.Windows.Forms.ListBox lbPlanets;
     }
 }
 

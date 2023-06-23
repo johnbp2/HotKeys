@@ -56,11 +56,11 @@ namespace JohnBPearson.Windows.Forms
             var index = 0;
             foreach (var key in letters as string[])
             {
-                   char newChar = char.Parse(key.Trim().ToLower());
+                char newChar = char.Parse(key.Trim().ToLower());
                 tb.Rows.Add(index, newChar);
                 index++;
             }
-            tb.AcceptChanges();     
+            tb.AcceptChanges();
             return tb;
         }
 
@@ -113,14 +113,14 @@ namespace JohnBPearson.Windows.Forms
         private int getIndexForKey(string key, DataTable keyIndexTable)
         {
             //var rows = keyIndexTable.Select(String.Concat(Form1.valueColumnName," = '" , key , "'"));
-           // var index = -1;
+            // var index = -1;
 
             foreach (DataRow row in keyIndexTable.Rows)
             {
                 if (row.ItemArray[1].ToString() == key)
                 {
                     return int.Parse(row.ItemArray[0].ToString());
-                } 
+                }
             }
             //if (rows.FirstOrDefault() != null)
             //{
@@ -132,6 +132,11 @@ namespace JohnBPearson.Windows.Forms
         }
 
 
+        private void copyToClipBoard(string textToCopy)
+        {
+
+
+        }
 
 
         #region Events
@@ -214,13 +219,63 @@ namespace JohnBPearson.Windows.Forms
         private void tbGuildAd_TextChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.GuildAd = tbGuildAd.Text;
+            Properties.Settings.Default.Save(); 
         }
 
         private void tbAcceptance_TextChanged(object sender, EventArgs e)
         {
 
             Properties.Settings.Default.AcceptanceMessage = tbAcceptance.Text;
+            Properties.Settings.Default.Save();
         }
-        #endregion  
+      
+
+        private void btnCopyGuildLog_Click(object sender, EventArgs e)
+        {
+            if (lbPlanets.SelectedItems.Count > 0)
+            {
+                foreach (var item in lbPlanets.SelectedItems)
+                {
+                var selectedPanet =  item.ToString().Substring(0, 1);
+                       
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(cmbPlanetGroups.GetItemText(cmbPlanetGroups.SelectedItem) ))
+            {
+                var selectedPlanet = cmbPlanetGroups.GetItemText(cmbPlanetGroups.SelectedItem).Substring(0, 1);
+
+                getPlanetCode(selectedPlanet);
+
+            }
+        }
+
+        private static string getPlanetCode(string selectedPlanet)
+        {
+            switch (selectedPlanet)
+            {
+                case "A":
+                    return "A";
+                    
+                case "B":
+                    return "B";;
+                case "C":
+                    return "C";;
+                case "D":
+                    return "D";;
+                case "E":
+                    return "E";;
+                case "F":
+                    return "F";;
+                case "G":
+                    return "G";;
+                case "H":
+                    return "H";;
+                case "I":
+                    return "I";;
+                default:
+                    return "";
+            }
+        }
+        #endregion
     }
 }
