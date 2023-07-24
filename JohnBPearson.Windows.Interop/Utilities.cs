@@ -10,10 +10,10 @@ namespace JohnBPearson.Windows.Interop
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int MessageBox(IntPtr hWnd, string lpText, string lpCaption, uint uType);
 
-        public static void Main(string[] args)
+        public static void MyMessageBox(string text, string caption)
         {
             // Invoke the function as a regular managed method.
-            MessageBox(IntPtr.Zero, "Command-line message box", "Attention!", 0);
+            MessageBox(IntPtr.Zero, text, caption, 0);
         }
     }
 }
