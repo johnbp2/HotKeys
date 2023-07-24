@@ -1,38 +1,47 @@
-﻿using System;
+﻿using JohnBPearson.Windows.Interop;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using JohnBPearson.Windows.Forms.Recruiting;
+using System.Data.SqlTypes;
 
 namespace JohnBPearson.Windows.Forms
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
+        #region private fields
 
         private DataTable keyIndexTable;
         private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
         private const string valueColumnName = "LetterValue";
-        private const string indexColumnName = "Id";
-        public Form1()
+        private const string indexColumnName = "Id"; 
+        #endregion
+        public Main()
         {
             InitializeComponent();
+            var reminderForm = new Reminders();
+
         }
 
+        #region private methods
 
 
 
         private void callBackForHotkeyGuildAd()
         {
 
-            Clipboard.SetText(Properties.Settings.Default.GuildAd);
+            System.Windows.Clipboard.SetText(Properties.Settings.Default.GuildAd);
         }
         private void callBackForHotkeyAcceptance()
         {
 
-            Clipboard.SetText(Properties.Settings.Default.AcceptanceMessage);
+            System.Windows.Clipboard.SetText(Properties.Settings.Default.AcceptanceMessage);
         }
 
 
@@ -51,8 +60,8 @@ namespace JohnBPearson.Windows.Forms
         {
             var letters = Properties.Settings.Default.AllowedHotkeys.Split(',').Clone();
             var tb = new DataTable("keyIndexTable");
-            tb.Columns.Add(Form1.indexColumnName, typeof(int));
-            tb.Columns.Add(Form1.valueColumnName, typeof(char));
+            tb.Columns.Add(Main.indexColumnName, typeof(int));
+            tb.Columns.Add(Main.valueColumnName, typeof(char));
             var index = 0;
             foreach (var key in letters as string[])
             {
@@ -92,8 +101,8 @@ namespace JohnBPearson.Windows.Forms
             cbHotkeyGuildAd.DataSource = this.keyIndexTable;
 
             var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
-            cbHotkeyGuildAd.ValueMember = Form1.valueColumnName;
-            cbHotkeyGuildAd.ValueMember = Form1.indexColumnName;
+            cbHotkeyGuildAd.ValueMember = Main.valueColumnName;
+            cbHotkeyGuildAd.ValueMember = Main.indexColumnName;
 
             cbHotkeyGuildAd.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
 
@@ -102,9 +111,14 @@ namespace JohnBPearson.Windows.Forms
             cbHotkeyAcceptance.DataSource = this.setUpDatasource();
 
             var currentHotKeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance.ToString();
-            cbHotkeyAcceptance.ValueMember = Form1.valueColumnName;
-            cbHotkeyAcceptance.ValueMember = Form1.indexColumnName;
+            cbHotkeyAcceptance.ValueMember = Main.valueColumnName;
+            cbHotkeyAcceptance.ValueMember = Main.indexColumnName;
             cbHotkeyAcceptance.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
+
+            lbPlanetsList.DataSource = Planets.buildPlanetsList();
+            lbPlanetsList.DisplayMember = "Text";
+            lbPlanetsList.ValueMember = "Type";
+
 
 
         }
@@ -136,7 +150,8 @@ namespace JohnBPearson.Windows.Forms
         {
 
 
-        }
+        } 
+        #endregion
 
 
         #region Events
@@ -193,6 +208,7 @@ namespace JohnBPearson.Windows.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Planets.buildPlanetsList();
             var keysForActionBinding = new List<string>();
             var actions = new List<Action>();
 
@@ -232,50 +248,31 @@ namespace JohnBPearson.Windows.Forms
 
         private void btnCopyGuildLog_Click(object sender, EventArgs e)
         {
-            if (lbPlanets.SelectedItems.Count > 0)
-            {
-                foreach (var item in lbPlanets.SelectedItems)
-                {
-                var selectedPanet =  item.ToString().Substring(0, 1);
-                       
-                }
-            }
-            if (!string.IsNullOrWhiteSpace(cmbPlanetGroups.GetItemText(cmbPlanetGroups.SelectedItem) ))
-            {
-                var selectedPlanet = cmbPlanetGroups.GetItemText(cmbPlanetGroups.SelectedItem).Substring(0, 1);
+            //var logEntry = new StringBuilder();
+            //if (lbPlanetsList.SelectedItems.Count > 0)
+            //{
+            //    foreach (Planets item in lbPlanetsList.SelectedItems)
+            //    {
+            //        logEntry.Append($"{item.Type.ToString()}, ");
 
-                getPlanetCode(selectedPlanet);
-
-            }
-        }
-
-        private static string getPlanetCode(string selectedPlanet)
-        {
-            switch (selectedPlanet)
+            //    }
+            //}
+            if (lbPlanetsList.SelectedItems.Count > 0)
             {
-                case "A":
-                    return "A";
-                    
-                case "B":
-                    return "B";;
-                case "C":
-                    return "C";;
-                case "D":
-                    return "D";;
-                case "E":
-                    return "E";;
-                case "F":
-                    return "F";;
-                case "G":
-                    return "G";;
-                case "H":
-                    return "H";;
-                case "I":
-                    return "I";;
-                default:
-                    return "";
+
+                var logEntry = new RecruiterLogEntry();
+           var logString = logEntry.CreateLogEntry(lbPlanetsList.SelectedItems);
+            // cache whats in there
+        var cachedString = System.Windows.Clipboard.GetText();
+                System.Windows.Clipboard.SetText(logString.ToString());
+               // string[] message = { };
+                Utilities.MyMessageBox("Click ok after pasting into discord.", "");
+                System.Windows.Clipboard.SetText(cachedString);
+
             }
         }
+
+     
         #endregion
     }
 }

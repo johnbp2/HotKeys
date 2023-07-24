@@ -23,5 +23,11 @@
  Rank + conquest rewards. Social + PvE + PvP Events. 
  Get involved or focus on solo play! Whisper for info/inv.</Value>
     </Setting>
+    <Setting Name="Reminder01" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Test</Value>
+    </Setting>
+    <Setting Name="MaximumReminders" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -67,6 +67,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>swtor.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -84,21 +87,33 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="PlanetsListItems.cs" />
+    <Compile Include="ReminderReminders.cs" />
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="Planets.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RecruiterLogEntry.cs" />
+    <Compile Include="Reminders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reminders.Designer.cs">
+      <DependentUpon>Reminders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utitlities.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -110,6 +125,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reminders.resx">
+      <DependentUpon>Reminders.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="JohnBPearson.com.snk" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -143,6 +161,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reminders_sample.json" />
     <None Include="Resources\alt_key.png" />
   </ItemGroup>
   <ItemGroup>
@@ -159,10 +178,17 @@
       <Project>{290f3e29-9012-4a41-ae60-993dbc62c716}</Project>
       <Name>JohnBPearson.Windows.Forms.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Extension\Extension.csproj">
+      <Project>{b8d5ffa8-80e3-447d-ae07-da86af72f206}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JohnBPearson.Windows.Interop\JohnBPearson.Windows.Interop.csproj">
       <Project>{c2eb5a3e-9528-47cd-bb07-b0f924239a77}</Project>
       <Name>JohnBPearson.Windows.Interop</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="swtor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

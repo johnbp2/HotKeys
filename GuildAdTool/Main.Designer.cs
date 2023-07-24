@@ -1,6 +1,6 @@
 ﻿namespace JohnBPearson.Windows.Forms
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.transparentFlowPanel3 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
-            this.cmbPlanetGroups = new System.Windows.Forms.ComboBox();
             this.btnCopyGuildLog = new System.Windows.Forms.Button();
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
             this.lblHotkeyGuildAd = new System.Windows.Forms.Label();
@@ -46,11 +44,12 @@
             this.lblAcceptance = new System.Windows.Forms.Label();
             this.tbAcceptance = new System.Windows.Forms.TextBox();
             this.tbGuildAd = new System.Windows.Forms.TextBox();
-            this.lbPlanets = new System.Windows.Forms.ListBox();
-            this.transparentFlowPanel3.SuspendLayout();
+            this.transparentPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
+            this.lbPlanetsList = new System.Windows.Forms.ListBox();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentFlowPanel2.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
+            this.transparentPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -62,39 +61,10 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // transparentFlowPanel3
-            // 
-            this.transparentFlowPanel3.Controls.Add(this.cmbPlanetGroups);
-            this.transparentFlowPanel3.Controls.Add(this.btnCopyGuildLog);
-            this.transparentFlowPanel3.Controls.Add(this.lbPlanets);
-            this.transparentFlowPanel3.Location = new System.Drawing.Point(12, 287);
-            this.transparentFlowPanel3.Name = "transparentFlowPanel3";
-            this.transparentFlowPanel3.Size = new System.Drawing.Size(501, 159);
-            this.transparentFlowPanel3.TabIndex = 3;
-            // 
-            // cmbPlanetGroups
-            // 
-            this.cmbPlanetGroups.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbPlanetGroups.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbPlanetGroups.FormattingEnabled = true;
-            this.cmbPlanetGroups.Items.AddRange(new object[] {
-            "A - Tython/Ord Mantell/Coruscant/Fleet",
-            "B - Korriban/Dromund Kaas/Hutta",
-            "C - Corellia/Alderaan/Balmorra/Taris",
-            "D - Yavin 4/Onderon/Manaan",
-            "E - Voss/Ossus/Quesh",
-            "F - Nar Shaddaa/Makeb/Rishi",
-            "G - Tatooine/Belsavis/Hoth",
-            "H - Ruhnuk/Odessen/Ilum/CZ-198",
-            " I  - Ziost, Oricon, Dantooine"});
-            this.cmbPlanetGroups.Location = new System.Drawing.Point(3, 3);
-            this.cmbPlanetGroups.Name = "cmbPlanetGroups";
-            this.cmbPlanetGroups.Size = new System.Drawing.Size(266, 21);
-            this.cmbPlanetGroups.TabIndex = 4;
-            // 
             // btnCopyGuildLog
             // 
-            this.btnCopyGuildLog.Location = new System.Drawing.Point(275, 3);
+            this.btnCopyGuildLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyGuildLog.Location = new System.Drawing.Point(278, 127);
             this.btnCopyGuildLog.Name = "btnCopyGuildLog";
             this.btnCopyGuildLog.Size = new System.Drawing.Size(138, 23);
             this.btnCopyGuildLog.TabIndex = 5;
@@ -220,47 +190,49 @@
             this.tbGuildAd.TabStop = false;
             this.tbGuildAd.TextChanged += new System.EventHandler(this.tbGuildAd_TextChanged);
             // 
-            // lbPlanets
+            // transparentPanel1
             // 
-            this.lbPlanets.FormattingEnabled = true;
-            this.lbPlanets.Items.AddRange(new object[] {
-            "A - Tython/Ord Mantell/Coruscant/Fleet",
-            "B - Korriban/Dromund Kaas/Hutta",
-            "C - Corellia/Alderaan/Balmorra/Taris",
-            "D - Yavin 4/Onderon/Manaan",
-            "E - Voss/Ossus/Quesh",
-            "F - Nar Shaddaa/Makeb/Rishi",
-            "G - Tatooine/Belsavis/Hoth",
-            "H - Ruhnuk/Odessen/Ilum/CZ-198",
-            "I  - Ziost, Oricon, Dantooine"});
-            this.lbPlanets.Location = new System.Drawing.Point(3, 32);
-            this.lbPlanets.Name = "lbPlanets";
-            this.lbPlanets.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbPlanets.Size = new System.Drawing.Size(214, 95);
-            this.lbPlanets.TabIndex = 6;
+            this.transparentPanel1.Controls.Add(this.lbPlanetsList);
+            this.transparentPanel1.Controls.Add(this.btnCopyGuildLog);
+            this.transparentPanel1.Location = new System.Drawing.Point(55, 283);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Size = new System.Drawing.Size(419, 155);
+            this.transparentPanel1.TabIndex = 7;
             // 
-            // Form1
+            // lbPlanetsList
+            // 
+            this.lbPlanetsList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbPlanetsList.FormattingEnabled = true;
+            this.lbPlanetsList.Location = new System.Drawing.Point(0, 0);
+            this.lbPlanetsList.Name = "lbPlanetsList";
+            this.lbPlanetsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbPlanetsList.Size = new System.Drawing.Size(419, 121);
+            this.lbPlanetsList.TabIndex = 6;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(524, 570);
-            this.Controls.Add(this.transparentFlowPanel3);
+            this.Controls.Add(this.transparentPanel1);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentFlowPanel2);
             this.Controls.Add(this.transparentPanel2);
-            this.Name = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Main";
             this.Text = "Guild Ad";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.transparentFlowPanel3.ResumeLayout(false);
             this.transparentFlowPanel1.ResumeLayout(false);
             this.transparentFlowPanel1.PerformLayout();
             this.transparentFlowPanel2.ResumeLayout(false);
             this.transparentFlowPanel2.PerformLayout();
             this.transparentPanel2.ResumeLayout(false);
             this.transparentPanel2.PerformLayout();
+            this.transparentPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -280,10 +252,9 @@
         private Controls.TransparentFlowPanel transparentFlowPanel2;
         private System.Windows.Forms.Label lblHotkeyAcceptance;
         private System.Windows.Forms.ComboBox cbHotkeyAcceptance;
-        private Controls.TransparentFlowPanel transparentFlowPanel3;
-        private System.Windows.Forms.ComboBox cmbPlanetGroups;
         private System.Windows.Forms.Button btnCopyGuildLog;
-        private System.Windows.Forms.ListBox lbPlanets;
+        private Controls.TransparentPanel transparentPanel1;
+        private System.Windows.Forms.ListBox lbPlanetsList;
     }
 }
 
