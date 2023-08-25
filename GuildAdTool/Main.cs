@@ -248,15 +248,7 @@ namespace JohnBPearson.Windows.Forms
 
         private void btnCopyGuildLog_Click(object sender, EventArgs e)
         {
-            //var logEntry = new StringBuilder();
-            //if (lbPlanetsList.SelectedItems.Count > 0)
-            //{
-            //    foreach (Planets item in lbPlanetsList.SelectedItems)
-            //    {
-            //        logEntry.Append($"{item.Type.ToString()}, ");
-
-            //    }
-            //}
+          
             if (lbPlanetsList.SelectedItems.Count > 0)
             {
 
@@ -264,7 +256,7 @@ namespace JohnBPearson.Windows.Forms
            var logString = logEntry.CreateLogEntry(lbPlanetsList.SelectedItems);
             // cache whats in there
         var cachedString = System.Windows.Clipboard.GetText();
-                System.Windows.Clipboard.SetText(logString.ToString());
+                System.Windows.Clipboard.SetText(logString);
                // string[] message = { };
                 Utilities.MyMessageBox("Click ok after pasting into discord.", "");
                 System.Windows.Clipboard.SetText(cachedString);
