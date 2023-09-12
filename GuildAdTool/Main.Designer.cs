@@ -70,6 +70,7 @@
             this.btnCopyGuildLog.TabIndex = 5;
             this.btnCopyGuildLog.Text = "Copy log info to clipboard";
             this.btnCopyGuildLog.UseVisualStyleBackColor = true;
+            this.btnCopyGuildLog.Visible = false;
             this.btnCopyGuildLog.Click += new System.EventHandler(this.btnCopyGuildLog_Click);
             // 
             // transparentFlowPanel1
@@ -155,22 +156,22 @@
             this.lblGuildAd.AutoSize = true;
             this.lblGuildAd.Location = new System.Drawing.Point(14, 4);
             this.lblGuildAd.Name = "lblGuildAd";
-            this.lblGuildAd.Size = new System.Drawing.Size(47, 13);
+            this.lblGuildAd.Size = new System.Drawing.Size(48, 13);
             this.lblGuildAd.TabIndex = 3;
-            this.lblGuildAd.Text = "Guild Ad";
+            this.lblGuildAd.Text = "hotkey 1";
             // 
             // lblAcceptance
             // 
             this.lblAcceptance.AutoSize = true;
             this.lblAcceptance.Location = new System.Drawing.Point(248, 4);
             this.lblAcceptance.Name = "lblAcceptance";
-            this.lblAcceptance.Size = new System.Drawing.Size(65, 13);
+            this.lblAcceptance.Size = new System.Drawing.Size(48, 13);
             this.lblAcceptance.TabIndex = 2;
-            this.lblAcceptance.Text = "Acceptance";
+            this.lblAcceptance.Text = "hotkey 2";
             // 
             // tbAcceptance
             // 
-            this.tbAcceptance.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbAcceptance.BackColor = System.Drawing.SystemColors.Info;
             this.tbAcceptance.Location = new System.Drawing.Point(248, 25);
             this.tbAcceptance.Multiline = true;
             this.tbAcceptance.Name = "tbAcceptance";
@@ -181,7 +182,7 @@
             // 
             // tbGuildAd
             // 
-            this.tbGuildAd.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbGuildAd.BackColor = System.Drawing.SystemColors.Info;
             this.tbGuildAd.Location = new System.Drawing.Point(17, 25);
             this.tbGuildAd.Multiline = true;
             this.tbGuildAd.Name = "tbGuildAd";
@@ -208,13 +209,16 @@
             this.lbPlanetsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbPlanetsList.Size = new System.Drawing.Size(419, 121);
             this.lbPlanetsList.TabIndex = 6;
+            this.lbPlanetsList.Visible = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(524, 570);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1056, 462);
             this.Controls.Add(this.transparentPanel1);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentFlowPanel2);
@@ -222,7 +226,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Guild Ad";
+            this.Text = "Butler copy my...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
