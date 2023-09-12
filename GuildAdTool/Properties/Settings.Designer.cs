@@ -12,7 +12,7 @@ namespace JohnBPearson.Windows.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,14 +25,13 @@ namespace JohnBPearson.Windows.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Glad to have you here! Don\'t hesitate to ask for help. Our discord link is in the" +
-            " Guild window \'Description\' (press G).")]
-        public string AcceptanceMessage {
+        [global::System.Configuration.DefaultSettingValueAttribute("612Annie#")]
+        public string hotkey2 {
             get {
-                return ((string)(this["AcceptanceMessage"]));
+                return ((string)(this["hotkey2"]));
             }
             set {
-                this["AcceptanceMessage"] = value;
+                this["hotkey2"] = value;
             }
         }
         
@@ -83,15 +82,13 @@ namespace JohnBPearson.Windows.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Max XP + Active (optional) discord. \r\n Chill, friendly, helpful. No requirements/" +
-            "alt limits, just be kind/respectful. \r\n Rank + conquest rewards. Social + PvE + " +
-            "PvP Events. \r\n Get involved or focus on solo play! Whisper for info/inv.")]
-        public string GuildAd {
+        [global::System.Configuration.DefaultSettingValueAttribute("john.b.pearson")]
+        public string hotkey1 {
             get {
-                return ((string)(this["GuildAd"]));
+                return ((string)(this["hotkey1"]));
             }
             set {
-                this["GuildAd"] = value;
+                this["hotkey1"] = value;
             }
         }
         

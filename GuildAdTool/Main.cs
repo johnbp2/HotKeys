@@ -36,12 +36,12 @@ namespace JohnBPearson.Windows.Forms
         private void callBackForHotkeyGuildAd()
         {
 
-            System.Windows.Clipboard.SetText(Properties.Settings.Default.GuildAd);
+            System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey1);
         }
         private void callBackForHotkeyAcceptance()
         {
 
-            System.Windows.Clipboard.SetText(Properties.Settings.Default.AcceptanceMessage);
+            System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey2);
         }
 
 
@@ -228,20 +228,20 @@ namespace JohnBPearson.Windows.Forms
             this.bindAndCacheDatasource();
 
 
-            this.tbGuildAd.Text = Properties.Settings.Default.GuildAd;
-            this.tbAcceptance.Text = Properties.Settings.Default.AcceptanceMessage;
+            this.tbGuildAd.Text = Properties.Settings.Default.hotkey1;
+            this.tbAcceptance.Text = Properties.Settings.Default.hotkey2;
 
         }
         private void tbGuildAd_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.GuildAd = tbGuildAd.Text;
+            Properties.Settings.Default.hotkey1 = tbGuildAd.Text;
             Properties.Settings.Default.Save(); 
         }
 
         private void tbAcceptance_TextChanged(object sender, EventArgs e)
         {
 
-            Properties.Settings.Default.AcceptanceMessage = tbAcceptance.Text;
+            Properties.Settings.Default.hotkey2 = tbAcceptance.Text;
             Properties.Settings.Default.Save();
         }
       
