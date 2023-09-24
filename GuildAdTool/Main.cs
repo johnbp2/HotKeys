@@ -10,51 +10,47 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using JohnBPearson.Windows.Forms.Recruiting;
 using System.Data.SqlTypes;
+using Tulpep.NotificationWindow;
 
 namespace JohnBPearson.Windows.Forms
 {
     public partial class Main : Form
     {
+
+
         #region private fields
 
         private DataTable keyIndexTable;
-        private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
+      //  private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
         private const string valueColumnName = "LetterValue";
-        private const string indexColumnName = "Id"; 
+        private const string indexColumnName = "Id";
+        private IPresenter presenter;
         #endregion
-        public Main()
+        public Main(IPresenter presenter)
         {
             InitializeComponent();
-            var reminderForm = new Reminders();
-
+            // var reminderForm = new Reminders();
+            this.presenter = presenter;
+            this.presenter.form = this;
         }
 
         #region private methods
 
 
 
-        private void callBackForHotkeyGuildAd()
+        private void onHotkey1()
         {
 
             System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey1);
         }
-        private void callBackForHotkeyAcceptance()
+        private void onHotkey2()
         {
 
             System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey2);
         }
 
 
-        private void saveSettings()
-        {
-            var row = (DataRowView)this.cbHotkeyGuildAd.SelectedItem;
-            char t = char.Parse(row.Row.ItemArray[1].ToString());
-            Properties.Settings.Default.UserHotKeyGuildAd = t;
-            row = (DataRowView)this.cbHotkeyAcceptance.SelectedItem;
-            t = char.Parse(row.Row.ItemArray[1].ToString());
-            Properties.Settings.Default.UserHotkeyAcceptance = t;
-            Properties.Settings.Default.Save();
-        }
+       
 
         private DataTable setUpDatasource()
         {
@@ -81,7 +77,7 @@ namespace JohnBPearson.Windows.Forms
 
 
                 var sb = new StringBuilder();
-                sb.Append(this.hotkeyModifiers);
+                sb.Append(Properties.Settings.Default.HotkeyModifiers);
                 sb.Append(key);
                 GlobalHotKey.RegisterHotKey(sb.ToString(), actions[index]);
 
@@ -98,26 +94,26 @@ namespace JohnBPearson.Windows.Forms
         {
 
             this.keyIndexTable = this.setUpDatasource();
-            cbHotkeyGuildAd.DataSource = this.keyIndexTable;
+            cbHotkey1.DataSource = this.keyIndexTable;
 
             var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
-            cbHotkeyGuildAd.ValueMember = Main.valueColumnName;
-            cbHotkeyGuildAd.ValueMember = Main.indexColumnName;
+            cbHotkey1.ValueMember = Main.valueColumnName;
+            cbHotkey1.ValueMember = Main.indexColumnName;
 
-            cbHotkeyGuildAd.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
+            cbHotkey1.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
 
 
 
-            cbHotkeyAcceptance.DataSource = this.setUpDatasource();
+            cbHotkey2.DataSource = this.setUpDatasource();
 
             var currentHotKeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance.ToString();
-            cbHotkeyAcceptance.ValueMember = Main.valueColumnName;
-            cbHotkeyAcceptance.ValueMember = Main.indexColumnName;
-            cbHotkeyAcceptance.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
+            cbHotkey2.ValueMember = Main.valueColumnName;
+            cbHotkey2.ValueMember = Main.indexColumnName;
+            cbHotkey2.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
 
-            lbPlanetsList.DataSource = Planets.buildPlanetsList();
-            lbPlanetsList.DisplayMember = "Text";
-            lbPlanetsList.ValueMember = "Type";
+            //lbPlanetsList.DataSource = Planets.buildPlanetsList();
+           // lbPlanetsList.DisplayMember = "Text";
+           // lbPlanetsList.ValueMember = "Type";
 
 
 
@@ -150,7 +146,25 @@ namespace JohnBPearson.Windows.Forms
         {
 
 
-        } 
+        }
+
+
+        private void attemptToSave(bool overrideAutoSaveSetting)
+        {
+            if (Properties.Settings.Default.autoSave == true | overrideAutoSaveSetting)
+            {
+
+                FlashWindow.TrayAndWindow(this);
+
+                var row = (DataRowView)this.cbHotkey1.SelectedItem;
+                char t = char.Parse(row.Row.ItemArray[1].ToString());
+                Properties.Settings.Default.UserHotKeyGuildAd = t;
+                row = (DataRowView)this.cbHotkey2.SelectedItem;
+                t = char.Parse(row.Row.ItemArray[1].ToString());
+                Properties.Settings.Default.UserHotkeyAcceptance = t;
+                Properties.Settings.Default.Save();
+            }
+        }
         #endregion
 
 
@@ -159,34 +173,21 @@ namespace JohnBPearson.Windows.Forms
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.Save();
-
+            attemptToSave(false);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-
-
-            //  Properties.Settings.Default.UserHotKeyGuildAd  = 
-
-          var row =  (DataRowView)this.cbHotkeyGuildAd.SelectedItem;
-           char t =     char.Parse( row.Row.ItemArray[1].ToString());
-            Properties.Settings.Default.UserHotKeyGuildAd = t;
-            row= (DataRowView)this.cbHotkeyAcceptance.SelectedItem;
-             t = char.Parse(row.Row.ItemArray[1].ToString());
-            Properties.Settings.Default.UserHotkeyAcceptance = t;
-            Properties.Settings.Default.Save();
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            // } 
+            attemptToSave(true);
+            var popupNotifier = new PopupNotifier();
+          
+            popupNotifier.TitleText = "Title of popup";
+            popupNotifier.ContentText = "Content text";
+            popupNotifier.IsRightToLeft = false;
+            popupNotifier.Popup();
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void Main_Resize(object sender, EventArgs e)
         {
             //if the form is minimized  
             //hide it from the task bar  
@@ -208,63 +209,56 @@ namespace JohnBPearson.Windows.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Planets.buildPlanetsList();
+            //Planets.buildPlanetsList();
             var keysForActionBinding = new List<string>();
             var actions = new List<Action>();
 
-            var callBackActionGuildAd = new Action(this.callBackForHotkeyGuildAd);
+            var callBackActionGuildAd = new Action(this.onHotkey1);
             actions.Add(callBackActionGuildAd);
             var currentHotkeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd;
-            lblHotkeyGuildAd.Text = string.Concat(this.hotkeyModifiers, currentHotkeyGuildAd);
+            lblHotkeyGuildAd.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyGuildAd);
             keysForActionBinding.Add(currentHotkeyGuildAd.ToString());
 
-            var callBackActionAcceptance = new Action(this.callBackForHotkeyAcceptance);
-            actions.Add(callBackActionAcceptance);
+            var callBackActionAcceptance = new Action(this.onHotkey2);
+            actions.Add(callBackActionAcceptance); 
             var currentHotkeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance;
-            lblHotkeyAcceptance.Text = string.Concat(this.hotkeyModifiers, currentHotkeyAcceptance);
+            lblHotkeyAcceptance.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyAcceptance);
             keysForActionBinding.Add(currentHotkeyAcceptance.ToString());
 
             this.registerHotKeys(keysForActionBinding, actions);
             this.bindAndCacheDatasource();
 
 
-            this.tbGuildAd.Text = Properties.Settings.Default.hotkey1;
-            this.tbAcceptance.Text = Properties.Settings.Default.hotkey2;
+            this.tbHotkey1.Text = Properties.Settings.Default.hotkey1;
+            this.tbHotkey2.Text = Properties.Settings.Default.hotkey2;
 
         }
-        private void tbGuildAd_TextChanged(object sender, EventArgs e)
+        private void tbHotkey1_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.hotkey1 = tbGuildAd.Text;
-            Properties.Settings.Default.Save(); 
+            attemptToSave(false);
         }
 
-        private void tbAcceptance_TextChanged(object sender, EventArgs e)
+        private void tbHotkey2_TextChanged(object sender, EventArgs e)
         {
-
-            Properties.Settings.Default.hotkey2 = tbAcceptance.Text;
-            Properties.Settings.Default.Save();
+            attemptToSave(false);
         }
       
 
-        private void btnCopyGuildLog_Click(object sender, EventArgs e)
+
+  
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
-            if (lbPlanetsList.SelectedItems.Count > 0)
-            {
-
-                var logEntry = new RecruiterLogEntry();
-           var logString = logEntry.CreateLogEntry(lbPlanetsList.SelectedItems);
-            // cache whats in there
-        var cachedString = System.Windows.Clipboard.GetText();
-                System.Windows.Clipboard.SetText(logString);
-               // string[] message = { };
-                Utilities.MyMessageBox("Click ok after pasting into discord.", "");
-                System.Windows.Clipboard.SetText(cachedString);
-
-            }
+            var settings = new SettingsDialog();
+            settings.Show();
         }
 
-     
+
         #endregion
+
+        private void Main_Activated(object sender, EventArgs e)
+        {
+            FlashWindow.Stop(this);
+         }
     }
 }
