@@ -19,19 +19,21 @@ namespace JohnBPearson.Windows.Forms
 
 
         #region private fields
-
+        private JohnBPearson.Windows.Forms.Controls.NotBetterButton btnTest;
         private DataTable keyIndexTable;
       //  private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
         private const string valueColumnName = "LetterValue";
         private const string indexColumnName = "Id";
-        private IPresenter presenter;
+      //  private IPresenter<Form> presenter;
         #endregion
-        public Main(IPresenter presenter)
+        public Main()
         {
             InitializeComponent();
             // var reminderForm = new Reminders();
-            this.presenter = presenter;
-            this.presenter.form = this;
+            //this.presenter = presenter;
+            //this.presenter.Form = this;
+           
+
         }
 
         #region private methods
@@ -148,9 +150,15 @@ namespace JohnBPearson.Windows.Forms
 
         }
 
-
         private void attemptToSave(bool overrideAutoSaveSetting)
         {
+            this.attemptToSave(overrideAutoSaveSetting, null, null);
+        }
+
+        private void attemptToSave(bool overrideAutoSaveSetting, object setting, object value)
+        {
+            //this.presenter.executeAutoSave((DataRowView)this.cbHotkey1.SelectedItem, (DataRowView)this.cbHotkey2.SelectedItem, new object(),
+            // new object());
             if (Properties.Settings.Default.autoSave == true | overrideAutoSaveSetting)
             {
 
@@ -254,11 +262,19 @@ namespace JohnBPearson.Windows.Forms
         }
 
 
-        #endregion
+   
 
         private void Main_Activated(object sender, EventArgs e)
         {
             FlashWindow.Stop(this);
          }
+
+        private void notBetterButton2_Click(object sender, EventArgs e)
+        {
+        this.btnSave_Click(sender, e);
+
+        }
+
+        #endregion
     }
 }

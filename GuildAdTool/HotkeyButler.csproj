@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PlanetsListItems.cs" />
+    <Compile Include="RazerChnromaFacade.cs" />
     <Compile Include="ReminderReminders.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -166,6 +167,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Colore" Version="6.0.0" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.3</Version>
     </PackageReference>
