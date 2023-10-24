@@ -16,6 +16,7 @@ namespace JohnBPearson.Windows.Forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
            
             var main = new Main();
             Application.Run(main);
