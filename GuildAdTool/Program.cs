@@ -16,8 +16,9 @@ namespace JohnBPearson.Windows.Forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           MainPresenter mp = new MainPresenter();
-            var main = new Main(mp);
+
+           
+            var main = new Main();
             Application.Run(main);
         }
     }
