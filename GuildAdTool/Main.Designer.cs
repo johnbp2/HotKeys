@@ -45,11 +45,13 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             this.lblHotkeyAcceptance = new System.Windows.Forms.Label();
             this.cbHotkey2 = new System.Windows.Forms.ComboBox();
             this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
+            this.notBetterButton2 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.lblAcceptance = new System.Windows.Forms.Label();
             this.tbHotkey2 = new System.Windows.Forms.TextBox();
             this.tbHotkey1 = new System.Windows.Forms.TextBox();
+            this.notBetterButton1 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentFlowPanel2.SuspendLayout();
@@ -167,6 +169,7 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             // 
             // transparentPanel2
             // 
+            this.transparentPanel2.Controls.Add(this.notBetterButton2);
             this.transparentPanel2.Controls.Add(this.btnSave);
             this.transparentPanel2.Controls.Add(this.lblGuildAd);
             this.transparentPanel2.Controls.Add(this.lblAcceptance);
@@ -177,6 +180,30 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             this.transparentPanel2.Name = "transparentPanel2";
             this.transparentPanel2.Size = new System.Drawing.Size(917, 238);
             this.transparentPanel2.TabIndex = 1;
+            // 
+            // notBetterButton2
+            // 
+            this.notBetterButton2.DisplayText = "Save";
+            this.notBetterButton2.EndColor = System.Drawing.Color.DarkBlue;
+            this.notBetterButton2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.notBetterButton2.ForeColor = System.Drawing.Color.White;
+            this.notBetterButton2.GradientAngle = 90;
+            this.notBetterButton2.Location = new System.Drawing.Point(845, 147);
+            this.notBetterButton2.MouseClickColor1 = System.Drawing.Color.DarkOrange;
+            this.notBetterButton2.MouseClickColor2 = System.Drawing.Color.Red;
+            this.notBetterButton2.MouseHoverColor1 = System.Drawing.Color.Yellow;
+            this.notBetterButton2.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
+            this.notBetterButton2.Name = "notBetterButton2";
+            this.notBetterButton2.Size = new System.Drawing.Size(69, 41);
+            this.notBetterButton2.StartColor = System.Drawing.Color.LightGreen;
+            this.notBetterButton2.TabIndex = 4;
+            this.notBetterButton2.Text = "Save";
+            this.notBetterButton2.TextLocation_X = 76;
+            this.notBetterButton2.TextLocation_Y = 24;
+            this.notBetterButton2.Transparent1 = 150;
+            this.notBetterButton2.Transparent2 = 150;
+            this.notBetterButton2.UseVisualStyleBackColor = true;
+            this.notBetterButton2.Click += new System.EventHandler(this.notBetterButton2_Click);
             // 
             // btnSave
             // 
@@ -234,6 +261,29 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             this.tbHotkey1.TabStop = false;
             this.tbHotkey1.TextChanged += new System.EventHandler(this.tbHotkey1_TextChanged);
             // 
+            // notBetterButton1
+            // 
+            this.notBetterButton1.DisplayText = "notBetterButton1";
+            this.notBetterButton1.EndColor = System.Drawing.Color.DarkBlue;
+            this.notBetterButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.notBetterButton1.ForeColor = System.Drawing.Color.White;
+            this.notBetterButton1.GradientAngle = 90;
+            this.notBetterButton1.Location = new System.Drawing.Point(-23, -46);
+            this.notBetterButton1.MouseClickColor1 = System.Drawing.Color.DarkOrange;
+            this.notBetterButton1.MouseClickColor2 = System.Drawing.Color.Red;
+            this.notBetterButton1.MouseHoverColor1 = System.Drawing.Color.Yellow;
+            this.notBetterButton1.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
+            this.notBetterButton1.Name = "notBetterButton1";
+            this.notBetterButton1.Size = new System.Drawing.Size(200, 50);
+            this.notBetterButton1.StartColor = System.Drawing.Color.LightGreen;
+            this.notBetterButton1.TabIndex = 9;
+            this.notBetterButton1.Text = "notBetterButton1";
+            this.notBetterButton1.TextLocation_X = 76;
+            this.notBetterButton1.TextLocation_Y = 24;
+            this.notBetterButton1.Transparent1 = 150;
+            this.notBetterButton1.Transparent2 = 150;
+            this.notBetterButton1.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -242,6 +292,7 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1036, 387);
+            this.Controls.Add(this.notBetterButton1);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentFlowPanel2);
             this.Controls.Add(this.transparentPanel2);
@@ -293,6 +344,8 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private Controls.NotBetterButton notBetterButton1;
+        private Controls.NotBetterButton notBetterButton2;
     }
 }
 
