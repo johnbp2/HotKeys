@@ -41,7 +41,7 @@ namespace JohnBPearson.Windows.Forms
 
             }
         }
-    }
+    
 
     public interface IPresenter
     {

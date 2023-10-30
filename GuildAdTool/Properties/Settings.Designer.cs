@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JohnBPearson.Windows.Forms.Properties {
+namespace JohnBPearson.Windows.Forms.HotkeyButler.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

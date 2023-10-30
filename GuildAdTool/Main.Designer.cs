@@ -1,6 +1,6 @@
 ﻿using JohnBPearson.Windows.Interop;
 
-namespace JohnBPearson.Windows.Forms
+namespace JohnBPearson.Windows.Forms.HotkeyButler
 {
     partial class Main
     {
@@ -72,7 +72,7 @@ namespace JohnBPearson.Windows.Forms
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1036, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1036, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -81,13 +81,13 @@ namespace JohnBPearson.Windows.Forms
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -95,13 +95,13 @@ namespace JohnBPearson.Windows.Forms
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -122,17 +122,17 @@ namespace JohnBPearson.Windows.Forms
             this.lblHotkeyGuildAd.Location = new System.Drawing.Point(6, 0);
             this.lblHotkeyGuildAd.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblHotkeyGuildAd.Name = "lblHotkeyGuildAd";
-            this.lblHotkeyGuildAd.Size = new System.Drawing.Size(157, 29);
+            this.lblHotkeyGuildAd.Size = new System.Drawing.Size(123, 24);
             this.lblHotkeyGuildAd.TabIndex = 0;
             this.lblHotkeyGuildAd.Text = "Alt +  Shift + ?";
             // 
             // cbHotkey1
             // 
             this.cbHotkey1.FormattingEnabled = true;
-            this.cbHotkey1.Location = new System.Drawing.Point(6, 35);
+            this.cbHotkey1.Location = new System.Drawing.Point(6, 30);
             this.cbHotkey1.Margin = new System.Windows.Forms.Padding(6);
             this.cbHotkey1.Name = "cbHotkey1";
-            this.cbHotkey1.Size = new System.Drawing.Size(218, 37);
+            this.cbHotkey1.Size = new System.Drawing.Size(218, 32);
             this.cbHotkey1.TabIndex = 0;
             // 
             // transparentFlowPanel2
@@ -152,17 +152,17 @@ namespace JohnBPearson.Windows.Forms
             this.lblHotkeyAcceptance.Location = new System.Drawing.Point(6, 0);
             this.lblHotkeyAcceptance.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblHotkeyAcceptance.Name = "lblHotkeyAcceptance";
-            this.lblHotkeyAcceptance.Size = new System.Drawing.Size(157, 29);
+            this.lblHotkeyAcceptance.Size = new System.Drawing.Size(123, 24);
             this.lblHotkeyAcceptance.TabIndex = 2;
             this.lblHotkeyAcceptance.Text = "Alt +  Shift + ?";
             // 
             // cbHotkey2
             // 
             this.cbHotkey2.FormattingEnabled = true;
-            this.cbHotkey2.Location = new System.Drawing.Point(6, 35);
+            this.cbHotkey2.Location = new System.Drawing.Point(6, 30);
             this.cbHotkey2.Margin = new System.Windows.Forms.Padding(6);
             this.cbHotkey2.Name = "cbHotkey2";
-            this.cbHotkey2.Size = new System.Drawing.Size(218, 37);
+            this.cbHotkey2.Size = new System.Drawing.Size(218, 32);
             this.cbHotkey2.TabIndex = 1;
             // 
             // transparentPanel2
@@ -196,7 +196,7 @@ namespace JohnBPearson.Windows.Forms
             this.lblGuildAd.Location = new System.Drawing.Point(26, 7);
             this.lblGuildAd.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblGuildAd.Name = "lblGuildAd";
-            this.lblGuildAd.Size = new System.Drawing.Size(422, 29);
+            this.lblGuildAd.Size = new System.Drawing.Size(334, 24);
             this.lblGuildAd.TabIndex = 3;
             this.lblGuildAd.Text = "Text to copy when hotkey 1 is invoked ";
             // 
@@ -206,7 +206,7 @@ namespace JohnBPearson.Windows.Forms
             this.lblAcceptance.Location = new System.Drawing.Point(455, 7);
             this.lblAcceptance.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAcceptance.Name = "lblAcceptance";
-            this.lblAcceptance.Size = new System.Drawing.Size(422, 29);
+            this.lblAcceptance.Size = new System.Drawing.Size(334, 24);
             this.lblAcceptance.TabIndex = 2;
             this.lblAcceptance.Text = "Text to copy when hotkey 2 is invoked ";
             // 
@@ -236,7 +236,7 @@ namespace JohnBPearson.Windows.Forms
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
