@@ -1,6 +1,6 @@
 ﻿using JohnBPearson.Windows.Interop;
 
-namespace JohnBPearson.Windows.Forms
+namespace JohnBPearson.Windows.Forms.HotkeyButler
 {
     partial class Main
     {

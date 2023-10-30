@@ -49,11 +49,17 @@ public interface IPresenterBase : INotifyPropertyChanged
     //                FlashWindow.TrayAndWindow(this.form);
 
 
+
+            }
+        }
+    
+
     //                char t = char.Parse(hotkey1.Row.ItemArray[1].ToString());
     //                Properties.Settings.Default.UserHotKeyGuildAd = t;
 
     //                t = char.Parse(hotkey2.Row.ItemArray[1].ToString());
     //                Properties.Settings.Default.UserHotkeyAcceptance = t;
+
 
     //                settingsObject = value;
     //                settingsObject = value;

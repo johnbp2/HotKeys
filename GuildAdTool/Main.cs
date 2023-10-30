@@ -2,17 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using JohnBPearson.Windows.Forms.Recruiting;
-using System.Data.SqlTypes;
 using Tulpep.NotificationWindow;
 
-namespace JohnBPearson.Windows.Forms
+namespace JohnBPearson.Windows.Forms.HotkeyButler
 {
     public partial class Main : Form
     {
@@ -57,6 +51,7 @@ namespace JohnBPearson.Windows.Forms
         private DataTable setUpDatasource()
         {
             var letters = Properties.Settings.Default.AllowedHotkeys.Split(',').Clone();
+      
             var tb = new DataTable("keyIndexTable");
             tb.Columns.Add(Main.indexColumnName, typeof(int));
             tb.Columns.Add(Main.valueColumnName, typeof(char));
