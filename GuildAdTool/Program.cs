@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace JohnBPearson.Windows.Forms
+namespace JohnBPearson.Windows.Forms.HotkeyButler
 {
     internal static class Program
     {

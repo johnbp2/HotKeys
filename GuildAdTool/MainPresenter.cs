@@ -50,8 +50,8 @@ public interface IPresenterBase : INotifyPropertyChanged
 
 
 
-            }
-        }
+        //    }
+        //}
     
 
     //                char t = char.Parse(hotkey1.Row.ItemArray[1].ToString());
