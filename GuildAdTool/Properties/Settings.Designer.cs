@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JohnBPearson.Windows.Forms.HotkeyButler.Properties {
+namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -49,7 +49,7 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z")]
+        [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
         public string AllowedHotkeys {
             get {
                 return ((string)(this["AllowedHotkeys"]));
@@ -125,6 +125,30 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler.Properties {
             }
             set {
                 this["autoSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MinimizeToTray {
+            get {
+                return ((bool)(this["MinimizeToTray"]));
+            }
+            set {
+                this["MinimizeToTray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("123Isabella!||||||||||||||||||123Isabella!|||||||s")]
+        public string HotkeyValues {
+            get {
+                return ((string)(this["HotkeyValues"]));
+            }
+            set {
+                this["HotkeyValues"] = value;
             }
         }
     }

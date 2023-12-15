@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JohnBPearson.Windows.Forms.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JohnBPearson.Windows.Forms.HotkeyButler.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="hotkey2" Type="System.String" Scope="User">
@@ -9,7 +9,7 @@
       <Value Profile="(Default)">s</Value>
     </Setting>
     <Setting Name="AllowedHotkeys" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z</Value>
+      <Value Profile="(Default)">a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z</Value>
     </Setting>
     <Setting Name="UserHotkeyAcceptance" Type="System.Char" Scope="User">
       <Value Profile="(Default)">a</Value>
@@ -28,6 +28,12 @@
     </Setting>
     <Setting Name="autoSave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MinimizeToTray" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HotkeyValues" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123Isabella!||||||||||||||||||123Isabella!|||||||s</Value>
     </Setting>
   </Settings>
 </SettingsFile>

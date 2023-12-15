@@ -1,4 +1,4 @@
-﻿namespace JohnBPearson.Windows.Forms
+﻿namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
     partial class SettingsDialog
     {
@@ -33,6 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rbAutoSaveOn = new JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton();
             this.rbAutoSaveOff = new JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton();
+            this.lblMinimizeToTray = new System.Windows.Forms.Label();
+            this.rbMinimizeToTrayOn = new JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton();
+            this.rbMinimizeToTrayOff = new JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton();
             this.transparentPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -61,6 +64,9 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.rbAutoSaveOn, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.rbAutoSaveOff, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblMinimizeToTray, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rbMinimizeToTrayOn, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rbMinimizeToTrayOff, 2, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -108,6 +114,43 @@
             this.rbAutoSaveOff.TabIndex = 4;
             this.rbAutoSaveOff.Text = "off";
             this.rbAutoSaveOff.UseVisualStyleBackColor = true;
+            // 
+            // lblMinimizeToTray
+            // 
+            this.lblMinimizeToTray.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMinimizeToTray.AutoSize = true;
+            this.lblMinimizeToTray.Location = new System.Drawing.Point(3, 83);
+            this.lblMinimizeToTray.Name = "lblMinimizeToTray";
+            this.lblMinimizeToTray.Size = new System.Drawing.Size(81, 13);
+            this.lblMinimizeToTray.TabIndex = 5;
+            this.lblMinimizeToTray.Text = "minimize to tray";
+            this.lblMinimizeToTray.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rbMinimizeToTrayOn
+            // 
+            this.rbMinimizeToTrayOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbMinimizeToTrayOn.AutoSize = true;
+            this.rbMinimizeToTrayOn.GroupName = "minimize";
+            this.rbMinimizeToTrayOn.GroupNameLevel = JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton.Level.Form;
+            this.rbMinimizeToTrayOn.Location = new System.Drawing.Point(90, 81);
+            this.rbMinimizeToTrayOn.Name = "rbMinimizeToTrayOn";
+            this.rbMinimizeToTrayOn.Size = new System.Drawing.Size(79, 17);
+            this.rbMinimizeToTrayOn.TabIndex = 6;
+            this.rbMinimizeToTrayOn.Text = "on";
+            this.rbMinimizeToTrayOn.UseVisualStyleBackColor = true;
+            // 
+            // rbMinimizeToTrayOff
+            // 
+            this.rbMinimizeToTrayOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbMinimizeToTrayOff.AutoSize = true;
+            this.rbMinimizeToTrayOff.GroupName = "111";
+            this.rbMinimizeToTrayOff.GroupNameLevel = JohnBPearson.Windows.Forms.Controls.AdvancedRadioButton.Level.Form;
+            this.rbMinimizeToTrayOff.Location = new System.Drawing.Point(175, 81);
+            this.rbMinimizeToTrayOff.Name = "rbMinimizeToTrayOff";
+            this.rbMinimizeToTrayOff.Size = new System.Drawing.Size(80, 17);
+            this.rbMinimizeToTrayOff.TabIndex = 7;
+            this.rbMinimizeToTrayOff.Text = "off";
+            this.rbMinimizeToTrayOff.UseVisualStyleBackColor = true;
             // 
             // transparentPanel1
             // 
@@ -164,5 +207,8 @@
         private System.Windows.Forms.Label label1;
         private Controls.AdvancedRadioButton rbAutoSaveOn;
         private Controls.AdvancedRadioButton rbAutoSaveOff;
+        private System.Windows.Forms.Label lblMinimizeToTray;
+        private Controls.AdvancedRadioButton rbMinimizeToTrayOn;
+        private Controls.AdvancedRadioButton rbMinimizeToTrayOff;
     }
 }

@@ -73,8 +73,27 @@ public class GlobalHotKey : IDisposable
     private static uint MOD_NOREPEAT = 0x4000;
     private static List<HotKeyWithAction> registeredHotKeys = new List<HotKeyWithAction>();
 
+
+    private class HotKeyWithDelegate
+    {
+
+
+
+        public HotKeyWithDelegate(ModifierKeys modifier, Key key, delegate void action)
+        {
+            Modifier = modifier;
+            Key = key;
+            delegate = action;
+        }
+
+        public ModifierKeys Modifier { get; }
+        public Key Key { get; }
+        public Action Action { get; }
+    }
     private class HotKeyWithAction
     {
+
+
 
         public HotKeyWithAction(ModifierKeys modifier, Key key, Action action)
         {
