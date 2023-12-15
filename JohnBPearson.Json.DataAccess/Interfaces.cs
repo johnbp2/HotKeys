@@ -24,10 +24,16 @@ namespace JohnBPearson.Json.DataAccess
         string Value { get; set; }
     }
 
-
-
-    public interface IHotkeyValueItems
+    public interface IListWrapper<T>
     {
-        List<HotkeyValueItem> Items { get; set; }
+
+         List<T> Items { get; set; }
     }
+
+
+
+    //public interface IHotkeyValueItems
+    //{
+    //    List<HotkeyValueItem> Items { get; set; }
+    //}
 }

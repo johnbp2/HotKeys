@@ -1,24 +1,27 @@
-﻿using JohnBPearson.Windows.Interop;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using JohnBPearson.KeyBindingButler.Model;
 
-namespace JohnBPearson.Windows.Forms
+
+namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
-public interface IPresenterBase : INotifyPropertyChanged
+    public interface IPresenterBase : INotifyPropertyChanged
 {
 
 }
 
+
+internal class MainPresenter
+{
+        
+        public List<KeyBoundValue> RetrieveHotKeyValues()
+        {
+            var userSettings = new UserSettingsHelper();
+            return userSettings.Items;
+            
+        }
+}
 
     //    public MainPresenter(ISettingsProvider settingsProv) 
     //    { 

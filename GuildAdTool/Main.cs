@@ -5,8 +5,11 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
+using JohnBPearson.KeyBindingButler.Model;
+using System.Runtime.CompilerServices;
+using System.Drawing;
 
-namespace JohnBPearson.Windows.Forms.HotkeyButler
+namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
     public partial class Main : Form
     {
@@ -15,10 +18,13 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
         #region private fields
         private JohnBPearson.Windows.Forms.Controls.NotBetterButton btnTest;
         private DataTable keyIndexTable;
-      //  private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
-        private const string valueColumnName = "LetterValue";
-        private const string indexColumnName = "Id";
-      //  private IPresenter<Form> presenter;
+        //  private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
+        private UserSettingsHelper userSettingsHelper;
+        private KeyBoundValue currentItem;
+
+        private ContextMenu contextMenuIcon;
+        private MenuItem menuItemIcon;
+        //  private IPresenter<Form> presenter;
         #endregion
         public Main()
         {
@@ -26,57 +32,55 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             // var reminderForm = new Reminders();
             //this.presenter = presenter;
             //this.presenter.Form = this;
-           
-
+            this.userSettingsHelper = new UserSettingsHelper();
+            this.setupTryIconMenu();
         }
+
+
 
         #region private methods
 
 
 
-        private void onHotkey1()
+    
+        private void copyToClipBoard(string data)
         {
-
-            System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey1);
-        }
-        private void onHotkey2()
-        {
-
-            System.Windows.Clipboard.SetText(Properties.Settings.Default.hotkey2);
+            System.Windows.Clipboard.SetText(data);
+            
         }
 
 
-       
 
-        private DataTable setUpDatasource()
-        {
-            var letters = Properties.Settings.Default.AllowedHotkeys.Split(',').Clone();
-      
-            var tb = new DataTable("keyIndexTable");
-            tb.Columns.Add(Main.indexColumnName, typeof(int));
-            tb.Columns.Add(Main.valueColumnName, typeof(char));
-            var index = 0;
-            foreach (var key in letters as string[])
-            {
-                char newChar = char.Parse(key.Trim().ToLower());
-                tb.Rows.Add(index, newChar);
-                index++;
-            }
-            tb.AcceptChanges();
-            return tb;
-        }
+        //private DataTable setUpDatasource()
+        //{
+        //    var letters = Properties.Settings.Default.AllowedHotkeys.Split(',').Clone();
 
-        private void registerHotKeys(List<string> keys, List<Action> actions)
+        //    var tb = new DataTable("keyIndexTable");
+        //    tb.Columns.Add(Main.indexColumnName, typeof(int));
+        //    tb.Columns.Add(Main.valueColumnName, typeof(char));
+        //    var index = 0;
+        //    foreach (var key in letters as string[])
+        //    {
+        //        char newChar = char.Parse(key.Trim().ToLower());
+        //        tb.Rows.Add(index, newChar);
+        //        index++;
+        //    }
+        //    tb.AcceptChanges();
+        //    return tb;
+        //}
+
+        private void registerHotKeys(List<KeyBoundValue> keys)
         {
             var index = 0;
-            foreach (var key in keys)
+            foreach (var item in keys)
             {
 
 
                 var sb = new StringBuilder();
                 sb.Append(Properties.Settings.Default.HotkeyModifiers);
-                sb.Append(key);
-                GlobalHotKey.RegisterHotKey(sb.ToString(), actions[index]);
+                sb.Append(item.Key);
+                var del = new KeyBindCallBack(this.copyToClipBoard);
+                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value , del);
 
 
 
@@ -90,60 +94,83 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
         private void bindAndCacheDatasource()
         {
 
-            this.keyIndexTable = this.setUpDatasource();
-            cbHotkey1.DataSource = this.keyIndexTable;
-
-            var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
-            cbHotkey1.ValueMember = Main.valueColumnName;
-            cbHotkey1.ValueMember = Main.indexColumnName;
-
-            cbHotkey1.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
 
 
+            this.cbHotkeySelection.Items.Clear();
+            this.cbHotkeySelection.DataSource = this.userSettingsHelper.Items;
+            //1  var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
+            cbHotkeySelection.ValueMember = "Key";
 
-            cbHotkey2.DataSource = this.setUpDatasource();
+            
+            // cbHotkeySelection.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
 
-            var currentHotKeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance.ToString();
-            cbHotkey2.ValueMember = Main.valueColumnName;
-            cbHotkey2.ValueMember = Main.indexColumnName;
-            cbHotkey2.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
+
+
+            //cbHotkey2.DataSource = this.setUpDatasource();
+
+            //var currentHotKeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance.ToString();
+            //cbHotkey2.ValueMember = Main.valueColumnName;
+            //cbHotkey2.ValueMember = Main.indexColumnName;
+            //cbHotkey2.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
 
             //lbPlanetsList.DataSource = Planets.buildPlanetsList();
-           // lbPlanetsList.DisplayMember = "Text";
-           // lbPlanetsList.ValueMember = "Type";
+            // lbPlanetsList.DisplayMember = "Text";
+            // lbPlanetsList.ValueMember = "Type";
 
 
 
         }
 
 
-        private int getIndexForKey(string key, DataTable keyIndexTable)
-        {
-            //var rows = keyIndexTable.Select(String.Concat(Form1.valueColumnName," = '" , key , "'"));
-            // var index = -1;
+        //private int getIndexForKey(string key, DataTable keyIndexTable)
+        //{
+        //    //var rows = keyIndexTable.Select(String.Concat(Form1.valueColumnName," = '" , key , "'"));
+        //    // var index = -1;
 
-            foreach (DataRow row in keyIndexTable.Rows)
-            {
-                if (row.ItemArray[1].ToString() == key)
-                {
-                    return int.Parse(row.ItemArray[0].ToString());
-                }
-            }
-            //if (rows.FirstOrDefault() != null)
-            //{
+        //    foreach (DataRow row in keyIndexTable.Rows)
+        //    {
+        //        if (row.ItemArray[1].ToString() == key)
+        //        {
+        //            return int.Parse(row.ItemArray[0].ToString());
+        //        }
+        //    }
+        //    //if (rows.FirstOrDefault() != null)
+        //    //{
 
-            //    int.TryParse( rows[0].ItemArray[0].ToString(), out index);
+        //    //    int.TryParse( rows[0].ItemArray[0].ToString(), out index);
 
-            //}
-            return -1;
+        //    //}
+        //    return -1;
+        //}
+        
+        private void setupTryIconMenu()        {
+            this.components = new System.ComponentModel.Container();
+            this.contextMenuIcon = new System.Windows.Forms.ContextMenu();
+            this.menuItemIcon = new System.Windows.Forms.MenuItem();
+
+            // Initialize contextMenu1
+            this.contextMenuIcon.MenuItems.AddRange(
+                        new System.Windows.Forms.MenuItem[] { this.menuItemIcon });
+
+            // Initialize menuItem1
+            this.menuItemIcon.Index = 0;
+            this.menuItemIcon.Text = "E&xit";
+            this.menuItemIcon.Click += new System.EventHandler(this.menuItemIcon_Click);
+
+    
+
+      
+
+ 
+
+            // The ContextMenu property sets the menu that will
+            // appear when the systray icon is right clicked.
+            notifyIcon1.ContextMenu = this.contextMenuIcon;
+
+            // The Text property sets the text that will be displayed,
+            // in a tooltip, when the mouse hovers over the systray icon  
         }
 
-
-        private void copyToClipBoard(string textToCopy)
-        {
-
-
-        }
 
         private void attemptToSave(bool overrideAutoSaveSetting)
         {
@@ -159,10 +186,10 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
 
                 FlashWindow.TrayAndWindow(this);
 
-                var row = (DataRowView)this.cbHotkey1.SelectedItem;
+                var row = (DataRowView)this.cbHotkeySelection.SelectedItem;
                 char t = char.Parse(row.Row.ItemArray[1].ToString());
                 Properties.Settings.Default.UserHotKeyGuildAd = t;
-                row = (DataRowView)this.cbHotkey2.SelectedItem;
+                //  row = (DataRowView)this.cbHotkey2.SelectedItem;
                 t = char.Parse(row.Row.ItemArray[1].ToString());
                 Properties.Settings.Default.UserHotkeyAcceptance = t;
                 Properties.Settings.Default.Save();
@@ -173,6 +200,11 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
 
         #region Events
 
+        private void menuItemIcon_Click(object Sender, EventArgs e)
+        {
+            // Close the form, which closes the application.
+            this.Close();
+        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -183,7 +215,7 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
         {
             attemptToSave(true);
             var popupNotifier = new PopupNotifier();
-          
+
             popupNotifier.TitleText = "Title of popup";
             popupNotifier.ContentText = "Content text";
             popupNotifier.IsRightToLeft = false;
@@ -200,6 +232,10 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
                 Hide();
                 notifyIcon1.Visible = true;
             }
+            else
+            {
+
+            }
             //  this.Size = new Size()
         }
 
@@ -210,45 +246,50 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
             notifyIcon1.Visible = false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
-            //Planets.buildPlanetsList();
-            var keysForActionBinding = new List<string>();
-            var actions = new List<Action>();
 
-            var callBackActionGuildAd = new Action(this.onHotkey1);
-            actions.Add(callBackActionGuildAd);
+            //.  this.cbHotkeySelection.ValueMember
+            var actions = new List<Action<string>>();
+            this.registerHotKeys(this.userSettingsHelper.Items);
+
+
+            //Planets.buildPlanetsList();
+            var keysForActionBinding = userSettingsHelper.Keys;
+
+
+            //   actions.Add(callBackActionGuildAd);
             var currentHotkeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd;
-            lblHotkeyGuildAd.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyGuildAd);
+            //  lblHotkeyGuildAd.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyGuildAd);
             keysForActionBinding.Add(currentHotkeyGuildAd.ToString());
 
-            var callBackActionAcceptance = new Action(this.onHotkey2);
-            actions.Add(callBackActionAcceptance); 
-            var currentHotkeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance;
-            lblHotkeyAcceptance.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyAcceptance);
-            keysForActionBinding.Add(currentHotkeyAcceptance.ToString());
+            //var callBackActionAcceptance = new Action<strin Hotkey2);
+            //  actions.Add(callBackActionAcceptance); 
+            //     var currentHotkeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance;
+            //  lblHotkeyAcceptance.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyAcceptance);
+            //   keysForActionBinding.Add(currentHotkeyAcceptance.ToString());
 
-            this.registerHotKeys(keysForActionBinding, actions);
+
+            // this.registerHotKeys(keysForActionBinding, actions);
             this.bindAndCacheDatasource();
 
 
-            this.tbHotkey1.Text = Properties.Settings.Default.hotkey1;
-            this.tbHotkey2.Text = Properties.Settings.Default.hotkey2;
+            this.tbValue.Text = Properties.Settings.Default.hotkey1;
+            //      this.tbHotkey2.Text = Properties.Settings.Default.hotkey2;
 
         }
-        private void tbHotkey1_TextChanged(object sender, EventArgs e)
+
+
+        private void tbValue_TextChanged(object sender, EventArgs e)
         {
+
             attemptToSave(false);
         }
 
-        private void tbHotkey2_TextChanged(object sender, EventArgs e)
-        {
-            attemptToSave(false);
-        }
-      
 
 
-  
+
+
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -257,19 +298,28 @@ namespace JohnBPearson.Windows.Forms.HotkeyButler
         }
 
 
-   
+
 
         private void Main_Activated(object sender, EventArgs e)
         {
             FlashWindow.Stop(this);
-         }
+        }
 
         private void notBetterButton2_Click(object sender, EventArgs e)
         {
-        this.btnSave_Click(sender, e);
+            this.btnSave_Click(sender, e);
 
         }
 
         #endregion
+
+        private void cbHotkeySelection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var item = this.cbHotkeySelection.SelectedItem as KeyBoundValue;
+            tbValue.Text = item.Value;
+            this.currentItem = item;
+
+        }
+
     }
 }
