@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JohnBPearson.KeyBindingButler.Model;
@@ -45,8 +46,8 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private List<KeyBoundValue> parse()
         {
-            var letters = Properties.Settings.Default.AllowedHotkeys.Split(delim).Clone();
-            var values = Properties.Settings.Default.HotkeyValues.Split(delim);
+            var letters = Properties.Settings.Default.BindableKeys.Split(delim).Clone();
+            var values = Properties.Settings.Default.BoundValues.Split(delim);
             this._keys =(letters as string[]).ToList();
          
             var resultList = new List<KeyBoundValue>();
@@ -62,16 +63,23 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             return resultList;
         }
         private const char delim = '|';
-        private void updateItems()
+        public bool updateItems(bool overrideAutoSave)
         {
-            var keys = new StringBuilder();
-            var values = new StringBuilder();
-            foreach (var item in this.Items) {
-                keys.Append(string.Format(item.Key, delim));
-                values.Append(string.Format(item.Value, delim));
+            if (Properties.Settings.Default.autoSave == true | overrideAutoSave)
+            {
+                var keys = new StringBuilder();
+                var values = new StringBuilder();
+                foreach (var item in this.Items)
+                {
+                    keys.Append(item.Key + delim);
+                    values.Append(item.Value+ delim);
+                }
+                Properties.Settings.Default.BoundValues = values.ToString();
+       
+                Properties.Settings.Default.Save();
+                return true;
             }
-            Properties.Settings.Default.HotkeyValues = Items.ToString();
-            Properties.Settings.Default.Save();
+            return false;
         }
     
     

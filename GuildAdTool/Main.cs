@@ -25,6 +25,22 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private ContextMenu contextMenuIcon;
         private MenuItem menuItemIcon;
+
+        
+
+        public KeyBoundValue selectedKeyBoundValue
+        {
+            get { if (cbHotkeySelection.SelectedItem != null) {
+                    return cbHotkeySelection.SelectedItem as KeyBoundValue;
+
+                } else
+                {
+                    return null;
+                }
+                }
+    
+        }
+
         //  private IPresenter<Form> presenter;
         #endregion
         public Main()
@@ -52,23 +68,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
 
-        //private DataTable setUpDatasource()
-        //{
-        //    var letters = Properties.Settings.Default.AllowedHotkeys.Split(',').Clone();
 
-        //    var tb = new DataTable("keyIndexTable");
-        //    tb.Columns.Add(Main.indexColumnName, typeof(int));
-        //    tb.Columns.Add(Main.valueColumnName, typeof(char));
-        //    var index = 0;
-        //    foreach (var key in letters as string[])
-        //    {
-        //        char newChar = char.Parse(key.Trim().ToLower());
-        //        tb.Rows.Add(index, newChar);
-        //        index++;
-        //    }
-        //    tb.AcceptChanges();
-        //    return tb;
-        //}
 
         private void registerHotKeys(List<KeyBoundValue> keys)
         {
@@ -78,7 +78,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
                 var sb = new StringBuilder();
-                sb.Append(Properties.Settings.Default.HotkeyModifiers);
+                sb.Append(Properties.Settings.Default.KeyBindingModifiers);
                 sb.Append(item.Key);
                 var del = new KeyBindCallBack(this.copyToClipBoard);
                     GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value , del);
@@ -92,7 +92,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         }
 
 
-        private void bindAndCacheDatasource()
+        private void bindDropDownKeyValues()
         {
 
 
@@ -101,7 +101,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.cbHotkeySelection.DataSource = this.userSettingsHelper.Items;
             //1  var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
             cbHotkeySelection.ValueMember = "Key";
-
+         //   cbHotkeySelection.DisplayMember = "Key";
             
             // cbHotkeySelection.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
 
@@ -173,29 +173,28 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         }
 
 
-        private void attemptToSave(bool overrideAutoSaveSetting)
-        {
-            this.attemptToSave(overrideAutoSaveSetting, null, null);
-        }
 
-        private void attemptToSave(bool overrideAutoSaveSetting, object setting, object value)
+
+        private void attemptToSave(bool overrideAutoSaveSetting)
         {
             //this.presenter.executeAutoSave((DataRowView)this.cbHotkey1.SelectedItem, (DataRowView)this.cbHotkey2.SelectedItem, new object(),
             // new object());
             if (Properties.Settings.Default.autoSave == true | overrideAutoSaveSetting)
             {
+                if(this.userSettingsHelper != null && this.userSettingsHelper.updateItems(overrideAutoSaveSetting))
+                {
+                    FlashWindow.TrayAndWindow(this);
+                }
 
-                FlashWindow.TrayAndWindow(this);
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Did not save");
+                }
 
-                var row = (DataRowView)this.cbHotkeySelection.SelectedItem;
-                char t = char.Parse(row.Row.ItemArray[1].ToString());
-                Properties.Settings.Default.UserHotKeyGuildAd = t;
-                //  row = (DataRowView)this.cbHotkey2.SelectedItem;
-                t = char.Parse(row.Row.ItemArray[1].ToString());
-                Properties.Settings.Default.UserHotkeyAcceptance = t;
-                Properties.Settings.Default.Save();
             }
         }
+
+
         #endregion
 
 
@@ -256,13 +255,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
             //Planets.buildPlanetsList();
-            var keysForActionBinding = userSettingsHelper.Keys;
+           // var keysForActionBinding = userSettingsHelper.Keys;
 
 
             //   actions.Add(callBackActionGuildAd);
-            var currentHotkeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd;
             //  lblHotkeyGuildAd.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyGuildAd);
-            keysForActionBinding.Add(currentHotkeyGuildAd.ToString());
+           
 
             //var callBackActionAcceptance = new Action<strin Hotkey2);
             //  actions.Add(callBackActionAcceptance); 
@@ -272,10 +270,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
             // this.registerHotKeys(keysForActionBinding, actions);
-            this.bindAndCacheDatasource();
+            this.bindDropDownKeyValues();
 
 
-            this.tbValue.Text = Properties.Settings.Default.hotkey1;
+        
             //      this.tbHotkey2.Text = Properties.Settings.Default.hotkey2;
 
         }
@@ -283,8 +281,21 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private void tbValue_TextChanged(object sender, EventArgs e)
         {
-
-            attemptToSave(false);
+            if (this.selectedKeyBoundValue != null) {
+                var itemToUpdate = this.userSettingsHelper.Items.Find((item) =>
+                {
+                    if (item.Key == this.selectedKeyBoundValue.Key)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+                itemToUpdate.Value = tbValue.Text;
+                attemptToSave(false);
+            }
         }
 
 
@@ -316,9 +327,11 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private void cbHotkeySelection_SelectedValueChanged(object sender, EventArgs e)
         {
-            var item = this.cbHotkeySelection.SelectedItem as KeyBoundValue;
-            tbValue.Text = item.Value;
-            this.currentItem = item;
+            if (this.selectedKeyBoundValue != null)
+            {
+                tbValue.Text = this.selectedKeyBoundValue.Value;
+              
+            }
 
         }
 

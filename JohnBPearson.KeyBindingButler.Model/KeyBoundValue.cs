@@ -21,7 +21,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         public string Value
         {
             get { return _value; }
-            private set { _value = value; }
+            set { _value = value; }
         }
         public KeyBoundValue()
         {
