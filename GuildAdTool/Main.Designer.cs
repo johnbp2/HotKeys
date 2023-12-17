@@ -1,4 +1,5 @@
 ﻿using JohnBPearson.Windows.Interop;
+using JohnBPearson.Windows.Forms.Controls;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {/// <summary>
@@ -281,8 +282,8 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private Controls.NotBetterButton notBetterButton1;
-        private Controls.NotBetterButton notBetterButton2;
+        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton1;
+        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton2;
     }
 }
 

@@ -1,4 +1,6 @@
-﻿namespace JohnBPearson.Windows.Forms.KeyBindingButler
+﻿using JohnBPearson.Windows.Forms.Controls;
+
+namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
     partial class SettingsDialog
     {
