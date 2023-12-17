@@ -26,69 +26,57 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("612Annie#")]
-        public string hotkey2 {
+        public string deprecated_hotkey2 {
             get {
-                return ((string)(this["hotkey2"]));
+                return ((string)(this["deprecated_hotkey2"]));
             }
             set {
-                this["hotkey2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("s")]
-        public char UserHotKeyGuildAd {
-            get {
-                return ((char)(this["UserHotKeyGuildAd"]));
-            }
-            set {
-                this["UserHotKeyGuildAd"] = value;
+                this["deprecated_hotkey2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
-        public string AllowedHotkeys {
+        public string BindableKeys {
             get {
-                return ((string)(this["AllowedHotkeys"]));
+                return ((string)(this["BindableKeys"]));
             }
             set {
-                this["AllowedHotkeys"] = value;
+                this["BindableKeys"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a")]
-        public char UserHotkeyAcceptance {
+        public char deprecated_UserHotkeyAcceptance {
             get {
-                return ((char)(this["UserHotkeyAcceptance"]));
+                return ((char)(this["deprecated_UserHotkeyAcceptance"]));
             }
             set {
-                this["UserHotkeyAcceptance"] = value;
+                this["deprecated_UserHotkeyAcceptance"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Alt + Shift + ")]
-        public string HotkeyModifiers {
+        public string KeyBindingModifiers {
             get {
-                return ((string)(this["HotkeyModifiers"]));
+                return ((string)(this["KeyBindingModifiers"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("john.b.pearson")]
-        public string hotkey1 {
+        public string deprecated_hotkey1 {
             get {
-                return ((string)(this["hotkey1"]));
+                return ((string)(this["deprecated_hotkey1"]));
             }
             set {
-                this["hotkey1"] = value;
+                this["deprecated_hotkey1"] = value;
             }
         }
         
@@ -142,13 +130,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123Isabella!||||||||||||||||||123Isabella!|||||||s")]
-        public string HotkeyValues {
+        [global::System.Configuration.DefaultSettingValueAttribute("123Isabella!|abc|||||||||||||||||123Isabella!|||||||s")]
+        public string BoundValues {
             get {
-                return ((string)(this["HotkeyValues"]));
+                return ((string)(this["BoundValues"]));
             }
             set {
-                this["HotkeyValues"] = value;
+                this["BoundValues"] = value;
             }
         }
     }

@@ -30,6 +30,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,9 +42,11 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.transparentPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.transparentFlowPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // transparentFlowPanel1
@@ -182,6 +185,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.btnCancel.Text = "cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // SettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +202,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.transparentPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -212,5 +220,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.Label lblMinimizeToTray;
         private Controls.AdvancedRadioButton rbMinimizeToTrayOn;
         private Controls.AdvancedRadioButton rbMinimizeToTrayOff;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
