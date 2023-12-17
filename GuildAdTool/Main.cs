@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 using JohnBPearson.KeyBindingButler.Model;
+using JohnBPearson.Windows.Forms.Controls;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 
