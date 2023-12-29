@@ -131,12 +131,24 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("123Isabella!|abc|||||||||||||||||123Isabella!|||||||s")]
-        public string BoundValues {
+        public string BindableValues {
             get {
-                return ((string)(this["BoundValues"]));
+                return ((string)(this["BindableValues"]));
             }
             set {
-                this["BoundValues"] = value;
+                this["BindableValues"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
+        public string BindableKeysBackup {
+            get {
+                return ((string)(this["BindableKeysBackup"]));
+            }
+            set {
+                this["BindableKeysBackup"] = value;
             }
         }
     }

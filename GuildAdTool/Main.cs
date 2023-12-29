@@ -9,6 +9,7 @@ using JohnBPearson.KeyBindingButler.Model;
 using JohnBPearson.Windows.Forms.Controls;
 using System.Runtime.CompilerServices;
 using System.Drawing;
+using System.Linq;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
@@ -20,18 +21,20 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private JohnBPearson.Windows.Forms.Controls.NotBetterButton btnTest;
         private DataTable keyIndexTable;
         //  private string hotkeyModifiers = Properties.Settings.Default.HotkeyModifiers;
-        private UserSettingsHelper userSettingsHelper;
-        private KeyBoundValue currentItem;
+       // private Parser userSettingsHelper;
+
+    private MainPresenter presenter;
+        private JohnBPearson.KeyBindingButler.Model.IKeyBoundValue currentItem;
 
         private ContextMenu contextMenuIcon;
         private MenuItem menuItemIcon;
 
         
 
-        public KeyBoundValue selectedKeyBoundValue
+        public string selectedKeyBoundValue
         {
             get { if (cbHotkeySelection.SelectedItem != null) {
-                    return cbHotkeySelection.SelectedItem as KeyBoundValue;
+                    return cbHotkeySelection.SelectedItem as string;
 
                 } else
                 {
@@ -43,16 +46,20 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         //  private IPresenter<Form> presenter;
         #endregion
-        public Main()
+        public Main(MainPresenter presenter)
         {
+            this.presenter = presenter;
             InitializeComponent();
             // var reminderForm = new Reminders();
             //this.presenter = presenter;
             //this.presenter.Form = this;
-            this.userSettingsHelper = new UserSettingsHelper();
+            //this.keyBoundValueList.Items;]
+          
             this.setupTryIconMenu();
         }
 
+
+       
 
 
         #region private methods
@@ -70,7 +77,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
 
-        private void registerHotKeys(List<KeyBoundValue> keys)
+        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> keys)
         {
             var index = 0;
             foreach (var item in keys)
@@ -79,9 +86,9 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
                 var sb = new StringBuilder();
                 sb.Append(Properties.Settings.Default.KeyBindingModifiers);
-                sb.Append(item.Key);
+                sb.Append(item.KeyAsChar);
                 var del = new KeyBindCallBack(this.copyToClipBoard);
-                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value , del);
+                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value.Value , del);
 
 
 
@@ -98,27 +105,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
             this.cbHotkeySelection.Items.Clear();
-            this.cbHotkeySelection.DataSource = this.userSettingsHelper.Items;
+            this.cbHotkeySelection.DataSource = this.presenter.Keys;
             //1  var currentHotKeyGuildAd = Properties.Settings.Default.UserHotKeyGuildAd.ToString();
-            cbHotkeySelection.ValueMember = "Key";
-         //   cbHotkeySelection.DisplayMember = "Key";
-            
-            // cbHotkeySelection.SelectedIndex = this.getIndexForKey(currentHotKeyGuildAd, this.keyIndexTable); //currentHotKeyGuildAd;
-
-
-
-            //cbHotkey2.DataSource = this.setUpDatasource();
-
-            //var currentHotKeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance.ToString();
-            //cbHotkey2.ValueMember = Main.valueColumnName;
-            //cbHotkey2.ValueMember = Main.indexColumnName;
-            //cbHotkey2.SelectedItem = this.getIndexForKey(currentHotKeyAcceptance, this.keyIndexTable);
-
-            //lbPlanetsList.DataSource = Planets.buildPlanetsList();
-            // lbPlanetsList.DisplayMember = "Text";
-            // lbPlanetsList.ValueMember = "Type";
-
-
+       
+      
 
         }
 
@@ -130,7 +120,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         //    foreach (DataRow row in keyIndexTable.Rows)
         //    {
-        //        if (row.ItemArray[1].ToString() == key)
+        //        if (row.ItemArray[1].ToString() == keyew)
         //        {
         //            return int.Parse(row.ItemArray[0].ToString());
         //        }
@@ -179,19 +169,33 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             //this.presenter.executeAutoSave((DataRowView)this.cbHotkey1.SelectedItem, (DataRowView)this.cbHotkey2.SelectedItem, new object(),
             // new object());
-            if (Properties.Settings.Default.autoSave == true | overrideAutoSaveSetting)
-            {
-                if(this.userSettingsHelper != null && this.userSettingsHelper.updateItems(overrideAutoSaveSetting))
-                {
-                    FlashWindow.TrayAndWindow(this);
-                }
+          //  if (Properties.Settings.Default.autoSave == true | overrideAutoSaveSetting)
+            //{
+                //if (this.presenter != null)
+                
+                  var result =  this.presenter.executeAutoSave(overrideAutoSaveSetting);
+                    if (result == 0)
+                    {
+                        var popupNotifier = new PopupNotifier();
+                        using (popupNotifier)
+                        {
+                            popupNotifier.TitleText = "Save Results";
+                            popupNotifier.ContentText = $"X items saved";
+                            popupNotifier.IsRightToLeft = false;
+                            popupNotifier.Popup();
+
+                        }
+
+                        FlashWindow.TrayAndWindow(this); 
+                    }
+                
 
                 else
                 {
                     System.Windows.Forms.MessageBox.Show("Did not save");
                 }
 
-            }
+            //}
         }
 
 
@@ -214,12 +218,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private void btnSave_Click(object sender, EventArgs e)
         {
             attemptToSave(true);
-            var popupNotifier = new PopupNotifier();
 
-            popupNotifier.TitleText = "Title of popup";
-            popupNotifier.ContentText = "Content text";
-            popupNotifier.IsRightToLeft = false;
-            popupNotifier.Popup();
         }
 
         private void Main_Resize(object sender, EventArgs e)
@@ -251,7 +250,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
             //.  this.cbHotkeySelection.ValueMember
             var actions = new List<Action<string>>();
-            this.registerHotKeys(this.userSettingsHelper.Items);
+            this.registerHotKeys(this.presenter.HotKeyValues);
 
 
             //Planets.buildPlanetsList();
@@ -282,19 +281,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private void tbValue_TextChanged(object sender, EventArgs e)
         {
             if (this.selectedKeyBoundValue != null) {
-                var itemToUpdate = this.userSettingsHelper.Items.Find((item) =>
-                {
-                    if (item.Key == this.selectedKeyBoundValue.Key)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                });
-                itemToUpdate.Value = tbValue.Text;
-                attemptToSave(false);
+                var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
+              
+                this.presenter.replaceItem(itemToUpdate, tbValue.Text);
+         
             }
         }
 
@@ -329,11 +319,21 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             if (this.selectedKeyBoundValue != null)
             {
-                tbValue.Text = this.selectedKeyBoundValue.Value;
+                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Value.Value;
               
             }
 
         }
 
+        private void tbValue_Leave(object sender, EventArgs e)
+        {
+            if (this.selectedKeyBoundValue != null)
+            {
+                var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
+
+                this.presenter.replaceItem(itemToUpdate, tbValue.Text);
+
+            }
+        }
     }
 }
