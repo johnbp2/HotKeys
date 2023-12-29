@@ -170,6 +170,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.notBetterButton2.Transparent1 = 150;
             this.notBetterButton2.Transparent2 = 150;
             this.notBetterButton2.UseVisualStyleBackColor = true;
+            this.notBetterButton2.Visible = false;
             this.notBetterButton2.Click += new System.EventHandler(this.notBetterButton2_Click);
             // 
             // btnSave
@@ -203,7 +204,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tbValue.Size = new System.Drawing.Size(363, 142);
             this.tbValue.TabIndex = 0;
             this.tbValue.TabStop = false;
-            this.tbValue.TextChanged += new System.EventHandler(this.tbValue_TextChanged);
+            this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
             // 
             // notBetterButton1
             // 

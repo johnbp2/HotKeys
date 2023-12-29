@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.Networking.Sockets;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
@@ -27,7 +28,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // This handler is for catching non-UI thread exceptions
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            var main = new Main();
+            var main = new Main(new MainPresenter());
             Application.Run(main);
         }
 
