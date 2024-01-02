@@ -51,11 +51,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\JohnBPearson.KeyBindingButler.Model\JohnBPearson.KeyBindingButler.Model.csproj">
-      <Project>{45ED5872-A9F3-497C-8A12-753D1A22A9F2}</Project>
-      <Name>JohnBPearson.KeyBindingButler.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
