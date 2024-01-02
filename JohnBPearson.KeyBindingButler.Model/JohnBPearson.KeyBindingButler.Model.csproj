@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseValue.cs" />
+    <Compile Include="ButlerBase.cs" />
     <Compile Include="ContentsForClipboard.cs" />
     <Compile Include="IKeyBoundValue.cs" />
     <Compile Include="Key.cs" />

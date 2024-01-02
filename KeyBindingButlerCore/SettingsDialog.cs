@@ -21,14 +21,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.popupNotifier1.Popup();
-           
-        Properties.Settings.Default.autoSave = rbAutoSaveOn.Checked;
-         
 
-                Properties.Settings.Default.MinimizeToTray = rbMinimizeToTrayOn.Checked;
+            Properties.Settings.Default.autoSave = rbAutoSaveOn.Checked;
+
+
+            Properties.Settings.Default.MinimizeToTray = rbMinimizeToTrayOn.Checked;
             Properties.Settings.Default.ServantName = tbServantName.Text;
 
             Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+
+            SettingsDialog_Load(this, new EventArgs());
         }
 
         private void SettingsDialog_Load(object sender, EventArgs e)
@@ -44,13 +47,23 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
             // "2011-03-21 13:26";
-            var test = DateTime.Now.CompareTo(DateTime.ParseExact($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
+            //     var test = DateTime.Now.CompareTo(DateTime.ParseExact($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
             popupNotifier1.TitleText = Properties.Settings.Default.ServantName;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void popupNotifier1_Appear(object sender, EventArgs e)
+        {
+
+        }
+
+        private void popupNotifier1_Disappear(object sender, EventArgs e)
+        {
+
         }
     }
 }
