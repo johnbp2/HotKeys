@@ -44,7 +44,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
             // "2011-03-21 13:26";
-            var test = DateTime.Now.CompareTo(DateTime.ParseExact($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
+         //   var test = DateTime.Now.CompareTo(DateTime.ParseExact($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
             popupNotifier1.TitleText = Properties.Settings.Default.ServantName;
         }
 

@@ -18,7 +18,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
     public class MainPresenter : IPresenter<Main>
     {
-        private KeyBoundValueList keyBoundValueList;
+        private JohnBPearson.KeyBindingButler.Model.KeyBindingButler keyBoundValueList;
         private Main _main;
         public Main Form { get { return this._main; } private set { this._main = value; } }
 
@@ -72,7 +72,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             var strings = new KeyAndValuesStringLiterals();
             strings.Values = Properties.Settings.Default.BindableValues;
             strings.Keys = Properties.Settings.Default.BindableKeys;
-            this.keyBoundValueList = new KeyBoundValueList(strings);
+            this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBindingButler(strings, Properties.Settings.Default.ServantName);
         }
     }
 

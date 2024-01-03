@@ -176,13 +176,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                   var result =  this.presenter.executeAutoSave(overrideAutoSaveSetting);
                     if (result == 0)
                     {
-                        var popupNotifier = new PopupNotifier();
-                        using (popupNotifier)
+
+                        var popupNotifier = ButlersNotificationRoutine.Create(Properties.Settings.Default.ServantName, "Saved");
+                        using (popupNotifier as IDisposable)
                         {
-                            popupNotifier.TitleText = "Save Results";
-                            popupNotifier.ContentText = $"X items saved";
-                            popupNotifier.IsRightToLeft = false;
-                            popupNotifier.Popup();
+                        
+                            popupNotifier.Popup()1;
 
                         }
 
