@@ -90,7 +90,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             {
                 return new KeyBoundValue(oldItem.Key.Key, newValue.Value, true);
             }
-            return new KeyBoundValue(oldItem.Key.Key, oldItem.Value.Value, oldItem.IsDirty) ;
+            return new KeyBoundValue(oldItem.Key.Key, oldItem.Value.Value, oldItem.IsDirty);
         }
 
         public bool Equals(KeyBoundValue other)
@@ -106,9 +106,9 @@ namespace JohnBPearson.KeyBindingButler.Model
         {
             return KeyBoundValue.Create(this.KeyAsChar, newValue);
         }
-            
-            
-     }
+
+
+    }
 
     public struct KeyAndValuesStringLiterals
     {
@@ -116,61 +116,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         public string Values;
         public int ItemsUpdated;
 
-      
-    }
-    public class KeyBoundValueList
-    {
 
-        private Parser _userSettingsHelper;
-        private List<IKeyBoundValue> _items = new List<IKeyBoundValue>();
-
-        public KeyBoundValueList(KeyAndValuesStringLiterals strings)
-        {
-            this._userSettingsHelper = new Parser(strings);
-            this._items = this._userSettingsHelper.Items;
-
-        }
-
-        public IEnumerable<string> Keys
-        {
-            get
-            {
-                if (this._userSettingsHelper != null)
-                {
-                    return this._userSettingsHelper.Keys;
-                }
-                else return null;
-            }
-        }
-        public IEnumerable<IKeyBoundValue> Items
-        { get { return this._items; } }
-
-        public void Replace(IKeyBoundValue newItem, IKeyBoundValue oldItem)
-        {
-
-
-            var newKeyBoundValue = KeyBoundValue.CreateForReplace(newItem.Value, oldItem);
-            var index = this._items.IndexOf(oldItem);
-            this._items.RemoveAt(index);
-            this._items[index] = newItem;
-            //  return this._items;
-        }
-
-        public KeyAndValuesStringLiterals PrepareDataForSave() {
-            var sbKeys = new StringBuilder();
-            var sbValues = new StringBuilder();
-            int count = 0;
-            foreach (var item in _items)
-            {if (item.IsDirty) count++;                        
-                        
-                sbKeys.Append(item.Key.ToString());
-                sbValues.Append(item.Value.ToString());
-            }
-            var result = new KeyAndValuesStringLiterals();
-            result.Values = sbValues.ToString();
-            result.Keys = sbKeys.ToString();
-            result.ItemsUpdated = count;
-           return result;
-        }
     }
 }
+  
