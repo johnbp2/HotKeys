@@ -181,7 +181,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                         using (popupNotifier as IDisposable)
                         {
                         
-                            popupNotifier.Popup()1;
+                            popupNotifier.Popup();
 
                         }
 
