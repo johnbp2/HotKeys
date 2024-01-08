@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace JohnBPearson.Windows.Forms.Controls
 { public interface INotificationRoutine
@@ -15,7 +17,9 @@ namespace JohnBPearson.Windows.Forms.Controls
     }
     public class ButlersNotificationRoutine : Tulpep.NotificationWindow.PopupNotifier, INotificationRoutine 
     {
-        private List<Tuple<string, string>> _notifications;
+        private List<Tuple<string, string>> _notifications = new List<Tuple<string, string>>();
+            
+        private Bitmap _bitmap;
         public void Popup()
         {
             this.Popup(0);
@@ -28,22 +32,26 @@ namespace JohnBPearson.Windows.Forms.Controls
             base.ContentText = _notifications[index].Item2;
             base.Popup();
         }
-        protected ButlersNotificationRoutine(List<Tuple<string, string>> notifications): base()
+        protected ButlersNotificationRoutine(List<Tuple<string, string>> notifications, System.Drawing.Bitmap bgImage) : base()
         {
+            this._bitmap = bgImage;
+            this.InitializeComponent();
+          
             this._notifications = notifications;
         }
 
-       public static INotificationRoutine Create(List<Tuple<string, string>> notifications)
+       public static INotificationRoutine Create(List<Tuple<string, string>> notifications, System.Drawing.Bitmap bgImage)
         {
-            return new ButlersNotificationRoutine(notifications);
+
+            return new ButlersNotificationRoutine(notifications, bgImage);
         }
 
-        public static INotificationRoutine Create(string title, string message)
+        public static INotificationRoutine Create(string title, string message, Bitmap bgImage)
         {
             
             List<Tuple<string, string>> list = new List<Tuple<string, string>>();
             list.Add(new Tuple<string, string>(title, message));
-            return new ButlersNotificationRoutine(list);
+            return new ButlersNotificationRoutine(list, bgImage);
         }
 
         private void InitializeComponent()
@@ -53,7 +61,7 @@ namespace JohnBPearson.Windows.Forms.Controls
             // ButlersNotificationRoutine
             // 
             this.AnimationDuration = 2000;
-            this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
+            this.Image = (Image)this._bitmap;
 
         }
     }

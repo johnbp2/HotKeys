@@ -134,6 +134,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.cbHotkeySelection.Name = "cbHotkeySelection";
             this.cbHotkeySelection.Size = new System.Drawing.Size(218, 32);
             this.cbHotkeySelection.TabIndex = 0;
+            this.cbHotkeySelection.TextUpdate += new System.EventHandler(this.cbHotkeySelection_TextUpdate);
             this.cbHotkeySelection.SelectedValueChanged += new System.EventHandler(this.cbHotkeySelection_SelectedValueChanged);
             // 
             // transparentPanel2

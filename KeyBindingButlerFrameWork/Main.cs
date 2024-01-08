@@ -10,6 +10,9 @@ using JohnBPearson.Windows.Forms.Controls;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 using System.Linq;
+using JohnBPearson.Windows.Forms.KeyBindingButler.Properties;
+using Windows.Media.Protection.PlayReady;
+using Windows.UI.Xaml.Controls;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
@@ -177,12 +180,16 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                     if (result == 0)
                     {
 
-                        var popupNotifier = ButlersNotificationRoutine.Create(Properties.Settings.Default.ServantName, "Saved");
-                        using (popupNotifier as IDisposable)
+                Bitmap bmp = new Bitmap(@".\Butler.png");
+
+                var popupNotifier = ButlersNotificationRoutine.Create(Properties.Settings.Default.ServantName, "Saved", bmp);
+                
+                //((System.Drawing.Image)(resources.GetObject("popupNotifier1.Image")));1
+                using (popupNotifier as IDisposable)
                         {
                         
                             popupNotifier.Popup();
-
+                    
                         }
 
                         FlashWindow.TrayAndWindow(this); 
@@ -197,7 +204,11 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             //}
         }
 
+        private void applyValueForKey(char key) {
 
+
+            tbValue.Text = this.presenter.findKeyBoundValue(key.ToString()).Value.Value;
+        }
         #endregion
 
 
@@ -312,14 +323,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         }
 
-        #endregion
+     
 
         private void cbHotkeySelection_SelectedValueChanged(object sender, EventArgs e)
         {
             if (this.selectedKeyBoundValue != null)
             {
-                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Value.Value;
-              
+                this.applyValueForKey(this.selectedKeyBoundValue.ToCharArray()[0]);
             }
 
         }
@@ -334,5 +344,21 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
             }
         }
+
+        private void cbHotkeySelection_TextUpdate(object sender, EventArgs e)
+        {
+            if (this.selectedKeyBoundValue != null)
+            {
+                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Value.Value;
+
+            }
+            var control = (System.Windows.Forms.ComboBox)sender;
+            if (control.Text .Length == 1)
+            {
+                   this.applyValueForKey(control.Text.ToCharArray()[0]);
+            }
+
+            }
+        #endregion
     }
 }
