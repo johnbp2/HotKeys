@@ -201,8 +201,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="butler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon1.ico" />
     <Content Include="icons8-butler-48.ico" />
+    <None Include="Resources\butler.png" />
+    <None Include="Resources\Image1.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
