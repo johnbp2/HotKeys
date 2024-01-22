@@ -42,14 +42,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
-            this.lblHotkeyGuildAd = new System.Windows.Forms.Label();
+            this.lblHotkey = new System.Windows.Forms.Label();
             this.cbHotkeySelection = new System.Windows.Forms.ComboBox();
             this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
             this.notBetterButton2 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
-            this.notBetterButton1 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
@@ -101,13 +100,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // transparentFlowPanel1
             // 
-            this.transparentFlowPanel1.Controls.Add(this.lblHotkeyGuildAd);
+            this.transparentFlowPanel1.Controls.Add(this.lblHotkey);
             this.transparentFlowPanel1.Controls.Add(this.cbHotkeySelection);
             this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.transparentFlowPanel1.Location = new System.Drawing.Point(42, 39);
@@ -116,15 +115,15 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.transparentFlowPanel1.Size = new System.Drawing.Size(268, 78);
             this.transparentFlowPanel1.TabIndex = 2;
             // 
-            // lblHotkeyGuildAd
+            // lblHotkey
             // 
-            this.lblHotkeyGuildAd.AutoSize = true;
-            this.lblHotkeyGuildAd.Location = new System.Drawing.Point(6, 0);
-            this.lblHotkeyGuildAd.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblHotkeyGuildAd.Name = "lblHotkeyGuildAd";
-            this.lblHotkeyGuildAd.Size = new System.Drawing.Size(123, 24);
-            this.lblHotkeyGuildAd.TabIndex = 0;
-            this.lblHotkeyGuildAd.Text = "Alt +  Shift + ?";
+            this.lblHotkey.AutoSize = true;
+            this.lblHotkey.Location = new System.Drawing.Point(6, 0);
+            this.lblHotkey.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblHotkey.Name = "lblHotkey";
+            this.lblHotkey.Size = new System.Drawing.Size(135, 24);
+            this.lblHotkey.TabIndex = 0;
+            this.lblHotkey.Text = "Alt +  Shift + {0}";
             // 
             // cbHotkeySelection
             // 
@@ -176,6 +175,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // 
             // btnSave
             // 
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Location = new System.Drawing.Point(832, 100);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
@@ -207,29 +207,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tbValue.TabStop = false;
             this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
             // 
-            // notBetterButton1
-            // 
-            this.notBetterButton1.DisplayText = "notBetterButton1";
-            this.notBetterButton1.EndColor = System.Drawing.Color.DarkBlue;
-            this.notBetterButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.notBetterButton1.ForeColor = System.Drawing.Color.White;
-            this.notBetterButton1.GradientAngle = 90;
-            this.notBetterButton1.Location = new System.Drawing.Point(-23, -46);
-            this.notBetterButton1.MouseClickColor1 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton1.MouseClickColor2 = System.Drawing.Color.Red;
-            this.notBetterButton1.MouseHoverColor1 = System.Drawing.Color.Yellow;
-            this.notBetterButton1.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton1.Name = "notBetterButton1";
-            this.notBetterButton1.Size = new System.Drawing.Size(200, 50);
-            this.notBetterButton1.StartColor = System.Drawing.Color.LightGreen;
-            this.notBetterButton1.TabIndex = 9;
-            this.notBetterButton1.Text = "notBetterButton1";
-            this.notBetterButton1.TextLocation_X = 76;
-            this.notBetterButton1.TextLocation_Y = 24;
-            this.notBetterButton1.Transparent1 = 150;
-            this.notBetterButton1.Transparent2 = 150;
-            this.notBetterButton1.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -239,7 +216,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1036, 387);
-            this.Controls.Add(this.notBetterButton1);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentPanel2);
             this.Controls.Add(this.menuStrip1);
@@ -274,7 +250,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.Label lblGuildAd;
         private System.Windows.Forms.Button btnSave;
         private JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel transparentFlowPanel1;
-        private System.Windows.Forms.Label lblHotkeyGuildAd;
+        private System.Windows.Forms.Label lblHotkey;
         private System.Windows.Forms.ComboBox cbHotkeySelection;
        // private System.Windows.Forms.Button btnCopyGuildLog;
        // private Controls.TransparentPanel transparentPanel1;
@@ -284,7 +260,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton1;
         private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton2;
     }
 }

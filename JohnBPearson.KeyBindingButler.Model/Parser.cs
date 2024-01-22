@@ -72,7 +72,7 @@ namespace JohnBPearson.com.Utility
             var index = 0;
             foreach (var key in this._keys)
             {
-                if (index < 26)
+                if (index < values.Length)
                 {
                     var value = values[index];
                     var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundValue.Create(key[0], value);
