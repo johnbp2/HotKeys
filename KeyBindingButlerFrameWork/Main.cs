@@ -330,6 +330,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             if (this.selectedKeyBoundValue != null)
             {
                 this.applyValueForKey(this.selectedKeyBoundValue.ToCharArray()[0]);
+                lblHotkey.Text
             }
 
         }
