@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using JohnBPearson.KeyBindingButler.Model;
 using JohnBPearson.Windows.Interop;
 
+public class BoundKeyActionEventArgs : EventArgs
+{
+    public string Key { get; set; }
+    public string Value { get; set;}
+    public BoundKeyActionEventArgs() { 
+
+            
+            }
+}
+
 
 
 public class GlobalHotKey : IDisposable
  {
+  
+ 
   // internal static InteropFacade facade = new InteropFacade();
         /// <summary>
         /// Registers a global hotkey
         /// </summary>
-        /// <param name="aKeyGesture">e.g. Alt + Shift + Control + Win + S</param>
+        /// <param name="aKeyGesture">e.g. Alt + Shift + Control + Win + s</param>
         /// <param name="aAction">Action to be called when hotkey is pressed</param>
         /// <returns>true, if registration succeeded, otherwise false</returns>
         public static bool RegisterHotKey(string aKeyGestureString, Action aAction, string data)
@@ -90,6 +104,7 @@ public class GlobalHotKey : IDisposable
 
         static GlobalHotKey()
         {
+        //BoundKeyAction = new EventHandler<BoundKeyActionEventArgs>()
             window.KeyPressed += (s, e) =>
             {
                 registeredHotKeys.ForEach(x =>
@@ -103,8 +118,9 @@ public class GlobalHotKey : IDisposable
                         }
                         else if (x.CallBack != null)
                         {
-                            x.CallBack.Invoke(x.Data);
+                            x.CallBack.Invoke(x.Key.ToString(),x.Data);
                         }
+                       
                     }
                 });
             };
@@ -114,7 +130,9 @@ public class GlobalHotKey : IDisposable
         private static int currentID;
         private static uint MOD_NOREPEAT = 0x4000;
         private static List<HotKeyWithAction> registeredHotKeys = new List<HotKeyWithAction>();
-
+    /// <summary>
+    /// Action parameter is deprecated
+    /// </summary>
     private class HotKeyWithAction    {
 
         public HotKeyWithAction(ModifierKeys modifier, Key key, string data, Action action = null, KeyBindCallBack callBack = null)

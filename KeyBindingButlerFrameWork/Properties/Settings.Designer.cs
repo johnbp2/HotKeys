@@ -163,5 +163,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
                 this["ServantName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("p")]
+        public string LastBoundKey {
+            get {
+                return ((string)(this["LastBoundKey"]));
+            }
+            set {
+                this["LastBoundKey"] = value;
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace JohnBPearson.Windows.Interop
 {
 
-    public delegate void KeyBindCallBack(string data);
+    public delegate void KeyBindCallBack(string key, string data);
     public class InteropFacade
     {
         public InteropFacade() { }
