@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using JohnBPearson.KeyBindingButler.Model;
@@ -68,7 +69,7 @@ namespace JohnBPearson.com.Utility
             //   var letters = this._keysString.Split(delims, 100, StringSplitOptions.None).Clone();
             var letters = this._keysString.Split(delimChar).Clone();
             var values = this._valuesString.Split(delimChar);
-                this._keys = (letters as string[]).ToList();
+            this._keys = (letters as string[]).ToList();
             var index = 0;
             foreach (var key in this._keys)
             {
@@ -85,9 +86,25 @@ namespace JohnBPearson.com.Utility
                 }
 
             }
+            checkAndRepairValuesArray(values);
 
             return resultList;
         }
+
+        private string[] checkAndRepairValuesArray(string[] values)
+        {
+            if (values.Length < 26)
+            {
+             var needToAdd = 26- values.Length;
+                
+                for (int i = 0; i < needToAdd; i++)
+                {
+                    values.Append("");
+                }
+            }
+            return values;
+        }
+
         private const string delim = "|";
         private const char delimChar = '|';
         internal KeyAndValuesStringLiterals updateStrings(List<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> items)
@@ -108,8 +125,9 @@ namespace JohnBPearson.com.Utility
                 tempValues.Add(item.Value.ToString());
             }
             var strings = new KeyAndValuesStringLiterals();
+          
             strings.Keys = tempKeys.ToString();
-            strings.Values = tempValues.ToString();
+            strings.Values = this.checkAndRepairValuesArray(tempValues.ToArray()).ToString();
             return strings;
         }
 

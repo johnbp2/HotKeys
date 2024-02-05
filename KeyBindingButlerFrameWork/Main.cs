@@ -31,8 +31,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private ContextMenu contextMenuIcon;
         private MenuItem menuItemIcon;
-
-        
+ 
 
         public string selectedKeyBoundValue
         {
@@ -70,10 +69,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
     
-        private void copyToClipBoard(string data)
+        private void copyToClipBoard(string key, string data)
         {
             System.Windows.Clipboard.SetText(data);
-            
+            this.lblKey.ClearAndReplace(key.ToLower());
+            this.cbHotkeySelection.SelectedItem = key;
+            applyValueForKey(key.ToCharArray()[0]);
+          //  messages.raiseEvent(key, data);
         }
 
 
@@ -99,8 +101,9 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
                 index++;
             }
-        }
+               }
 
+        
 
         private void bindDropDownKeyValues()
         {
@@ -116,26 +119,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         }
 
 
-        //private int getIndexForKey(string key, DataTable keyIndexTable)
-        //{
-        //    //var rows = keyIndexTable.Select(String.Concat(Form1.valueColumnName," = '" , key , "'"));
-        //    // var index = -1;
-
-        //    foreach (DataRow row in keyIndexTable.Rows)
-        //    {
-        //        if (row.ItemArray[1].ToString() == keyew)
-        //        {
-        //            return int.Parse(row.ItemArray[0].ToString());
-        //        }
-        //    }
-        //    //if (rows.FirstOrDefault() != null)
-        //    //{
-
-        //    //    int.TryParse( rows[0].ItemArray[0].ToString(), out index);
-
-        //    //}
-        //    return -1;
-        //}
         
         private void setupTryIconMenu()        {
             this.components = new System.ComponentModel.Container();
@@ -263,27 +246,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.registerHotKeys(this.presenter.HotKeyValues);
 
 
-            //Planets.buildPlanetsList();
-           // var keysForActionBinding = userSettingsHelper.Keys;
-
-
-            //   actions.Add(callBackActionGuildAd);
-            //  lblHotkeyGuildAd.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyGuildAd);
-           
-
-            //var callBackActionAcceptance = new Action<strin Hotkey2);
-            //  actions.Add(callBackActionAcceptance); 
-            //     var currentHotkeyAcceptance = Properties.Settings.Default.UserHotkeyAcceptance;
-            //  lblHotkeyAcceptance.Text = string.Concat(Properties.Settings.Default.HotkeyModifiers, currentHotkeyAcceptance);
-            //   keysForActionBinding.Add(currentHotkeyAcceptance.ToString());
-
-
-            // this.registerHotKeys(keysForActionBinding, actions);
+            
             this.bindDropDownKeyValues();
-
-
+            this.lblKey.Template = "Alt + Shift + {0}";
+            this.lblKey.TemplateValues.Add("a");
         
-            //      this.tbHotkey2.Text = Properties.Settings.Default.hotkey2;
+          
 
         }
 
@@ -330,9 +298,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             if (this.selectedKeyBoundValue != null)
             {
                 this.applyValueForKey(this.selectedKeyBoundValue.ToCharArray()[0]);
-                lblHotkey.Text
+              
             }
 
+            this.lblKey.ClearAndReplace(cbHotkeySelection.Text);
         }
 
         private void tbValue_Leave(object sender, EventArgs e)
@@ -354,12 +323,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
             }
             var control = (System.Windows.Forms.ComboBox)sender;
-            if (control.Text .Length == 1)
-            {
+            //if (control.Text.Length == 1)
+            //{
                    this.applyValueForKey(control.Text.ToCharArray()[0]);
-            }
-
-            }
+            //  }
+            this.lblKey.ClearAndReplace(cbHotkeySelection.Text);
+        }
         #endregion
     }
 }
