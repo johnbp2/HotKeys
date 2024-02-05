@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extension", "Extension\Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnBPearson.KeyBindingButler.Model", "JohnBPearson.KeyBindingButler.Model\JohnBPearson.KeyBindingButler.Model.csproj", "{45ED5872-A9F3-497C-8A12-753D1A22A9F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnBPearson.KeyBindingButler.Test", "JohnBPearson.KeyBindingButler.Test\JohnBPearson.KeyBindingButler.Test.csproj", "{991C6617-7BB1-4515-B567-7F06798DAFD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{45ED5872-A9F3-497C-8A12-753D1A22A9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45ED5872-A9F3-497C-8A12-753D1A22A9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45ED5872-A9F3-497C-8A12-753D1A22A9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991C6617-7BB1-4515-B567-7F06798DAFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991C6617-7BB1-4515-B567-7F06798DAFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991C6617-7BB1-4515-B567-7F06798DAFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991C6617-7BB1-4515-B567-7F06798DAFD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,9 +9,9 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
     //public class Parser
     //{
 
-    //    private List<JohnBPearson.KeyBindingButler.Model.KeyBoundValue> _items;
+    //    private List<JohnBPearson.KeyBindingButler.Model.KeyBoundData> _items;
 
-    //    public List<JohnBPearson.KeyBindingButler.Model.KeyBoundValue> Items
+    //    public List<JohnBPearson.KeyBindingButler.Model.KeyBoundData> Items
     //    {
     //        get {
     //            if(this._items == null)
@@ -44,18 +44,18 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
     //    }
 
-    //    private List<JohnBPearson.KeyBindingButler.Model.KeyBoundValue> parse()
+    //    private List<JohnBPearson.KeyBindingButler.Model.KeyBoundData> parse()
     //    {
     //        var letters = Properties.Settings.Default.BindableKeys.Split(delim).Clone();
     //        var values = Properties.Settings.Default.BoundValues.Split(delim);
     //        this._keys =(letters as string[]).ToList();
          
-    //        var resultList = new List<JohnBPearson.KeyBindingButler.Model.KeyBoundValue>();
+    //        var resultList = new List<JohnBPearson.KeyBindingButler.Model.KeyBoundData>();
     //        var index = 0;
     //        foreach (var key in letters as string[])
     //        {
     //            var value = values[index];
-    //            var hkv =  JohnBPearson.KeyBindingButler.Model.KeyBoundValue.Create(key, value);
+    //            var hkv =  JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(key, value);
     //            resultList.Add(hkv);
     //            index++;
     //        }
@@ -78,7 +78,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                         
     //                }
     //                keys.Append(item.Key + delim);
-    //                values.Append(item.Value+ delim);
+    //                values.Append(item.Data+ delim);
     //            }
     //            Properties.Settings.Default.BoundValues = values.ToString();
        

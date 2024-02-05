@@ -2,19 +2,20 @@
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public interface IKeyBoundValue
+    public interface IKeyBoundData
     {
         bool IsDirty { get; }
         KeyBinding Key { get; }
         char KeyAsChar { get; }
-        ContentsForClipboard Value { get; }
-        IKeyBoundValue Recreate(string newValue);
-      
+        ContentsForClipboard Data { get; }
+        IKeyBoundData Recreate(string newValue);
+        string GetDelimitated();
+
 
     }
 
 
-    public abstract class KeyBoundValueBase
+    public abstract class KeyBoundDataBase
     {
 
 
@@ -26,9 +27,9 @@ namespace JohnBPearson.KeyBindingButler.Model
         /// <param name="value"></param>
         /// <param name="item">the item to be replaced</param>
         ///// <returns></returns>
-        //public static IKeyBoundValue CreateForReplace(string key, string value, KeyBoundValue item)
+        //public static IKeyBoundData CreateForReplace(string key, string value, KeyBoundData item)
         //{
-        //    return KeyBoundValue.KeyBoundValueBase Create(string key, string value)
+        //    return KeyBoundData.KeyBoundDataBase Create(string key, string value)
         //}
     }
 }

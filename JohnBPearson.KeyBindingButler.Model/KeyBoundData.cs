@@ -13,7 +13,7 @@ namespace JohnBPearson.KeyBindingButler.Model
 {
 
 
-    public class KeyBoundValue : IKeyBoundValue, IEquatable<KeyBoundValue>
+    public class KeyBoundData : IKeyBoundData, IEquatable<KeyBoundData>
     {
         private ContentsForClipboard _value;
 
@@ -23,7 +23,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             get { return _key; }
             private set { _key = value; }
         }
-        public ContentsForClipboard Value
+        public ContentsForClipboard Data
         {
             get { return _value; }
             private set
@@ -62,16 +62,16 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
 
 
-        protected KeyBoundValue()
+        protected KeyBoundData()
         {
         }
-        protected KeyBoundValue(char key, string value)
+        protected KeyBoundData(char key, string value)
         {
             Key = KeyBinding.Create(key);
-            Value = ContentsForClipboard.Create(value);
+            Data = ContentsForClipboard.Create(value);
         }
 
-        protected KeyBoundValue(char key, string value, bool isDirty)
+        protected KeyBoundData(char key, string value, bool isDirty)
         {
             this._key = KeyBinding.Create(key);
             this._value = ContentsForClipboard.Create(value);
@@ -79,38 +79,44 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
 
 
-        internal static KeyBoundValue Create(char key, string value)
+        internal static KeyBoundData Create(char key, string value)
         {
-            return new KeyBoundValue(key, value);
+            return new KeyBoundData(key, value);
         }
 
-        internal static KeyBoundValue CreateForReplace(ContentsForClipboard newValue, IKeyBoundValue oldItem)
+        internal static KeyBoundData CreateForReplace(ContentsForClipboard newValue, IKeyBoundData oldItem)
         {
-            if (!newValue.Equals(oldItem.Value))
+            if (!newValue.Equals(oldItem.Data))
             {
-                return new KeyBoundValue(oldItem.Key.Key, newValue.Value, true);
+                return new KeyBoundData(oldItem.Key.Key, newValue.Value, true);
             }
-            return new KeyBoundValue(oldItem.Key.Key, oldItem.Value.Value, oldItem.IsDirty) ;
+            return new KeyBoundData(oldItem.Key.Key, oldItem.Data.Value, oldItem.IsDirty) ;
         }
 
-        public bool Equals(KeyBoundValue other)
+        public bool Equals(KeyBoundData other)
         {
-            if (this.Value == other.Value && this.KeyAsChar == other.KeyAsChar)
+            if (this.Data == other.Data && this.KeyAsChar == other.KeyAsChar)
             {
                 return true;
             }
             return false;
         }
 
-        public IKeyBoundValue Recreate(string newValue)
+        public IKeyBoundData Recreate(string newValue)
         {
-            return KeyBoundValue.Create(this.KeyAsChar, newValue);
+            return KeyBoundData.Create(this.KeyAsChar, newValue);
         }
-            
+          
+        
+        public  string GetDeliminated()
+        {
+            return string.Concat(this._key.GetDeliminated(), this._value.ToString());
+                    
+        }
             
      }
 
-    public struct KeyAndValuesStringLiterals
+    public struct KeyAndDataStringLiterals
     {
         public string Keys;
         public string Values;
@@ -118,13 +124,14 @@ namespace JohnBPearson.KeyBindingButler.Model
 
       
     }
-    public class KeyBoundValueList
+    public class KeyBoundDataList
     {
 
         private Parser _userSettingsHelper;
-        private List<IKeyBoundValue> _items = new List<IKeyBoundValue>();
+        private List<IKeyBoundData> _items = new List<IKeyBoundData>();
+        private const string deliminater = "|";
 
-        public KeyBoundValueList(KeyAndValuesStringLiterals strings)
+        public KeyBoundDataList(KeyAndDataStringLiterals strings)
         {
             this._userSettingsHelper = new Parser(strings);
             this._items = this._userSettingsHelper.Items;
@@ -142,35 +149,53 @@ namespace JohnBPearson.KeyBindingButler.Model
                 else return null;
             }
         }
-        public IEnumerable<IKeyBoundValue> Items
+        public IEnumerable<IKeyBoundData> Items
         { get { return this._items; } }
 
-        public void Replace(IKeyBoundValue newItem, IKeyBoundValue oldItem)
+        public void Replace(IKeyBoundData newItem, IKeyBoundData oldItem)
         {
 
 
-            var newKeyBoundValue = KeyBoundValue.CreateForReplace(newItem.Value, oldItem);
+            var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
             var index = this._items.IndexOf(oldItem);
             this._items.RemoveAt(index);
             this._items[index] = newItem;
             //  return this._items;
         }
 
-        public KeyAndValuesStringLiterals PrepareDataForSave() {
+        public KeyAndDataStringLiterals PrepareDataForSave() {
             var sbKeys = new StringBuilder();
+           
             var sbValues = new StringBuilder();
             int count = 0;
             foreach (var item in _items)
             {if (item.IsDirty) count++;                        
                         
-                sbKeys.Append(item.Key.ToString());
-                sbValues.Append(item.Value.ToString());
+                sbKeys.Append(item.Key.ToString();
+                sbValues.Append(item.Data.ToString());
             }
-            var result = new KeyAndValuesStringLiterals();
+            var result = new KeyAndDataStringLiterals();
             result.Values = sbValues.ToString();
             result.Keys = sbKeys.ToString();
             result.ItemsUpdated = count;
            return result;
+        }
+
+        public string PrepareDataToSaveAsOneSetting()
+        {
+            var sbOneString = new StringBuilder();
+            foreach (var item in _items)
+            {
+                sbOneString.Append(this.buildSaveString(item));
+
+                    
+            }
+           return sbOneString.ToString();
+        }
+
+        private string buildSaveString(IKeyBoundData item)
+        {
+            return String.Concat(item.Key.GetDeliminated(),item.Data, KeyBoundDataList.deliminater);
         }
     }
 }

@@ -29,11 +29,14 @@
     <Setting Name="MinimizeToTray" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="BindableValues" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123Isabella!|abc|||||||||||||||||123Isabella!|||||||s</Value>
+    <Setting Name="BindableData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123Isabella!|abc|||||||||||||||||123Isabella!|||||||s|</Value>
     </Setting>
     <Setting Name="BindableKeysBackup" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z</Value>
+      <Value Profile="(Default)">a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|</Value>
+    </Setting>
+    <Setting Name="OneStringSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">a,123Isabella!|b,|c,|d,abc|e,|f,|g,|h,|i,|j,|k,|l,|m,|n,|o,|p,|q,|r,|s,|t,|u,|v,|w,|x,|y,|z,|</Value>
     </Setting>
   </Settings>
 </SettingsFile>

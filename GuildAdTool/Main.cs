@@ -24,7 +24,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
        // private Parser userSettingsHelper;
 
     private MainPresenter presenter;
-        private JohnBPearson.KeyBindingButler.Model.IKeyBoundValue currentItem;
+        private JohnBPearson.KeyBindingButler.Model.IKeyBoundData currentItem;
 
         private ContextMenu contextMenuIcon;
         private MenuItem menuItemIcon;
@@ -77,7 +77,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
 
-        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> keys)
+        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> keys)
         {
             var index = 0;
             foreach (var item in keys)
@@ -88,7 +88,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 sb.Append(Properties.Settings.Default.KeyBindingModifiers);
                 sb.Append(item.KeyAsChar);
                 var del = new KeyBindCallBack(this.copyToClipBoard);
-                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value.Value , del);
+                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Data.Value , del);
 
 
 
@@ -319,7 +319,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             if (this.selectedKeyBoundValue != null)
             {
-                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Value.Value;
+                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Data.Value;
               
             }
 

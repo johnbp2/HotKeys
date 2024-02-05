@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using JohnBPearson.KeyBindingButler.Model;
 
@@ -18,14 +19,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
     public class MainPresenter : IPresenter<Main>
     {
-        private KeyBoundValueList keyBoundValueList;
+        private KeyBoundDataList keyBoundValueList;
         private Main _main;
         public Main Form { get { return this._main; } private set { this._main = value; } }
 
 
-        public void replaceItem(IKeyBoundValue oldItem, string newValue)
+        public void replaceItem(IKeyBoundData oldItem, string newValue)
         {
-            if (oldItem.Value.Value != newValue)
+            if (oldItem.Data.Value != newValue)
             {
                 this.keyBoundValueList.Replace(oldItem.Recreate(newValue), oldItem);
             }
@@ -33,8 +34,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         public int executeAutoSave(bool overrideAutoSaveSetting)
         {
             var strings = this.keyBoundValueList.PrepareDataForSave();
-            Properties.Settings.Default.BindableValues = strings.Values;
+            var oneString = this.keyBoundValueList.PrepareDataToSaveAsOneSetting();
+
+            Properties.Settings.Default.BindableData = strings.Values;
+            Properties.Settings.Default.OneStringSave = oneString;
             Properties.Settings.Default.Save();
+
             return 0;
         }
         public IEnumerable<string> Keys
@@ -49,7 +54,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 return this.keyBoundValueList.Keys;
             }
         }
-        public IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> HotKeyValues
+        public IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> HotKeyValues
         {
             get
             {
@@ -62,17 +67,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         }
 
-        public IKeyBoundValue findKeyBoundValue(string keyValue)
+        public IKeyBoundData findKeyBoundValue(string keyValue)
         {
-          return  this.HotKeyValues.ToList<IKeyBoundValue>().Find((item) => { return item.Key.Value == keyValue; });
+          return  this.HotKeyValues.ToList<IKeyBoundData>().Find((item) => { return item.Key.Value == keyValue; });
 
         }
         private void LoadHotKeyValues()
         {
-            var strings = new KeyAndValuesStringLiterals();
-            strings.Values = Properties.Settings.Default.BindableValues;
+            var strings = new KeyAndDataStringLiterals();
+            strings.Values = Properties.Settings.Default.BindableData;
             strings.Keys = Properties.Settings.Default.BindableKeys;
-            this.keyBoundValueList = new KeyBoundValueList(strings);
+            this.keyBoundValueList = new KeyBoundDataList(strings);
         }
     }
 

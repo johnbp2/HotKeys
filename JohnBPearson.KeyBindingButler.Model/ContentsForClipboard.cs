@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public class ContentsForClipboard : BaseValue
+    public class ContentsForClipboard : BaseData
     {
 
 
