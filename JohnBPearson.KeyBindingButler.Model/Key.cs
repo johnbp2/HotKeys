@@ -7,7 +7,7 @@ using System.Xml.Schema;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public class KeyBinding : BaseValue
+    public class KeyBinding : BaseData
     {
 
         private char _key;

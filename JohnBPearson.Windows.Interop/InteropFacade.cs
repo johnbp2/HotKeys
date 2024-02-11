@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using JohnBPearson.KeyBindingButler.Model;
 
 namespace JohnBPearson.Windows.Interop
 {
 
-    public delegate void KeyBindCallBack(string key, string data);
+    public delegate void KeyBindCallBack(IKeyBoundData item);
     public class InteropFacade
     {
         public InteropFacade() { }

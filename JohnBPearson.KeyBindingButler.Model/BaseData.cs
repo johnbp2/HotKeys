@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public abstract class BaseValue : IEquatable<BaseValue>
+
+
+ 
+    public abstract class BaseData : IEquatable<BaseData>
     {
-        protected BaseValue() { }
-        protected BaseValue(string value)
+        protected BaseData() { }
+        protected BaseData(string value)
         {
             if (value == null) value = string.Empty;
             this._value = value;
@@ -17,13 +20,16 @@ namespace JohnBPearson.KeyBindingButler.Model
         private string _value;
         public virtual string Value { get => this._value; set => this._value = value; }
 
-        protected string deliminator = "|";
+        public string deliminater = ",";
 
         public override string ToString() {
-            return Value + deliminator;
+            return Value;
         }
-
-        public bool Equals(BaseValue other)
+        public string GetDeliminated()
+        {
+            return string.Concat(Value, deliminater);
+        }
+        public bool Equals(BaseData other)
         {
             if((this._value !=null ? this._value : "") == (other != null ? other.Value != null ? other.Value: "" : ""))
             {
