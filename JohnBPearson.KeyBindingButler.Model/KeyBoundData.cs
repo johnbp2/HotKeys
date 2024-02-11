@@ -108,7 +108,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
           
         
-        public  string GetDeliminated()
+        public  string GetDelimitated()
         {
             return string.Concat(this._key.GetDeliminated(), this._value.ToString());
                     
@@ -171,7 +171,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             foreach (var item in _items)
             {if (item.IsDirty) count++;                        
                         
-                sbKeys.Append(item.Key.ToString();
+                sbKeys.Append(item.Key.ToString());
                 sbValues.Append(item.Data.ToString());
             }
             var result = new KeyAndDataStringLiterals();

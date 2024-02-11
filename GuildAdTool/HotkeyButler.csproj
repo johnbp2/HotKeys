@@ -95,6 +95,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="SettingsDialog.Designer.cs">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseForm.designer.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserSettingsHelper.cs" />
     <Compile Include="Utitlities.cs" />

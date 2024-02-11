@@ -17,6 +17,7 @@ namespace Extension
 
 
 
+
         //public static T GetEnumValueByDescription<T>(this Enum description) where T : Enum
         //{
         //    foreach (Enum enumItem in Enum.GetValues(typeof(T)))

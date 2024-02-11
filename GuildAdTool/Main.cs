@@ -10,6 +10,7 @@ using JohnBPearson.Windows.Forms.Controls;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Media.TextFormatting;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
@@ -49,6 +50,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         public Main(MainPresenter presenter)
         {
             this.presenter = presenter;
+            this.presenter.Form = this;
             InitializeComponent();
             // var reminderForm = new Reminders();
             //this.presenter = presenter;
@@ -67,28 +69,32 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
     
-        private void copyToClipBoard(string data)
+        public void copyToClipBoard(IKeyBoundData keyBoundObject)
         {
-            System.Windows.Clipboard.SetText(data);
-            
+            System.Windows.Clipboard.SetText(keyBoundObject.Data.Value);
+            cbHotkeySelection.SelectedIndex = cbHotkeySelection.Items.IndexOf(keyBoundObject.Key.Value);
+            notify("Sir I've updated your clipboard!",
+                $"I heard you request {keyBoundObject.KeyAsChar.ToString()} and the {keyBoundObject.Data.Value} in your clipboard.");
+
+
         }
 
 
 
 
 
-        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> keys)
+        public void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> keys)
         {
             var index = 0;
             foreach (var item in keys)
             {
 
-
                 var sb = new StringBuilder();
                 sb.Append(Properties.Settings.Default.KeyBindingModifiers);
                 sb.Append(item.KeyAsChar);
                 var del = new KeyBindCallBack(this.copyToClipBoard);
-                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Data.Value , del);
+                    GlobalHotKey.RegisterHotKey(sb.ToString(), item , del);
+
 
 
 
@@ -175,27 +181,33 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 
                   var result =  this.presenter.executeAutoSave(overrideAutoSaveSetting);
                     if (result == 0)
-                    {
-                        var popupNotifier = new PopupNotifier();
-                        using (popupNotifier)
-                        {
-                            popupNotifier.TitleText = "Save Results";
-                            popupNotifier.ContentText = $"X items saved";
-                            popupNotifier.IsRightToLeft = false;
-                            popupNotifier.Popup();
+            {
+                this.notify("Save Results", $"X items saved");
 
-                        }
+                FlashWindow.TrayAndWindow(this);
+            }
 
-                        FlashWindow.TrayAndWindow(this); 
-                    }
-                
 
-                else
+            else
                 {
                     System.Windows.Forms.MessageBox.Show("Did not save");
                 }
 
             //}
+        }
+
+        private void notify(string title, string content)
+        {
+            var popupNotifier = new PopupNotifier();
+            using (popupNotifier)
+            {
+                popupNotifier.TitleText = title;
+                popupNotifier.ContentText = content;
+                popupNotifier.IsRightToLeft = false;
+                
+                popupNotifier.Popup();
+
+            }
         }
 
 

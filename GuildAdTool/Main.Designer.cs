@@ -49,7 +49,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
-            this.notBetterButton1 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
@@ -206,29 +205,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tbValue.TabStop = false;
             this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
             // 
-            // notBetterButton1
-            // 
-            this.notBetterButton1.DisplayText = "notBetterButton1";
-            this.notBetterButton1.EndColor = System.Drawing.Color.DarkBlue;
-            this.notBetterButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.notBetterButton1.ForeColor = System.Drawing.Color.White;
-            this.notBetterButton1.GradientAngle = 90;
-            this.notBetterButton1.Location = new System.Drawing.Point(-23, -46);
-            this.notBetterButton1.MouseClickColor1 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton1.MouseClickColor2 = System.Drawing.Color.Red;
-            this.notBetterButton1.MouseHoverColor1 = System.Drawing.Color.Yellow;
-            this.notBetterButton1.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton1.Name = "notBetterButton1";
-            this.notBetterButton1.Size = new System.Drawing.Size(200, 50);
-            this.notBetterButton1.StartColor = System.Drawing.Color.LightGreen;
-            this.notBetterButton1.TabIndex = 9;
-            this.notBetterButton1.Text = "notBetterButton1";
-            this.notBetterButton1.TextLocation_X = 76;
-            this.notBetterButton1.TextLocation_Y = 24;
-            this.notBetterButton1.Transparent1 = 150;
-            this.notBetterButton1.Transparent2 = 150;
-            this.notBetterButton1.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -238,7 +214,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1036, 387);
-            this.Controls.Add(this.notBetterButton1);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentPanel2);
             this.Controls.Add(this.menuStrip1);
@@ -283,7 +258,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton1;
         private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton2;
     }
 }

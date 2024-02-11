@@ -67,8 +67,8 @@ namespace JohnBPearson.com.Utility
             var resultList = new List<IKeyBoundData>();
             //   var letters = this._keysString.Split(delims, 100, StringSplitOptions.None).Clone();
             char[] chars = { delimChar };
-            var letters = this._keysString.Split(chars, StringSplitOptions.RemoveEmptyEntries).Clone();
-             var values = this._valuesString.Split(chars, StringSplitOptions.RemoveEmptyEntries).Clone();
+            var letters = this._keysString.Split(chars, StringSplitOptions.None).Clone();
+             var values = this._valuesString.Split(chars, StringSplitOptions.None).Clone();
             this._keys = (letters as string[]).ToList();
             var index = 0;
             var valuesTyped = values as string[];

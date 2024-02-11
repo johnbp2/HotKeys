@@ -12,7 +12,7 @@ using Tulpep.NotificationWindow;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
-    public partial class SettingsDialog : Form
+    public partial class SettingsDialog : BaseForm
     {
         public SettingsDialog()
         {
@@ -41,7 +41,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.rbMinimizeToTrayOff.Checked = !Properties.Settings.Default.MinimizeToTray;
 
             tbServantName.Text = Properties.Settings.Default.ServantName;
-            popupNotifier1.ContentText = $"{tbServantName.Text} has saved your settings you can close settings dialog now";
+          
 
 
             // "2011-03-21 13:26";
@@ -56,4 +56,4 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
     }
 
 }
-}
+

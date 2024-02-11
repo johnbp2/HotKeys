@@ -38,5 +38,8 @@
     <Setting Name="OneStringSave" Type="System.String" Scope="User">
       <Value Profile="(Default)">a,123Isabella!|b,|c,|d,abc|e,|f,|g,|h,|i,|j,|k,|l,|m,|n,|o,|p,|q,|r,|s,|t,|u,|v,|w,|x,|y,|z,|</Value>
     </Setting>
+    <Setting Name="ServantName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bellvidear</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

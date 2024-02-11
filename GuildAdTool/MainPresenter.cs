@@ -21,14 +21,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
     {
         private KeyBoundDataList keyBoundValueList;
         private Main _main;
-        public Main Form { get { return this._main; } private set { this._main = value; } }
+        public Main Form { get { return this._main; }  set { this._main = value; } }
 
-
+        public MainPresenter() { 
+            
+        }
         public void replaceItem(IKeyBoundData oldItem, string newValue)
         {
             if (oldItem.Data.Value != newValue)
             {
                 this.keyBoundValueList.Replace(oldItem.Recreate(newValue), oldItem);
+                this._main.registerHotKeys(this.keyBoundValueList.Items);
             }
         }
         public int executeAutoSave(bool overrideAutoSaveSetting)

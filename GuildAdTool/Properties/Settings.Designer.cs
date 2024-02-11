@@ -164,5 +164,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
                 this["OneStringSave"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bellvidear")]
+        public string ServantName {
+            get {
+                return ((string)(this["ServantName"]));
+            }
+            set {
+                this["ServantName"] = value;
+            }
+        }
     }
 }
