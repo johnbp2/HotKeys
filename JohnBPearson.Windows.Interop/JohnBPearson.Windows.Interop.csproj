@@ -47,13 +47,13 @@
   <ItemGroup>
     <Compile Include="FlashWindow.cs" />
     <Compile Include="InteropFacade.cs" />
-    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="HotKeyEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JohnBPearson.KeyBindingButler.Model\JohnBPearson.KeyBindingButler.Model.csproj">
-      <Project>{45ED5872-A9F3-497C-8A12-753D1A22A9F2}</Project>
+      <Project>{45ed5872-a9f3-497c-8a12-753d1a22a9f2}</Project>
       <Name>JohnBPearson.KeyBindingButler.Model</Name>
     </ProjectReference>
   </ItemGroup>
