@@ -4,14 +4,14 @@ namespace JohnBPearson.KeyBindingButler.Model
 {
     public interface IKeyBoundData
     {
-        bool IsDirty { get; }
+  
         KeyBinding Key { get; }
         char KeyAsChar { get; }
         ContentsForClipboard Data { get; }
         IKeyBoundData Recreate(string newValue);
         string GetDelimitated();
 
-
+        
     }
 }
 

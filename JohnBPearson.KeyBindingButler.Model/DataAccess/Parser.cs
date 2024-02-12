@@ -14,7 +14,7 @@ namespace JohnBPearson.com.Utility
 
     {
 
-        public Parser(KeyAndValuesStringLiterals strings)
+        public Parser(KeyAndDataStringLiterals strings)
         {
 
             this._valuesString = strings.Values;
@@ -26,9 +26,9 @@ namespace JohnBPearson.com.Utility
         private string _keysString;
         private string _valuesString;
 
-        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> _items;
+        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> _items;
 
-        public List<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> Items
+        public List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> Items
         {
             get
             {
@@ -62,10 +62,10 @@ namespace JohnBPearson.com.Utility
 
         }
 
-        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> parse()
+        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> parse()
         {
             string[] delims = { delim };
-            var resultList = new List<IKeyBoundValue>();
+            var resultList = new List<IKeyBoundData>();
             //   var letters = this._keysString.Split(delims, 100, StringSplitOptions.None).Clone();
             var letters = this._keysString.Split(delimChar).Clone();
             var values = this._valuesString.Split(delimChar);
@@ -76,7 +76,7 @@ namespace JohnBPearson.com.Utility
                 if (index < values.Length)
                 {
                     var value = values[index];
-                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundValue.Create(key[0], value);
+                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(key[0], value);
                     resultList.Add(hkv);
                     index++;
                 }
@@ -107,7 +107,7 @@ namespace JohnBPearson.com.Utility
 
         private const string delim = "|";
         private const char delimChar = '|';
-        internal KeyAndValuesStringLiterals updateStrings(List<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> items)
+        internal KeyAndDataStringLiterals updateStrings(List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> items)
         {
             var result = 0;
             var tempKeys = new List<string>();
@@ -116,15 +116,11 @@ namespace JohnBPearson.com.Utility
             var values = new StringBuilder();
             foreach (var item in this.Items)
             {
-                if (item.IsDirty)
-                {
-                    result++;
-
-                }
+               
                 tempKeys.Add(item.Key.ToString());
-                tempValues.Add(item.Value.ToString());
+                tempValues.Add(item.Data.ToString());
             }
-            var strings = new KeyAndValuesStringLiterals();
+            var strings = new KeyAndDataStringLiterals();
           
             strings.Keys = tempKeys.ToString();
             strings.Values = this.checkAndRepairValuesArray(tempValues.ToArray()).ToString();

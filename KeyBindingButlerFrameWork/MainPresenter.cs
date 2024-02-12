@@ -18,14 +18,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
     public class MainPresenter : IPresenter<Main>
     {
-        private JohnBPearson.KeyBindingButler.Model.KeyBindingButler keyBoundValueList;
+        private JohnBPearson.KeyBindingButler.Model.KeyBoundDataList keyBoundValueList;
         private Main _main;
         public Main Form { get { return this._main; } private set { this._main = value; } }
 
 
-        public void replaceItem(IKeyBoundValue oldItem, string newValue)
+        public void replaceItem(IKeyBoundData oldItem, string newValue)
         {
-            if (oldItem.Value.Value != newValue)
+            if (oldItem.Data.Value != newValue)
             {
                 this.keyBoundValueList.Replace(oldItem.Recreate(newValue), oldItem);
             }
@@ -49,7 +49,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 return this.keyBoundValueList.Keys;
             }
         }
-        public IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> HotKeyValues
+        public IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> HotKeyValues
         {
             get
             {
@@ -62,17 +62,18 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         }
 
-        public IKeyBoundValue findKeyBoundValue(string keyValue)
+        public IKeyBoundData findKeyBoundValue(string keyValue)
         {
-          return  this.HotKeyValues.ToList<IKeyBoundValue>().Find((item) => { return item.Key.Value == keyValue; });
+          return  this.HotKeyValues.ToList<IKeyBoundData>().Find((item) => { return item.Key.Value == keyValue; });
 
         }
         private void LoadHotKeyValues()
         {
-            var strings = new KeyAndValuesStringLiterals();
+            var strings = new KeyAndDataStringLiterals();
             strings.Values = Properties.Settings.Default.BindableValues;
             strings.Keys = Properties.Settings.Default.BindableKeys;
-            this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBindingButler(strings, Properties.Settings.Default.ServantName);
+            
+            this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBoundDataList(strings);
         }
     }
 

@@ -38,7 +38,7 @@
     <Setting Name="ServantName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Johnny Butler</Value>
     </Setting>
-    <Setting Name="LastBoundKey" Type="System.String" Scope="User">
+    <Setting Name="LastBoundKeyPressed" Type="System.String" Scope="User">
       <Value Profile="(Default)">p</Value>
     </Setting>
   </Settings>

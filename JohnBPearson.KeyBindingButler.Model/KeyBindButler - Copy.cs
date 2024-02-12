@@ -12,9 +12,9 @@ namespace JohnBPearson.KeyBindingButler.Model
     {
 
         private Parser _userSettingsHelper;
-        private List<IKeyBoundData> _items = new List<IKeyBoundData>();
+        private List<IKeyBoundValue> _items = new List<IKeyBoundValue>();
 
-        public KeyBindingButler(KeyAndDataStringLiterals strings, string hisName) : base(hisName)
+        public KeyBindingButler(KeyAndValuesStringLiterals strings, string hisName) : base(hisName)
         {
             this._userSettingsHelper = new Parser(strings);
             this._items = this._userSettingsHelper.Items;
@@ -32,34 +32,34 @@ namespace JohnBPearson.KeyBindingButler.Model
                 else return null;
             }
         }
-        public IEnumerable<IKeyBoundData> Items
+        public IEnumerable<IKeyBoundValue> Items
         { get { return this._items; } }
 
-        public void Replace(IKeyBoundData newItem, IKeyBoundData oldItem)
+        public void Replace(IKeyBoundValue newItem, IKeyBoundValue oldItem)
         {
 
 
-            var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
+            var newKeyBoundValue = KeyBoundValue.CreateForReplace(newItem.Value, oldItem);
             var index = this._items.IndexOf(oldItem);
             this._items.RemoveAt(index);
             this._items[index] = newItem;
             //  return this._items;
         }
 
-        public KeyAndDataStringLiterals PrepareDataForSave()
+        public KeyAndValuesStringLiterals PrepareDataForSave()
         {
             var sbKeys = new StringBuilder();
-            var sbData = new StringBuilder();
+            var sbValues = new StringBuilder();
             int count = 0;
             foreach (var item in _items)
             {
-             //   if (item.IsDirty) count++;
+                if (item.IsDirty) count++;
 
                 sbKeys.Append(item.Key.ToString());
-                sbData.Append(item.Data.ToString());
+                sbValues.Append(item.Value.ToString());
             }
-            var result = new KeyAndDataStringLiterals();
-            result.Values = sbData.ToString();
+            var result = new KeyAndValuesStringLiterals();
+            result.Values = sbValues.ToString();
             result.Keys = sbKeys.ToString();
             result.ItemsUpdated = count;
             return result;

@@ -167,12 +167,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("p")]
-        public string LastBoundKey {
+        public string LastBoundKeyPressed {
             get {
-                return ((string)(this["LastBoundKey"]));
+                return ((string)(this["LastBoundKeyPressed"]));
             }
             set {
-                this["LastBoundKey"] = value;
+                this["LastBoundKeyPressed"] = value;
             }
         }
     }

@@ -33,7 +33,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
         protected KeyBinding(char key) : base(key.ToString())
         {
-
+            this._key = key;
         }
 
         private bool last

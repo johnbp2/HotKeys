@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
@@ -10,66 +11,59 @@ using JohnBPearson.Windows.Interop;
 public class BoundKeyActionEventArgs : EventArgs
 {
     public string Key { get; set; }
-    public string Value { get; set;}
-    public BoundKeyActionEventArgs() { 
+    public string Value { get; set; }
+    public BoundKeyActionEventArgs()
+    {
 
-            
-            }
+
+    }
 }
 
 
 
 public class GlobalHotKey : IDisposable
- {
-  
+{
+
+
  
-  // internal static InteropFacade facade = new InteropFacade();
-        /// <summary>
-        /// Registers a global hotkey
-        /// </summary>
-        /// <param name="aKeyGesture">e.g. Alt + Shift + Control + Win + s</param>
-        /// <param name="aAction">Action to be called when hotkey is pressed</param>
-        /// <returns>true, if registration succeeded, otherwise false</returns>
-        public static bool RegisterHotKey(string aKeyGestureString, Action aAction, string data)
-        {
-     
-            var c = new KeyGestureConverter();
-            KeyGesture keyGesture = (KeyGesture)c.ConvertFrom(aKeyGestureString);
-            return RegisterHotKey(keyGesture.Modifiers, keyGesture.Key, data, aAction);
-        }
-    public static bool RegisterHotKey(string aKeyGestureString, string data, KeyBindCallBack callBack)
+
+    public static bool RegisterHotKey(string aKeyGestureString, IKeyBoundData data, KeyBindCallBack callBack)
     {
 
         var c = new KeyGestureConverter();
         KeyGesture aKeyGesture = (KeyGesture)c.ConvertFrom(aKeyGestureString);
-       return RegisterHotKey(aKeyGesture.Modifiers, aKeyGesture.Key, data, null , callBack);
-    }
-    private static bool RegisterHotKey(ModifierKeys modifier, Key key, string data, Action action =  null, KeyBindCallBack callBack = null)
+        if (callBack == null)
         {
+            System.Diagnostics.Debugger.Break();
+        }
+        return GlobalHotKey.RegisterHotKey(aKeyGesture.Modifiers, aKeyGesture.Key, data, callBack);
+    }
+    private static bool RegisterHotKey(ModifierKeys modifier, Key key, IKeyBoundData data, KeyBindCallBack callBack)
+    {
         if (modifier == ModifierKeys.None)
         {
             throw new ArgumentException("Modifier must not be ModifierKeys.None");
         }
-        if (callBack is null)
-        {
-           
-            if (action is null)
-            {
-                throw new ArgumentException("Action or delegate must be provided.");
-            }
+      
+            //if (action is null)
+            //{
+            //    throw new ArgumentException("Action or delegate must be provided.");
+            //}
 
-            System.Windows.Forms.Keys aVirtualKeyCode = (System.Windows.Forms.Keys)KeyInterop.VirtualKeyFromKey(key);
-            currentID = currentID + 1;
-            bool aRegistered = InteropFacade.RegisterHotKey(window.Handle, currentID,
-                                        (uint)modifier | MOD_NOREPEAT,
-                                        (uint)aVirtualKeyCode);
+            //System.Windows.Forms.Keys aVirtualKeyCode = (System.Windows.Forms.Keys)KeyInterop.VirtualKeyFromKey(key);
+            //currentID = currentID + 1;
+            //bool aRegistered = InteropFacade.RegisterHotKey(window.Handle, currentID,
+            //                            (uint)modifier | MOD_NOREPEAT,
+            //                            (uint)aVirtualKeyCode);
 
-            if (aRegistered && action != null)
-            {
-                registeredHotKeys.Add(new HotKeyWithAction(modifier, key,data, action: action, callBack: null));
-            }
-            return aRegistered;
-       } else  {
+            //if (aRegistered && action != null)
+            //{
+            //    ReplaceAdd(modifier, key, data, action);
+            //}
+            //return aRegistered;
+        //}
+        //else
+        //{
 
             if (callBack is null)
             {
@@ -84,58 +78,83 @@ public class GlobalHotKey : IDisposable
 
             if (aRegistered)
             {
-                registeredHotKeys.Add(new HotKeyWithAction(modifier, key, data ,action: action, callBack: callBack));
+                ReplaceAdd(modifier, key, data, callBack);
             }
             return aRegistered;
-        }
+        
     }
 
-        public void Dispose()
+    private static void ReplaceAdd(ModifierKeys modifier, Key key, IKeyBoundData data,  KeyBindCallBack callBack)
+    {
+        if (registeredHotKeys.ContainsKey(data.Key.Value))
         {
-            // unregister all the registered hot keys.
-            for (int i = currentID; i > 0; i--)
-            {
+            registeredHotKeys.Remove(data.Key.Value);
+        }
+        registeredHotKeys.Add(data.Key.Value, new HotKeyWithAction(modifier, key, data, null,callBack));
+    }
+
+    public void Dispose()
+    {
+        // unregister all the registered hot keys.
+        for (int i = currentID; i > 0; i--)
+        {
             InteropFacade.UnregisterHotKey(window.Handle, i);
-            }
-
-            // dispose the inner native window.
-            window.Dispose();
         }
 
-        static GlobalHotKey()
-        {
+        // dispose the inner native window.
+        window.Dispose();
+    }
+
+    static GlobalHotKey()
+    {
         //BoundKeyAction = new EventHandler<BoundKeyActionEventArgs>()
-            window.KeyPressed += (s, e) =>
+        window.KeyPressed += (s, e) =>
+        {
+            if (registeredHotKeys.ContainsKey(e.Key.ToString()))
             {
-                registeredHotKeys.ForEach(x =>
+                HotKeyWithAction item;
+                registeredHotKeys.TryGetValue(e.Key.ToString().ToLower(), out item);
+                if (item != null && item.Modifier == e.Modifier)
                 {
-                    if (e.Modifier == x.Modifier && e.Key == x.Key)
+                   if(item.Action != null)
                     {
-                        if (x.Action != null)
-                        {
-                            x.Action();
-
-                        }
-                        else if (x.CallBack != null)
-                        {
-                            x.CallBack.Invoke(x.Key.ToString(),x.Data);
-                        }
-                       
+                        item.Action();
+                    } else if(item.CallBack != null)
+                    {
+                        item.CallBack.Invoke(item.Data);
                     }
-                });
-            };
-        }
+                }
 
-        private static readonly InvisibleWindowForMessages window = new InvisibleWindowForMessages();
-        private static int currentID;
-        private static uint MOD_NOREPEAT = 0x4000;
-        private static List<HotKeyWithAction> registeredHotKeys = new List<HotKeyWithAction>();
-    /// <summary>
-    /// Action parameter is deprecated
-    /// </summary>
-    private class HotKeyWithAction    {
+            }
+            registeredHotKeys.Values.ToList().ForEach(x =>
+            {
+                if (e.Modifier == x.Modifier && e.Key == x.Key)
+                {
+                    if (x.Action != null)
+                    {
+                        x.Action();
 
-        public HotKeyWithAction(ModifierKeys modifier, Key key, string data, Action action = null, KeyBindCallBack callBack = null)
+                    }
+                    else if (x.CallBack != null)
+                    {
+                        x.CallBack.Invoke(x.Data);
+                    }
+
+                }
+            });
+        };
+    }
+
+    private static readonly InvisibleWindowForMessages window = new InvisibleWindowForMessages();
+    private static int currentID;
+    private static uint MOD_NOREPEAT = 0x4000;
+    private static Dictionary<string, HotKeyWithAction> registeredHotKeys = new Dictionary<string, HotKeyWithAction>();
+
+
+    private class HotKeyWithAction
+    {
+
+        public HotKeyWithAction(ModifierKeys modifier, Key key, IKeyBoundData data, Action action = null, KeyBindCallBack callBack = null)
         {
             Modifier = modifier;
             Key = key;
@@ -143,7 +162,7 @@ public class GlobalHotKey : IDisposable
             {
                 Action = action;
             }
-            if(callBack != null)
+            if (callBack != null)
             {
                 CallBack = callBack;
             }
@@ -152,69 +171,98 @@ public class GlobalHotKey : IDisposable
 
         public ModifierKeys Modifier { get; }
         public Key Key { get; }
-        public string Data { get;  } 
+        public IKeyBoundData Data { get; }
         public Action Action { get; }
         public KeyBindCallBack CallBack { get; }
 
-    }      
+    }
+    /// <summary>
+    /// Action parameter is deprecated
+    /// </summary>
+    /// 
 
-        private class InvisibleWindowForMessages : System.Windows.Forms.NativeWindow, IDisposable
+    //private class HotKeyWithAction    {
+
+    //    public HotKeyWithAction(ModifierKeys modifier, Key key, string data, Action action = null, KeyBindCallBack callBack = null)
+    //    {
+    //        Modifier = modifier;
+    //        Key = key;
+    //        if (action != null)
+    //        {
+    //            Action = action;
+    //        }
+    //        if(callBack != null)
+    //        {
+    //            CallBack = callBack;
+    //        }
+    //        Data = data;
+    //    }
+
+    //    public ModifierKeys Modifier { get; }
+    //    public Key Key { get; }
+    //    public IKeyBoundData Data { get;  } 
+    //    public Action Action { get; }
+    //    public KeyBindCallBack CallBack { get; }
+
+    //}      
+
+    private class InvisibleWindowForMessages : System.Windows.Forms.NativeWindow, IDisposable
+    {
+        public InvisibleWindowForMessages()
         {
-            public InvisibleWindowForMessages()
-            {
-                CreateHandle(new System.Windows.Forms.CreateParams());
-            }
-
-            private static int WM_HOTKEY = 0x0312;
-            protected override void WndProc(ref System.Windows.Forms.Message m)
-            {
-                base.WndProc(ref m);
-
-                if (m.Msg == WM_HOTKEY)
-                {
-                    var aWPFKey = KeyInterop.KeyFromVirtualKey(((int)m.LParam >> 16) & 0xFFFF);
-                    ModifierKeys modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
-                    if (KeyPressed != null)
-                    {
-                        KeyPressed(this, new HotKeyPressedEventArgs(modifier, aWPFKey));
-                    }
-                }
-            }
-
-            public class HotKeyPressedEventArgs : EventArgs
-            {
-                private ModifierKeys _modifier;
-                private Key _key;
-
-                internal HotKeyPressedEventArgs(ModifierKeys modifier, Key key)
-                {
-                    _modifier = modifier;
-                    _key = key;
-                }
-
-                public ModifierKeys Modifier
-                {
-                    get { return _modifier; }
-                }
-
-                public Key Key
-                {
-                    get { return _key; }
-                }
-            }
-
-
-            public event EventHandler<HotKeyPressedEventArgs> KeyPressed;
-
-            #region IDisposable Members
-
-            public void Dispose()
-            {
-                this.DestroyHandle();
-            }
-
-            #endregion
+            CreateHandle(new System.Windows.Forms.CreateParams());
         }
-    } 
+
+        private static int WM_HOTKEY = 0x0312;
+        protected override void WndProc(ref System.Windows.Forms.Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == WM_HOTKEY)
+            {
+                var aWPFKey = KeyInterop.KeyFromVirtualKey(((int)m.LParam >> 16) & 0xFFFF);
+                ModifierKeys modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
+                if (KeyPressed != null)
+                {
+                    KeyPressed(this, new HotKeyPressedEventArgs(modifier, aWPFKey));
+                }
+            }
+        }
+
+        public class HotKeyPressedEventArgs : EventArgs
+        {
+            private ModifierKeys _modifier;
+            private Key _key;
+
+            internal HotKeyPressedEventArgs(ModifierKeys modifier, Key key)
+            {
+                _modifier = modifier;
+                _key = key;
+            }
+
+            public ModifierKeys Modifier
+            {
+                get { return _modifier; }
+            }
+
+            public Key Key
+            {
+                get { return _key; }
+            }
+        }
+
+
+        public event EventHandler<HotKeyPressedEventArgs> KeyPressed;
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this.DestroyHandle();
+        }
+
+        #endregion
+    }
+}
 
 

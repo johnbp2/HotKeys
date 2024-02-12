@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlashWindow.cs" />
+    <Compile Include="HotKeyWithAction.cs" />
     <Compile Include="InteropFacade.cs" />
     <Compile Include="HotKeyEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
