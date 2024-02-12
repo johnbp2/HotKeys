@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
 {
-    public partial class Main : Form
+    public partial class Main : BaseForm
     {
 
 
@@ -27,7 +27,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
        // private Parser userSettingsHelper;
 
     private MainPresenter presenter;
-        private JohnBPearson.KeyBindingButler.Model.IKeyBoundValue currentItem;
+        private JohnBPearson.KeyBindingButler.Model.IKeyBoundData currentItem;
 
         private ContextMenu contextMenuIcon;
         private MenuItem menuItemIcon;
@@ -69,20 +69,25 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
     
-        private void copyToClipBoard(string key, string data)
+        private void hotKeyCallBack(IKeyBoundData item)
         {
-            System.Windows.Clipboard.SetText(data);
-            this.lblKey.ClearAndReplace(key.ToLower());
-            this.cbHotkeySelection.SelectedItem = key;
-            applyValueForKey(key.ToCharArray()[0]);
-          //  messages.raiseEvent(key, data);
+            System.Windows.Clipboard.SetText(item.Data.Value);
+           
+            this.lblKey.ClearAndReplace(item.Key.Value.ToLower());
+            this.cbHotkeySelection.SelectedItem = item.Key.Value.ToLower();
+            applyValueForKey(item.Key.Key);
+
+            Settings.Default.LastBoundKeyPressed = item.Key.Value;
+            Settings.Default.Save();
+            base.notify("Sir your data", "Is in the clipboard");
+          //  messages.raiseEvent(key, item);
         }
 
 
 
 
 
-        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundValue> keys)
+        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> keys)
         {
             var index = 0;
             foreach (var item in keys)
@@ -92,8 +97,8 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 var sb = new StringBuilder();
                 sb.Append(Properties.Settings.Default.KeyBindingModifiers);
                 sb.Append(item.KeyAsChar);
-                var del = new KeyBindCallBack(this.copyToClipBoard);
-                    GlobalHotKey.RegisterHotKey(sb.ToString(), item.Value.Value , del);
+                var del = new KeyBindCallBack(hotKeyCallBack);
+                    GlobalHotKey.RegisterHotKey(sb.ToString(), item , del);
 
 
 
@@ -190,7 +195,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private void applyValueForKey(char key) {
 
 
-            tbValue.Text = this.presenter.findKeyBoundValue(key.ToString()).Value.Value;
+            tbValue.Text = this.presenter.findKeyBoundValue(key.ToString()).Data.Value;
         }
         #endregion
 
@@ -319,7 +324,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             if (this.selectedKeyBoundValue != null)
             {
-                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Value.Value;
+                tbValue.Text = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue.ToString()).Data.Value;
 
             }
             var control = (System.Windows.Forms.ComboBox)sender;

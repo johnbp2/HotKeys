@@ -31,19 +31,12 @@ namespace JohnBPearson.KeyBindingButler.Model
                 if (value != this._value)
                 {
                     this._value = value;
-                    this._isDirty = true;
+                 
                 }
             }
         }
 
-        private bool _isDirty = false;
-        public bool IsDirty
-        {
-            get
-            {
-                return this._isDirty;
-            }
-        }
+      
 
         public char KeyAsChar
         {
@@ -71,12 +64,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             Data = ContentsForClipboard.Create(value);
         }
 
-        protected KeyBoundData(char key, string value, bool isDirty)
-        {
-            this._key = KeyBinding.Create(key);
-            this._value = ContentsForClipboard.Create(value);
-            this._isDirty = isDirty;
-        }
+
 
 
         internal static KeyBoundData Create(char key, string value)
@@ -88,9 +76,15 @@ namespace JohnBPearson.KeyBindingButler.Model
         {
             if (!newValue.Equals(oldItem.Data))
             {
-                return new KeyBoundData(oldItem.Key.Key, newValue.Value, true);
+                return new KeyBoundData(oldItem.Key.Key, newValue.Value);
             }
-            return new KeyBoundData(oldItem.Key.Key, oldItem.Data.Value, oldItem.IsDirty) ;
+            if (oldItem is KeyBoundData)
+            {
+                return (KeyBoundData)(oldItem);
+            } else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool Equals(KeyBoundData other)
@@ -169,7 +163,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             var sbValues = new StringBuilder();
             int count = 0;
             foreach (var item in _items)
-            {if (item.IsDirty) count++;                        
+            {//if (item.IsDirty) count++;                        
                         
                 sbKeys.Append(item.Key.ToString());
                 sbValues.Append(item.Data.ToString());

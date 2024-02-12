@@ -133,11 +133,11 @@ namespace JohnBPearson.KeyBindingButler.Model
           
             foreach (var item in this.Items)
             {
-                if (item.IsDirty)
-                {
-                    result++;
+                //if (item.IsDirty)
+                //{
+                //    result++;
 
-                }
+                //}
                 sbResult.Append(item.GetDelimitated());
                 //tempKeys.Add(item.Key.ToString());
                 //tempValues.Add(item.Data.ToString());
