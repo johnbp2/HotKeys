@@ -117,8 +117,8 @@ namespace JohnBPearson.com.Utility
             foreach (var item in this.Items)
             {
                
-                tempKeys.Add(item.Key.ToString());
-                tempValues.Add(item.Data.ToString());
+                tempKeys.Add(item.Key.GetDeliminated());
+                tempValues.Add(item.Data.GetDeliminated());
             }
             var strings = new KeyAndDataStringLiterals();
           

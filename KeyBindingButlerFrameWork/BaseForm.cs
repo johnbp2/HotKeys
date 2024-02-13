@@ -21,7 +21,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             Bitmap bmp = new Bitmap(@".\Butler.png");
 
-            var popupNotifier = ButlersNotificationRoutine.Create(title, content, bmp);
+            var popupNotifier = Notification.Create(title, content, bmp);
 
             //((System.Drawing.Image)(resources.GetObject("popupNotifier1.Image")));1
             using (popupNotifier as IDisposable)

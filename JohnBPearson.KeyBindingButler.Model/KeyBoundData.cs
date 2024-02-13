@@ -165,8 +165,8 @@ namespace JohnBPearson.KeyBindingButler.Model
             foreach (var item in _items)
             {//if (item.IsDirty) count++;                        
                         
-                sbKeys.Append(item.Key.ToString());
-                sbValues.Append(item.Data.ToString());
+                sbKeys.Append(item.Key.GetDeliminated());
+                sbValues.Append(item.Data.GetDeliminated());
             }
             var result = new KeyAndDataStringLiterals();
             result.Values = sbValues.ToString();
