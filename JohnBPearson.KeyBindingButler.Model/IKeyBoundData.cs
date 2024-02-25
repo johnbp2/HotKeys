@@ -2,16 +2,30 @@
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public interface IKeyBoundData
+    public interface IBase
     {
-  
         KeyBinding Key { get; }
         char KeyAsChar { get; }
+        string Description { get; set; }
+    }
+    public interface IKeyBoundData : IEquatable<IKeyBoundData>, IBase
+    {
+
+
+
         ContentsForClipboard Data { get; }
-        IKeyBoundData Recreate(string newValue);
+
+
+        void Update(string newValue);
         string GetDelimitated();
 
-        
+
+    }
+
+
+    public interface IKeyBoundCommand: IBase // , IEquatable<IKeyBoundCommand>
+    {
+
     }
 }
 

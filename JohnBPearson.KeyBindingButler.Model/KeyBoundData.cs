@@ -54,6 +54,11 @@ namespace JohnBPearson.KeyBindingButler.Model
 
         }
 
+        public string Description
+        {
+            get; set;
+        }
+
 
         protected KeyBoundData()
         {

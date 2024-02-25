@@ -47,14 +47,21 @@
     <Compile Include="BaseData.cs" />
     <Compile Include="ButlerBase.cs" />
     <Compile Include="ContentsForClipboard.cs" />
+    <Compile Include="DataAccess\JsonToObject.cs" />
     <Compile Include="IKeyBoundData.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="KeyBindButler.cs" />
     <Compile Include="KeyBoundData.cs" />
     <Compile Include="DataAccess\OneStringParser.cs" />
+    <Compile Include="Processes\CommandProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccess\Parser.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TheButlerFramework\JohnBPearson.KeyBindingButler.Common\JohnBPearson.KeyBindingButler.Common.csproj">
+      <Project>{2844508a-f28b-4d3d-a974-aaf26291981a}</Project>
+      <Name>JohnBPearson.KeyBindingButler.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

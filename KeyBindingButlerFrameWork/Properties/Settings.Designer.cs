@@ -25,18 +25,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("612Annie#")]
-        public string deprecated_hotkey2 {
-            get {
-                return ((string)(this["deprecated_hotkey2"]));
-            }
-            set {
-                this["deprecated_hotkey2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
         public string BindableKeys {
             get {
@@ -44,18 +32,6 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
             }
             set {
                 this["BindableKeys"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
-        public char deprecated_UserHotkeyAcceptance {
-            get {
-                return ((char)(this["deprecated_UserHotkeyAcceptance"]));
-            }
-            set {
-                this["deprecated_UserHotkeyAcceptance"] = value;
             }
         }
         
@@ -173,6 +149,18 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
             }
             set {
                 this["LastBoundKeyPressed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dir||||||||||||||||||pushd c:\\|||||||s")]
+        public string BindableCommands {
+            get {
+                return ((string)(this["BindableCommands"]));
+            }
+            set {
+                this["BindableCommands"] = value;
             }
         }
     }

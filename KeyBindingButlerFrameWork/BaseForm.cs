@@ -30,7 +30,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 popupNotifier.Popup();
 
             }
-
+          )
             FlashWindow.TrayAndWindow(this);
         }
     }
