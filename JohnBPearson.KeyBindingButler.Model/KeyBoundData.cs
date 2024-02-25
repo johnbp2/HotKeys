@@ -13,7 +13,7 @@ namespace JohnBPearson.KeyBindingButler.Model
 {
 
 
-    public class KeyBoundData : IKeyBoundData, IEquatable<KeyBoundData>
+    public class KeyBoundData : IKeyBoundData
     {
         private ContentsForClipboard _value;
 
@@ -112,8 +112,21 @@ namespace JohnBPearson.KeyBindingButler.Model
             return string.Concat(this._key.GetDeliminated(), this._value.ToString());
                     
         }
-            
-     }
+
+        public void Update(string newValue)
+        {
+           this.Data.Value= newValue;
+        }
+
+        public bool Equals(IKeyBoundData other)
+        {
+            if (other.Data.Equals(this.Data))
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
     public struct KeyAndDataStringLiterals
     {

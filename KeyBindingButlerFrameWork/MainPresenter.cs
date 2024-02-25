@@ -27,7 +27,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             if (oldItem.Data.Value != newValue)
             {
-                this.keyBoundValueList.Replace(oldItem.Recreate(newValue), oldItem);
+               this,ke
             }
         }
         public int executeAutoSave(bool overrideAutoSaveSetting)

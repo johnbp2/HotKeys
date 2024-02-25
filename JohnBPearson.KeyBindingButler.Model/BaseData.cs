@@ -18,8 +18,12 @@ namespace JohnBPearson.KeyBindingButler.Model
             if (value == null) value = string.Empty;
             this._value = value;
         }
-        private string _value;
-        public virtual string Value { get => this._value; set => this._value = value; }
+        private string _value = "";
+        public virtual string Value { get { return _value; } set {if(!string.IsNullOrWhiteSpace(value))
+                {
+                    this._value = value;
+                }
+                    } }
 
         public readonly string deliminater = "|";
 
@@ -64,9 +68,10 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
         public bool Equals(BaseData other)
         {
-            if((this._value !=null ? this._value : "") == (other.Value != null ? other.Value: ""  ))
+            if(other != null && !string.IsNullOrWhiteSpace(other.Value))
             {
-                return true;
+                
+                return this._value == other.Value;
             }
             return false;
         }
