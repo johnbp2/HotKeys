@@ -8,7 +8,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         char KeyAsChar { get; }
         string Description { get; set; }
     }
-    public interface IKeyBoundData : IEquatable<IKeyBoundData>, IBase
+    public interface IKeyBoundData : System.IEquatable<IKeyBoundData>, IBase
     {
 
 
