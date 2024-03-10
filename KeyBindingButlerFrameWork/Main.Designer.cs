@@ -46,12 +46,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.cbHotkeySelection = new System.Windows.Forms.ComboBox();
             this.templatedLabel1 = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
             this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
+            this.tbDesc = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
-            this.tbDesc = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
@@ -112,11 +112,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.transparentFlowPanel1.Controls.Add(this.lblKey);
             this.transparentFlowPanel1.Controls.Add(this.cbHotkeySelection);
             this.transparentFlowPanel1.Controls.Add(this.templatedLabel1);
+            this.transparentFlowPanel1.Controls.Add(this.label1);
+            this.transparentFlowPanel1.Controls.Add(this.tbDesc);
             this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.transparentFlowPanel1.Location = new System.Drawing.Point(42, 39);
             this.transparentFlowPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.transparentFlowPanel1.Name = "transparentFlowPanel1";
-            this.transparentFlowPanel1.Size = new System.Drawing.Size(494, 78);
+            this.transparentFlowPanel1.Size = new System.Drawing.Size(365, 168);
             this.transparentFlowPanel1.TabIndex = 2;
             // 
             // lblKey
@@ -145,7 +147,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // templatedLabel1
             // 
             this.templatedLabel1.AutoSize = true;
-            this.templatedLabel1.Location = new System.Drawing.Point(233, 0);
+            this.templatedLabel1.Location = new System.Drawing.Point(3, 68);
             this.templatedLabel1.Name = "templatedLabel1";
             this.templatedLabel1.Size = new System.Drawing.Size(0, 24);
             this.templatedLabel1.TabIndex = 10;
@@ -154,23 +156,31 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // 
             // transparentPanel2
             // 
-            this.transparentPanel2.Controls.Add(this.tbDesc);
-            this.transparentPanel2.Controls.Add(this.label1);
+            this.transparentPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.transparentPanel2.Controls.Add(this.btnCopy);
             this.transparentPanel2.Controls.Add(this.btnSave);
             this.transparentPanel2.Controls.Add(this.lblGuildAd);
             this.transparentPanel2.Controls.Add(this.tbValue);
-            this.transparentPanel2.Location = new System.Drawing.Point(11, 128);
+            this.transparentPanel2.Location = new System.Drawing.Point(11, 219);
             this.transparentPanel2.Margin = new System.Windows.Forms.Padding(6);
             this.transparentPanel2.Name = "transparentPanel2";
-            this.transparentPanel2.Size = new System.Drawing.Size(573, 186);
+            this.transparentPanel2.Size = new System.Drawing.Size(573, 203);
             this.transparentPanel2.TabIndex = 1;
+            // 
+            // tbDesc
+            // 
+            this.tbDesc.Location = new System.Drawing.Point(3, 119);
+            this.tbDesc.Multiline = true;
+            this.tbDesc.Name = "tbDesc";
+            this.tbDesc.Size = new System.Drawing.Size(248, 32);
+            this.tbDesc.TabIndex = 7;
+            this.tbDesc.TextChanged += new System.EventHandler(this.tbDesc_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Menu;
-            this.label1.Location = new System.Drawing.Point(34, 7);
+            this.label1.Location = new System.Drawing.Point(3, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(172, 24);
             this.label1.TabIndex = 6;
@@ -178,6 +188,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // 
             // btnCopy
             // 
+            this.btnCopy.Enabled = false;
             this.btnCopy.Location = new System.Drawing.Point(406, 46);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(97, 32);
@@ -210,23 +221,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // tbValue
             // 
             this.tbValue.BackColor = System.Drawing.SystemColors.Info;
-            this.tbValue.Location = new System.Drawing.Point(31, 46);
-            this.tbValue.Margin = new System.Windows.Forms.Padding(6);
+            this.tbValue.Location = new System.Drawing.Point(0, 7);
+            this.tbValue.Margin = new System.Windows.Forms.Padding(0);
             this.tbValue.Multiline = true;
             this.tbValue.Name = "tbValue";
             this.tbValue.Size = new System.Drawing.Size(363, 142);
             this.tbValue.TabIndex = 0;
             this.tbValue.TabStop = false;
             this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
-            // 
-            // tbDesc
-            // 
-            this.tbDesc.Location = new System.Drawing.Point(277, -2);
-            this.tbDesc.Multiline = true;
-            this.tbDesc.Name = "tbDesc";
-            this.tbDesc.Size = new System.Drawing.Size(248, 32);
-            this.tbDesc.TabIndex = 7;
-            this.tbDesc.TextChanged += new System.EventHandler(this.tbDesc_TextChanged);
             // 
             // Main
             // 
@@ -236,7 +238,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(584, 329);
+            this.ClientSize = new System.Drawing.Size(584, 428);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentPanel2);
             this.Controls.Add(this.menuStrip1);

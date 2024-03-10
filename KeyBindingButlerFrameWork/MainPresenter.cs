@@ -67,7 +67,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             var strings = new KeyAndDataStringLiterals();
             strings.Values = Properties.Settings.Default.BindableValues;
             strings.Keys = Properties.Settings.Default.BindableKeys;
-            
+            strings.Descriptions = Properties.Settings.Default.Descriptions;
             this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBoundDataList(strings);
         }
     }

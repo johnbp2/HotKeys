@@ -20,6 +20,7 @@ namespace JohnBPearson.com.Utility
             this._valuesString = strings.Values;
 
             this._keysString = strings.Keys;
+            this._descriptionString = strings.Descriptions;
 
         }
 
