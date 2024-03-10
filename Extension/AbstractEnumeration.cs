@@ -7,44 +7,58 @@ using System.Threading.Tasks;
 
 namespace JohnBPearson.NET.Extensions
 {
-    public abstract class Enumeration : IComparable
-    {
-        public string Name
-        {
-            get; private set;
-        }
 
-        public int Id
-        {
-            get; private set;
-        }
 
-        protected Enumeration(int id, string name) => (Id, Name) = (id, name);
+    //public class CardType
+    //: Enumeration
+    //{
+    //    public static CardType Amex = new(1, nameof(Amex));
+    //    public static CardType Visa = new(2, nameof(Visa));
+    //    public static CardType MasterCard = new(3, nameof(MasterCard));
 
-        public override string ToString() => Name;
+    //    public CardType(int id, string name)
+    //        : base(id, name)
+    //    {
+    //    }
+    //}
+    //public abstract class Enumeration : IComparable
+    //{
+    //    public string Name
+    //    {
+    //        get; private set;
+    //    }
 
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration =>
-            typeof(T).GetFields(BindingFlags.Public |
-                                BindingFlags.Static |
-                                BindingFlags.DeclaredOnly)
-                     .Select(f => f.GetValue(null))
-                     .Cast<T>();
+    //    public int Id
+    //    {
+    //        get; private set;
+    //    }
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is  Enumeration otherValue))
-            {
-                return false;
-            }
+    //    protected Enumeration(int id, string name) => (Id, Name) = (id, name);
 
-            var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = Id.Equals(otherValue.Id);
+    //    public override string ToString() => Name;
 
-            return typeMatches && valueMatches;
-        }
+    //    public static IEnumerable<T> GetAll<T>() where T : Enumeration =>
+    //        typeof(T).GetFields(BindingFlags.Public |
+    //                            BindingFlags.Static |
+    //                            BindingFlags.DeclaredOnly)
+    //                 .Select(f => f.GetValue(null))
+    //                 .Cast<T>();
 
-        public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
+    //    public override bool Equals(object obj)
+    //    {
+    //        if (!(obj is  Enumeration otherValue))
+    //        {
+    //            return false;
+    //        }
 
-        // Other utility methods ...
-    }
+    //        var typeMatches = GetType().Equals(obj.GetType());
+    //        var valueMatches = Id.Equals(otherValue.Id);
+
+    //        return typeMatches && valueMatches;
+    //    }
+
+    //    public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
+
+    //    // Other utility methods ...
+    //}
 }

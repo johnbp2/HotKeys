@@ -75,7 +75,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
            
             this.lblKey.ClearAndReplace(item.Key.Value.ToLower());
             this.cbHotkeySelection.SelectedItem = item.Key.Value.ToLower();
-            applyValueForKey(item.Key.Key);
+            updateUIByKey(item.Key.Key);
 
             Settings.Default.LastBoundKeyPressed = item.Key.Value;
             Settings.Default.Save();
@@ -192,10 +192,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             //}
         }
 
-        private void applyValueForKey(char key) {
+        private void updateUIByKey(char key) {
 
+            var currentItem = this.presenter.findKeyBoundValue(key.ToString());
+            tbValue.Text = currentItem.Data.Value;
+            tbDesc.Text = currentItem.Description.Value;
 
-            tbValue.Text = this.presenter.findKeyBoundValue(key.ToString()).Data.Value;
         }
         #endregion
 
@@ -302,7 +304,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         {
             if (this.selectedKeyBoundValue != null)
             {
-                this.applyValueForKey(this.selectedKeyBoundValue.ToCharArray()[0]);
+                this.updateUIByKey(this.selectedKeyBoundValue.ToCharArray()[0]);
               
             }
 
@@ -330,10 +332,17 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             var control = (System.Windows.Forms.ComboBox)sender;
             //if (control.Text.Length == 1)
             //{
-                   this.applyValueForKey(control.Text.ToCharArray()[0]);
+                   this.updateUIByKey(control.Text.ToCharArray()[0]);
             //  }
             this.lblKey.ClearAndReplace(cbHotkeySelection.Text);
         }
+       
+
+        private void tbDesc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
     }
 }

@@ -44,14 +44,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseData.cs" />
+    <Compile Include="KeyBinding\BaseData.cs" />
+    <Compile Include="KeyBinding\KeyAndDataStringLiterals.cs" />
+    <Compile Include="KeyBinding\KeyBoundDataList.cs" />
+    <Compile Include="KeyBinding\ValueObject.cs" />
     <Compile Include="ButlerBase.cs" />
-    <Compile Include="ContentsForClipboard.cs" />
+    <Compile Include="KeyBinding\Data.cs" />
     <Compile Include="DataAccess\JsonToObject.cs" />
-    <Compile Include="IKeyBoundData.cs" />
-    <Compile Include="Key.cs" />
+    <Compile Include="KeyBinding\Description.cs" />
+    <Compile Include="KeyBinding\DescriptionValue.cs" />
+    <Compile Include="KeyBinding\IBaseData.cs" />
+    <Compile Include="KeyBinding\IKeyBoundData.cs" />
+    <Compile Include="KeyBinding\KeyboardKey.cs" />
     <Compile Include="KeyBindButler.cs" />
-    <Compile Include="KeyBoundData.cs" />
+    <Compile Include="KeyBinding\KeyBoundData.cs" />
     <Compile Include="DataAccess\OneStringParser.cs" />
     <Compile Include="Processes\CommandProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

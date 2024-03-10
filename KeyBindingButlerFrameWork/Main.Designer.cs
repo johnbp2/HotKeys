@@ -44,13 +44,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
             this.lblKey = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
             this.cbHotkeySelection = new System.Windows.Forms.ComboBox();
+            this.templatedLabel1 = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
             this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
-            this.notBetterButton2 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
-            this.btnCopy = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbDesc = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
@@ -110,11 +111,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // 
             this.transparentFlowPanel1.Controls.Add(this.lblKey);
             this.transparentFlowPanel1.Controls.Add(this.cbHotkeySelection);
+            this.transparentFlowPanel1.Controls.Add(this.templatedLabel1);
             this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.transparentFlowPanel1.Location = new System.Drawing.Point(42, 39);
             this.transparentFlowPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.transparentFlowPanel1.Name = "transparentFlowPanel1";
-            this.transparentFlowPanel1.Size = new System.Drawing.Size(408, 78);
+            this.transparentFlowPanel1.Size = new System.Drawing.Size(494, 78);
             this.transparentFlowPanel1.TabIndex = 2;
             // 
             // lblKey
@@ -140,11 +142,21 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.cbHotkeySelection.TextUpdate += new System.EventHandler(this.cbHotkeySelection_TextUpdate);
             this.cbHotkeySelection.SelectedValueChanged += new System.EventHandler(this.cbHotkeySelection_SelectedValueChanged);
             // 
+            // templatedLabel1
+            // 
+            this.templatedLabel1.AutoSize = true;
+            this.templatedLabel1.Location = new System.Drawing.Point(233, 0);
+            this.templatedLabel1.Name = "templatedLabel1";
+            this.templatedLabel1.Size = new System.Drawing.Size(0, 24);
+            this.templatedLabel1.TabIndex = 10;
+            this.templatedLabel1.Template = null;
+            this.templatedLabel1.TemplateValues = null;
+            // 
             // transparentPanel2
             // 
+            this.transparentPanel2.Controls.Add(this.tbDesc);
             this.transparentPanel2.Controls.Add(this.label1);
             this.transparentPanel2.Controls.Add(this.btnCopy);
-            this.transparentPanel2.Controls.Add(this.notBetterButton2);
             this.transparentPanel2.Controls.Add(this.btnSave);
             this.transparentPanel2.Controls.Add(this.lblGuildAd);
             this.transparentPanel2.Controls.Add(this.tbValue);
@@ -154,30 +166,24 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.transparentPanel2.Size = new System.Drawing.Size(573, 186);
             this.transparentPanel2.TabIndex = 1;
             // 
-            // notBetterButton2
+            // label1
             // 
-            this.notBetterButton2.DisplayText = "Save";
-            this.notBetterButton2.EndColor = System.Drawing.Color.DarkBlue;
-            this.notBetterButton2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.notBetterButton2.ForeColor = System.Drawing.Color.White;
-            this.notBetterButton2.GradientAngle = 90;
-            this.notBetterButton2.Location = new System.Drawing.Point(437, 134);
-            this.notBetterButton2.MouseClickColor1 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton2.MouseClickColor2 = System.Drawing.Color.Red;
-            this.notBetterButton2.MouseHoverColor1 = System.Drawing.Color.Yellow;
-            this.notBetterButton2.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton2.Name = "notBetterButton2";
-            this.notBetterButton2.Size = new System.Drawing.Size(69, 41);
-            this.notBetterButton2.StartColor = System.Drawing.Color.LightGreen;
-            this.notBetterButton2.TabIndex = 4;
-            this.notBetterButton2.Text = "Save";
-            this.notBetterButton2.TextLocation_X = 76;
-            this.notBetterButton2.TextLocation_Y = 24;
-            this.notBetterButton2.Transparent1 = 150;
-            this.notBetterButton2.Transparent2 = 150;
-            this.notBetterButton2.UseVisualStyleBackColor = true;
-            this.notBetterButton2.Visible = false;
-            this.notBetterButton2.Click += new System.EventHandler(this.notBetterButton2_Click);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Menu;
+            this.label1.Location = new System.Drawing.Point(34, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(172, 24);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Action for hotkey is:";
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(406, 46);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(97, 32);
+            this.btnCopy.TabIndex = 5;
+            this.btnCopy.Text = "Copy ";
+            this.btnCopy.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -213,24 +219,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tbValue.TabStop = false;
             this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
             // 
-            // btnCopy
+            // tbDesc
             // 
-            this.btnCopy.Location = new System.Drawing.Point(406, 46);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(97, 32);
-            this.btnCopy.TabIndex = 5;
-            this.btnCopy.Text = "Copy ";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Menu;
-            this.label1.Location = new System.Drawing.Point(34, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(172, 24);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Action for hotkey is:";
+            this.tbDesc.Location = new System.Drawing.Point(277, -2);
+            this.tbDesc.Multiline = true;
+            this.tbDesc.Name = "tbDesc";
+            this.tbDesc.Size = new System.Drawing.Size(248, 32);
+            this.tbDesc.TabIndex = 7;
+            this.tbDesc.TextChanged += new System.EventHandler(this.tbDesc_TextChanged);
             // 
             // Main
             // 
@@ -284,10 +280,11 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton2;
         private TemplatedLabel lblKey;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCopy;
+        private TemplatedLabel templatedLabel1;
+        private System.Windows.Forms.TextBox tbDesc;
     }
 }
 

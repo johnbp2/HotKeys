@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JohnBPearson.Windows.Forms.KeyBindingButler.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BindableKeys" Type="System.String" Scope="User">
+    <Setting Name="BindableKeys" Type="System.String" Scope="Application">
       <Value Profile="(Default)">a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z</Value>
     </Setting>
     <Setting Name="KeyBindingModifiers" Type="System.String" Scope="Application">
@@ -26,7 +26,7 @@
     <Setting Name="BindableValues" Type="System.String" Scope="User">
       <Value Profile="(Default)">123Isabella!|abc|||||||||||||||||123Isabella!|||||||s</Value>
     </Setting>
-    <Setting Name="BindableKeysBackup" Type="System.String" Scope="User">
+    <Setting Name="BindableKeysBackup" Type="System.String" Scope="Application">
       <Value Profile="(Default)">a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z</Value>
     </Setting>
     <Setting Name="ServantName" Type="System.String" Scope="User">
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="BindableCommands" Type="System.String" Scope="User">
       <Value Profile="(Default)">dir||||||||||||||||||pushd c:\|||||||s</Value>
+    </Setting>
+    <Setting Name="Descriptions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">test|||||||||||||||||||||||||</Value>
     </Setting>
   </Settings>
 </SettingsFile>

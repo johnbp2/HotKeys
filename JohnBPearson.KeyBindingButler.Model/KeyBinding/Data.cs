@@ -7,28 +7,33 @@ using System.Threading.Tasks;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public class ContentsForClipboard : BaseData
+    public class Data : BaseData
     {
 
 
-        private ContentsForClipboard() {
+        private Data() {
             
         } 
-        private ContentsForClipboard(string value) : base(value) { 
+        private Data(string value) : base(value) { 
      
         
         }
 
+        private Data(object anyObject, ref object reference)
+        {
+            reference = anyObject;
+        }
 
         public override string ToString()
         {
             return base.ToString();
         }
 
-        public static ContentsForClipboard Create(string value)
+        public static Data Create(string value)
         {
-            return new ContentsForClipboard(value);
+            return new Data(value);
         }
 
+      
     }
 }

@@ -23,17 +23,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         public Main Form { get { return this._main; } private set { this._main = value; } }
 
 
-        public void replaceItem(IKeyBoundData oldItem, string newValue)
-        {
-            if (oldItem.Data.Value != newValue)
-            {
-               this,ke
-            }
-        }
+        public void replaceItem(IKeyBoundData oldItem, string newValue) => oldItem.Update(newValue);
         public int executeAutoSave(bool overrideAutoSaveSetting)
         {
             var strings = this.keyBoundValueList.PrepareDataForSave();
             Properties.Settings.Default.BindableValues = strings.Values;
+            Properties.Settings.Default.Descriptions = strings.Descriptions;
             Properties.Settings.Default.Save();
             return 0;
         }

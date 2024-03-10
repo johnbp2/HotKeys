@@ -12,7 +12,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -23,15 +23,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
         public string BindableKeys {
             get {
                 return ((string)(this["BindableKeys"]));
-            }
-            set {
-                this["BindableKeys"] = value;
             }
         }
         
@@ -116,15 +113,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z")]
         public string BindableKeysBackup {
             get {
                 return ((string)(this["BindableKeysBackup"]));
-            }
-            set {
-                this["BindableKeysBackup"] = value;
             }
         }
         
@@ -161,6 +155,18 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler.Properties {
             }
             set {
                 this["BindableCommands"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("test|||||||||||||||||||||||||")]
+        public string Descriptions {
+            get {
+                return ((string)(this["Descriptions"]));
+            }
+            set {
+                this["Descriptions"] = value;
             }
         }
     }

@@ -35,16 +35,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         public IEnumerable<IKeyBoundData> Items
         { get { return this._items; } }
 
-        public void Replace(IKeyBoundData newItem, IKeyBoundData oldItem)
-        {
-
-
-            var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
-            var index = this._items.IndexOf(oldItem);
-            this._items.RemoveAt(index);
-            this._items[index] = newItem;
-            //  return this._items;
-        }
+        
 
         public KeyAndDataStringLiterals PrepareDataForSave()
         {

@@ -25,6 +25,7 @@ namespace JohnBPearson.com.Utility
 
         private string _keysString;
         private string _valuesString;
+        private string _descriptionString;
 
         private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> _items;
 
@@ -69,6 +70,7 @@ namespace JohnBPearson.com.Utility
             //   var letters = this._keysString.Split(delims, 100, StringSplitOptions.None).Clone();
             var letters = this._keysString.Split(delimChar).Clone();
             var values = this._valuesString.Split(delimChar);
+            var descriptions = this._descriptionString.Split(delimChar);
             this._keys = (letters as string[]).ToList();
             var index = 0;
             foreach (var key in this._keys)
@@ -76,7 +78,8 @@ namespace JohnBPearson.com.Utility
                 if (index < values.Length)
                 {
                     var value = values[index];
-                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(key[0], value);
+                    var des = descriptions[index];
+                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(key[0], value, des);
                     resultList.Add(hkv);
                     index++;
                 }

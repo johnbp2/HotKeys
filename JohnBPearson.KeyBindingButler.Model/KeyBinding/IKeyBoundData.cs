@@ -1,24 +1,38 @@
-﻿using System.ComponentModel;
+﻿
+
+using System.Dynamic;
+using System.Net.Http.Headers;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
+
+    public enum ObjectState
+    {
+        New,
+        Mutated,
+        Deleted,
+
+    }
     public interface IBase
     {
-        KeyBinding Key { get; }
+        KeyboardKey Key { get; }
+        Data Data { get; }
         char KeyAsChar { get; }
-        string Description { get; set; }
+        
+        ObjectState ObjectState { get; }
     }
     public interface IKeyBoundData : System.IEquatable<IKeyBoundData>, IBase
     {
 
 
 
-        ContentsForClipboard Data { get; }
+        Description Description { get; set; }
 
 
         void Update(string newValue);
         string GetDelimitated();
 
+        
 
     }
 
