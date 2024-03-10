@@ -1,14 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public interface IKeyBoundData
+    public interface IKeyBoundData : IEquatable<IKeyBoundData>
     {
   
         KeyBinding Key { get; }
         char KeyAsChar { get; }
         ContentsForClipboard Data { get; }
-        IKeyBoundData Recreate(string newValue);
+        void Update(string newValue);
         string GetDelimitated();
 
         

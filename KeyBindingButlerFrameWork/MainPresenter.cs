@@ -3,9 +3,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Navigation;
 using JohnBPearson.KeyBindingButler.Model;
+using JohnBPearson.Windows.Interop;
 
 
 namespace JohnBPearson.Windows.Forms.KeyBindingButler
@@ -20,21 +22,23 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
     {
         private JohnBPearson.KeyBindingButler.Model.KeyBoundDataList keyBoundValueList;
         private Main _main;
-        public Main Form { get { return this._main; } private set { this._main = value; } }
+        public Main Form { get { return this._main; }  set { this._main = value; } }
 
 
-        public void replaceItem(IKeyBoundData oldItem, string newValue)
+        public void updateItem(IKeyBoundData oldItem, string newData)
         {
-            if (oldItem.Data.Value != newValue)
-            {
-                this.keyBoundValueList.Replace(oldItem.Recreate(newValue), oldItem);
-            }
+            oldItem.Update(newData);
+            GlobalHotKey.removeAllRegistration();
+            registerHotKeys(keyBoundValueList.Items);
         }
         public int executeAutoSave(bool overrideAutoSaveSetting)
         {
             var strings = this.keyBoundValueList.PrepareDataForSave();
             Properties.Settings.Default.BindableValues = strings.Values;
             Properties.Settings.Default.Save();
+            this.LoadHotKeyValues();
+            GlobalHotKey.removeAllRegistration();
+            this.registerHotKeys(this.keyBoundValueList.Items);
             return 0;
         }
         public IEnumerable<string> Keys
@@ -67,13 +71,36 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
           return  this.HotKeyValues.ToList<IKeyBoundData>().Find((item) => { return item.Key.Value == keyValue; });
 
         }
-        private void LoadHotKeyValues()
+        private KeyBoundDataList LoadHotKeyValues()
         {
             var strings = new KeyAndDataStringLiterals();
             strings.Values = Properties.Settings.Default.BindableValues;
             strings.Keys = Properties.Settings.Default.BindableKeys;
             
             this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBoundDataList(strings);
+            return this.keyBoundValueList;
+        }
+
+
+        private void registerHotKeys(IEnumerable<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> keys)
+        {
+            var index = 0;
+            foreach (var item in keys)
+            {
+
+
+                var sb = new StringBuilder();
+                sb.Append(Properties.Settings.Default.KeyBindingModifiers);
+                sb.Append(item.KeyAsChar);
+                var callBack = new KeyBindCallBack(_main.hotKeyCallBack);
+                GlobalHotKey.RegisterHotKey(sb.ToString(), item, callBack);
+
+
+
+
+
+                index++;
+            }
         }
     }
 
