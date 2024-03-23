@@ -51,6 +51,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         public Main(MainPresenter presenter)
         {
             this.presenter = presenter;
+            presenter.Form = this;
             InitializeComponent();
             // var reminderForm = new Reminders();
             //this.presenter = presenter;
@@ -69,7 +70,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
     
-        private void hotKeyCallBack(IKeyBoundData item)
+        public void hotKeyCallBack(IKeyBoundData item)
         {
             System.Windows.Clipboard.SetText(item.Data.Value);
            

@@ -93,14 +93,19 @@ public class GlobalHotKey : IDisposable
         registeredHotKeys.Add(data.Key.Value, new HotKeyWithAction(modifier, key, data, null,callBack));
     }
 
-    public void Dispose()
+    public static void removeAllRegistration()
     {
         // unregister all the registered hot keys.
         for (int i = currentID; i > 0; i--)
         {
             InteropFacade.UnregisterHotKey(window.Handle, i);
         }
+    }
 
+    public void Dispose()
+    {
+        // unregister all the registered hot keys.
+        removeAllRegistration();
         // dispose the inner native window.
         window.Dispose();
     }
