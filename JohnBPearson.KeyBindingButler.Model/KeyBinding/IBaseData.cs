@@ -9,6 +9,7 @@ namespace JohnBPearson.KeyBindingButler.Model
        // bool Equals(IBaseData other);    
         string GetDeliminated();
         string GetDeliminated(char delim);
+        string GetDelimiter();
         string ToString();
     }
 }

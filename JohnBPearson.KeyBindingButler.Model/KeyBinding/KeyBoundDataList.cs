@@ -7,17 +7,17 @@ using JohnBPearson.com.Utility;
 
 namespace JohnBPearson.KeyBindingButler.Model
 {
-    public class KeyBoundDataList
+    public class KeyBoundDataList : IKeyBoundDataList
     {
 
-        private Parser _userSettingsHelper;
+        private Parser _userSettingsParser;
         private List<IKeyBoundData> _items = new List<IKeyBoundData>();
         private const string deliminater = "|";
 
         public KeyBoundDataList(KeyAndDataStringLiterals strings)
         {
-            this._userSettingsHelper = new Parser(strings);
-            this._items = this._userSettingsHelper.Items;
+            this._userSettingsParser = new Parser(strings, this);
+            this._items = this._userSettingsParser.Items;
 
         }
 
@@ -25,9 +25,9 @@ namespace JohnBPearson.KeyBindingButler.Model
         {
             get
             {
-                if (this._userSettingsHelper != null)
+                if (this._userSettingsParser != null)
                 {
-                    return this._userSettingsHelper.Keys;
+                    return this._userSettingsParser.Keys;
                 }
                 else return null;
             }
@@ -35,34 +35,39 @@ namespace JohnBPearson.KeyBindingButler.Model
         public IEnumerable<IKeyBoundData> Items
         { get { return this._items; } }
 
-        public void Replace(IKeyBoundData newItem, IKeyBoundData oldItem)
+        //public void Replace(IKeyBoundData newItem, IKeyBoundData oldItem)
+        //{
+
+
+        //    var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
+        //    var index = this._items.IndexOf(oldItem);
+        //    this._items.RemoveAt(index);
+        //    this._items[index] = newItem;
+        //    //  return this._items;
+        //}
+
+        public KeyAndDataStringLiterals PrepareDataForSave()
         {
 
-
-            var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
-            var index = this._items.IndexOf(oldItem);
-            this._items.RemoveAt(index);
-            this._items[index] = newItem;
-            //  return this._items;
-        }
-
-        public KeyAndDataStringLiterals PrepareDataForSave() {
-           
             var values = new StringBuilder();
             var descriptions = new StringBuilder();
             int count = 0;
             foreach (var item in _items)
             {//if (item.IsDirty) count++;                        
 
-                descriptions.Append(item.Description.Value);
+                descriptions.Append(item.Description.GetDeliminated());
                 values.Append(item.Data.GetDeliminated());
-                
+                if(item.ObjectState == ObjectState.Mutated)
+                {
+                    count++;
+                }
+
             }
             var result = new KeyAndDataStringLiterals();
             result.Values = values.ToString();
-      result.Descriptions = descriptions.ToString();
+            result.Descriptions = descriptions.ToString();
             result.ItemsUpdated = count;
-           return result;
+            return result;
         }
 
         public string PrepareDataToSaveAsOneSetting()
@@ -72,19 +77,19 @@ namespace JohnBPearson.KeyBindingButler.Model
             {
                 sbOneString.Append(this.buildSaveString(item));
 
-                    
+
             }
-           return sbOneString.ToString();
+            return sbOneString.ToString();
         }
 
         private string buildSaveString(IKeyBoundData item)
         {
-            return String.Concat(item.Key.GetDeliminated(),item.Data, KeyBoundDataList.deliminater);
+            return String.Concat(item.Key.GetDeliminated(), item.Data, KeyBoundDataList.deliminater);
         }
 
         internal int findIndex(KeyBoundData searchItem)
         {
-          return this._items.FindIndex((itemToCheck) => { return itemToCheck.Equals(searchItem); });
+            return this._items.FindIndex((itemToCheck) => { return itemToCheck.Equals(searchItem); });
 
         }
     }

@@ -15,8 +15,9 @@ namespace JohnBPearson.KeyBindingButler.Model
     public class KeyBoundData : IKeyBoundData
     {
         private Data _data;
-        private bool _lastInList;
+       
         private KeyboardKey _key;
+         internal IKeyBoundDataList _parent;
         public KeyboardKey Key
         {
             get { return _key; }
@@ -47,7 +48,7 @@ namespace JohnBPearson.KeyBindingButler.Model
                 }
             }
         }
-
+     
 
 
         public char KeyAsChar
@@ -73,62 +74,78 @@ namespace JohnBPearson.KeyBindingButler.Model
         //        } }
         //}
 
-        private ObjectState _ojectState;
-        public ObjectState ObjectStat
-        {
-            get { return this._ojectState; }
-        }
 
-        public ObjectState ObjectState => throw new NotImplementedException();
+        private ObjectState _objectState = ObjectState.New;
+        public ObjectState ObjectState
+        {
+            get { return this._objectState; }
+        }
 
         protected KeyBoundData()
         {
         }
         protected KeyBoundData(char key, string value)
         {
-            Key = KeyboardKey.Create(key);
-            Data = Data.Create(value);
+            this.CreateKeyboardKey(key);
+            this.CreateData(value);
         }
-
-
-        protected KeyBoundData(char key, string value, string description)
+        private void CreateData(string value)
         {
-            Key = KeyboardKey.Create(key);
-            Data = Data.Create(value);
-            Description = Description.Create(description);
-            
+            Data = Data.Create(value, this);
+        }
+
+        private void CreateKeyboardKey(char key)
+        {
+            Key = KeyboardKey.Create(key, this);
+        }
+
+        private void CreateDescription(string description)
+        {
+            Description =Description.Create(description, this);
+        }
+
+        protected KeyBoundData(IKeyBoundDataList parent, char key, string value, string description)
+        {
+            this.CreateKeyboardKey(key);
+            this.CreateData(value);
+           this.CreateDescription(description);
+            this._parent = parent;
         }
 
 
-        private void setIfLastItem(KeyboardKey key)
+        public bool setIfLastItem()
         {
             /// z is the last in the keyboard key list 
-            if(key.Key == 'z')
+            var lastIndex = this._parent.Items.Count() - 1;
+            var lastItem = _parent.Items.LastOrDefault();
+            if (lastItem.Equals(this))
             {
-                this._lastInList = true;
+                return true;
+               
             }
+            return false;
         }
 
 
-        internal static KeyBoundData Create(char key, string value, string description = "")
+        internal static KeyBoundData Create(IKeyBoundDataList parent, char key, string value, string description = "")
         {
-            return new KeyBoundData(key, value, description);
+            return new KeyBoundData(parent, key, value, description);
         }
 
-        internal static KeyBoundData CreateForReplace(Data newValue, IKeyBoundData oldItem)
-        {
-            if (!newValue.Equals(oldItem.Data))
-            {
-                return new KeyBoundData(oldItem.Key.Key, newValue.Value);
-            }
-            if (oldItem is KeyBoundData)
-            {
-                return (KeyBoundData)(oldItem);
-            } else
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //internal static KeyBoundData CreateForReplace(Data newValue, IKeyBoundData oldItem)
+        //{
+        //    if (!newValue.Equals(oldItem.Data))
+        //    {
+        //        return new KeyBoundData(oldItem.Key.Key, newValue.Value);
+        //    }
+        //    if (oldItem is KeyBoundData)
+        //    {
+        //        return (KeyBoundData)(oldItem);
+        //    } else
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
 
         public bool Equals(KeyBoundData other)
         {
@@ -138,20 +155,27 @@ namespace JohnBPearson.KeyBindingButler.Model
             }
             return false;
         }
+   
 
-      
-          
-        
-        public  string GetDelimitated()
+        [Obsolete("no mas")]
+        public string GetDelimitated()
         {
             return string.Concat(this._key.GetDeliminated(), this._data.ToString());
                     
         }
 
-        public void Update(string newValue)
+        public void Update(string newValue, string newDescription)
         {
-            if(this.Data.Value != newValue)
-           this.Data.Value= newValue;
+            if (this.Data.Value != newValue)
+            {
+                this.Data.Value = newValue;
+                this._objectState = ObjectState.Mutated;
+            }
+            if (!string.IsNullOrWhiteSpace(newDescription))
+            {
+                this.Description.Value = newDescription;
+                this._objectState = ObjectState.Mutated;
+            }
         }
 
         public bool Equals(IKeyBoundData other)

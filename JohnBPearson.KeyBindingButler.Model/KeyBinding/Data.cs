@@ -11,27 +11,23 @@ namespace JohnBPearson.KeyBindingButler.Model
     {
 
 
-        private Data() {
+        //private Data() {
             
-        } 
-        private Data(string value) : base(value) { 
+        //} 
+        private Data(string value, IKeyBoundData parent) : base(value, parent) { 
      
         
         }
 
-        private Data(object anyObject, ref object reference)
-        {
-            reference = anyObject;
-        }
-
+       
         public override string ToString()
         {
             return base.ToString();
         }
 
-        public static Data Create(string value)
+        public static Data Create(string value, IKeyBoundData parent)
         {
-            return new Data(value);
+            return new Data(value, parent);
         }
 
       

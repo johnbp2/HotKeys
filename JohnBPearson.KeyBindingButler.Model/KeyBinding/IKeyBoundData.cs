@@ -17,22 +17,27 @@ namespace JohnBPearson.KeyBindingButler.Model
     {
         KeyboardKey Key { get; }
         Data Data { get; }
+        Description Description { get; set; }
         char KeyAsChar { get; }
         
         ObjectState ObjectState { get; }
+
+
     }
-    public interface IKeyBoundData : System.IEquatable<IKeyBoundData>, IBase
+    public interface IKeyBoundData : System.IEquatable<IKeyBoundData>,                    IBase
     {
 
 
 
-        Description Description { get; set; }
+      
 
 
-        void Update(string newValue);
+        void Update(string newValue, string newDescription);
         string GetDelimitated();
 
-        
+
+        bool setIfLastItem();
+
 
     }
 

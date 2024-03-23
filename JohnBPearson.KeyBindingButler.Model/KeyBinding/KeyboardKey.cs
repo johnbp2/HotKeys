@@ -27,11 +27,11 @@ namespace JohnBPearson.KeyBindingButler.Model
             }
             set { _key = value; }
         }
-        protected KeyboardKey() : base()
+        protected KeyboardKey(IKeyBoundData parent) : base(parent)
         {
 
         }
-        protected KeyboardKey(char key) : base(key.ToString())
+        protected KeyboardKey(char key, IKeyBoundData parent) : base(key.ToString(), parent)
         {
             this._key = key;
         }
@@ -68,9 +68,9 @@ namespace JohnBPearson.KeyBindingButler.Model
 
         }
 
-        public static KeyboardKey Create(char key)
+        public static KeyboardKey Create(char key, IKeyBoundData parent)
         {
-            return new KeyboardKey(key);
+            return new KeyboardKey(key, parent);
 
         }
     }

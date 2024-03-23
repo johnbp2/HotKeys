@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyBinding\BaseData.cs" />
+    <Compile Include="KeyBinding\IKeyBoundDataList.cs" />
     <Compile Include="KeyBinding\KeyAndDataStringLiterals.cs" />
     <Compile Include="KeyBinding\KeyBoundDataList.cs" />
     <Compile Include="KeyBinding\ValueObject.cs" />

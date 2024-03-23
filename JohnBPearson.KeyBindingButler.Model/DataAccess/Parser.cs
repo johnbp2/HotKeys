@@ -1,8 +1,11 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +14,31 @@ using JohnBPearson.KeyBindingButler.Model;
 namespace JohnBPearson.com.Utility
 {
     internal class Parser
-
     {
 
-        public Parser(KeyAndDataStringLiterals strings)
+
+
+        private class Resurrect
+        {
+
+            const int Delimiter = 25;
+
+
+            public Resurrect()
+            {
+            }
+        
+        }
+
+        private IKeyBoundDataList _parent;
+        public Parser(KeyAndDataStringLiterals strings, IKeyBoundDataList parent)
         {
 
             this._valuesString = strings.Values;
 
             this._keysString = strings.Keys;
             this._descriptionString = strings.Descriptions;
+            this._parent = parent;
 
         }
 
@@ -80,7 +98,7 @@ namespace JohnBPearson.com.Utility
                 {
                     var value = values[index];
                     var des = descriptions[index];
-                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(key[0], value, des);
+                    var hkv = JohnBPearson.KeyBindingButler.Model.KeyBoundData.Create(this._parent,key[0], value, des);
                     resultList.Add(hkv);
                     index++;
                 }
@@ -91,6 +109,7 @@ namespace JohnBPearson.com.Utility
 
             }
             checkAndRepairValuesArray(values);
+            checkAndRepairValuesArray(descriptions);
 
             return resultList;
         }
@@ -116,17 +135,38 @@ namespace JohnBPearson.com.Utility
             var result = 0;
             var tempKeys = new List<string>();
             var tempValues = new List<string>();
-
+            var tempDescs = new List<string>();
             var values = new StringBuilder();
             foreach (var item in this.Items)
             {
-               
-                tempKeys.Add(item.Key.GetDeliminated());
-                tempValues.Add(item.Data.GetDeliminated());
+                if (item.ObjectState != ObjectState.Deleted)
+                {
+                    if (!item.setIfLastItem()) { 
+                    tempKeys.Add(item.Key.GetDeliminated());
+                        tempValues.Add(item.Data.GetDeliminated());
+                        tempDescs.Add(item.Description.GetDeliminated());
+                    }else
+                    {
+                        tempKeys.Add(item.Key.Value);
+                        tempValues.Add(item.Data.Value);
+                        tempDescs.Add(item.Description.Value);
+                    }
+                }
+                if(item.ObjectState == ObjectState.Mutated)
+                {
+                    result++;
+                }
+                else if(item.ObjectState == ObjectState.Deleted)
+                {
+                    tempKeys.Add(item.Key.GetDeliminated());
+                    tempValues.Add(item.Data.GetDeliminated());
+                    tempDescs.Add(item.Description.GetDeliminated());
+                }
             }
             var strings = new KeyAndDataStringLiterals();
           
             strings.Keys = tempKeys.ToString();
+            strings.Descriptions = tempDescs.ToString();
             strings.Values = this.checkAndRepairValuesArray(tempValues.ToArray()).ToString();
             return strings;
         }

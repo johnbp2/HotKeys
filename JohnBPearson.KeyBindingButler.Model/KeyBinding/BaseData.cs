@@ -13,14 +13,16 @@ namespace JohnBPearson.KeyBindingButler.Model
 
     public abstract class BaseData : IEquatable<BaseData>, IBaseData
     {
-      protected BaseData() { }
-        protected BaseData(string value)
+        protected IKeyBoundData _parent;
+        protected BaseData(IKeyBoundData parent) { this._parent = parent; }
+        protected BaseData(string value, IKeyBoundData parent)
         {
             if (value == null) value = string.Empty;
             this._value = value;
+            this._parent = parent;
         }
 
-       
+
 
         private string _value = "";
         public virtual string Value
@@ -35,19 +37,21 @@ namespace JohnBPearson.KeyBindingButler.Model
             }
         }
 
-        public string Deliminater
+        public string Delimiter
         {
-            get { return deliminater; }
+            get { return _delimiter; }
             private set
             {
                 if (!String.IsNullOrWhiteSpace(value))
                 {
-                    this.deliminater = value;
+                    this._delimiter = value;
                 }
             }
         }
 
-        private  string deliminater = "|";
+
+
+        private string _delimiter = "|";
 
         public override string ToString()
         {
@@ -55,8 +59,15 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
         public string GetDeliminated()
         {
-            return string.Concat(Value, Deliminater);
+            return string.Concat(Value, Delimiter);
         }
+        public string GetDelimiter()
+        {
+            return Delimiter;
+        }
+
+
+
 
         public string GetDeliminated(char delim)
         {
@@ -84,7 +95,7 @@ namespace JohnBPearson.KeyBindingButler.Model
 
                     break;
                 default:
-                    throw new ArgumentException($"{nameof(delim)} is invalid for deliminater. Allowed chars are , ? ! / \\ # %");
+                    throw new ArgumentException($"{nameof(delim)} is invalid for _delimiter. Allowed chars are , ? ! / \\ # %");
                     break;
             }
             return string.Concat(Value, delim.ToString());
@@ -99,11 +110,39 @@ namespace JohnBPearson.KeyBindingButler.Model
             return false;
         }
 
-        public  bool Equals(BaseData other)
+        public bool Equals(BaseData other)
         {
-            if (other != null && other.Value == this.Value) { return true; } else { return false; }
+            return this == other;
+           // if (other != null && other.Value == this.Value) { return true; } else { return false; }
         }
 
-        // public abstract bool Equals(IBaseData other);
+
+        public static bool operator ==(BaseData lhs, BaseData rhs)
+        {        // public abstract bool Equals(IBaseData other);
+            if (lhs is null || rhs is null)
+            {
+                if (lhs is null && rhs is null) { return true; } else { return false; }
+
+
+            }
+            if (lhs.Value == rhs.Value) { return true; }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        public static bool operator !=(BaseData lhs, BaseData rhs)
+        {
+            if (lhs is null || rhs is null)
+            {
+                if (lhs is null && rhs is null) { return false; } else { return true; }
+
+      
+            }
+            if (!lhs.Equals(rhs)) return true;
+            return false;
+        }
     }
 }

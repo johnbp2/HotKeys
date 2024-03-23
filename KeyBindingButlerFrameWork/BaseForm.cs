@@ -17,7 +17,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         protected PopupNotifier notifier = new PopupNotifier();
 
 
-        protected void notify(string title, string content)
+        protected void notify(string title, string content, bool flash= false)
         {
             Bitmap bmp = new Bitmap(@".\Butler.png");
 
@@ -30,8 +30,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
                 popupNotifier.Popup();
 
             }
-          
-            FlashWindow.TrayAndWindow(this);
+            if (flash)
+            {
+                FlashWindow.TrayAndWindow(this);
+            }
         }
     }
 

@@ -79,7 +79,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
             Settings.Default.LastBoundKeyPressed = item.Key.Value;
             Settings.Default.Save();
-            base.notify("Sir your data", "Is in the clipboard");
+            base.notify($"Sir your data: {item.Description.Value}", "Is in the clipboard");
           //  messages.raiseEvent(key, item);
         }
 
@@ -156,7 +156,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
 
 
-        private void attemptToSave(bool overrideAutoSaveSetting)
+        private void presenterSave(bool overrideAutoSaveSetting)
         {
             //this.presenter.executeAutoSave((DataRowView)this.cbHotkey1.SelectedItem, (DataRowView)this.cbHotkey2.SelectedItem, new object(),
             // new object());
@@ -212,12 +212,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            attemptToSave(false);
+            presenterSave(false);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            attemptToSave(true);
+            presenterSave(true);
 
         }
 
@@ -268,7 +268,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             if (this.selectedKeyBoundValue != null) {
                 var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
               
-                this.presenter.replaceItem(itemToUpdate, tbValue.Text);
+                this.presenter.replaceItem(itemToUpdate, tbValue.Text, "");
          
             }
         }
@@ -313,11 +313,16 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
 
         private void tbValue_Leave(object sender, EventArgs e)
         {
+            updateKeyBoundData(tbValue.Text, "");
+        }
+
+        private void updateKeyBoundData(string newValue, string newDescription)
+        {
             if (this.selectedKeyBoundValue != null)
             {
                 var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
 
-                this.presenter.replaceItem(itemToUpdate, tbValue.Text);
+                this.presenter.replaceItem(itemToUpdate, newValue, newDescription);
 
             }
         }
@@ -344,5 +349,10 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         }
 
         #endregion
+
+        private void tbDesc_Leave(object sender, EventArgs e)
+        {
+            updateKeyBoundData("", tbDesc.Text);
+        }
     }
 }
