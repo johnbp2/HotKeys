@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,14 +9,15 @@ namespace JohnBPearson.KeyBindingButler.Model
 {
     internal class OneStringParser
     {
+        private IKeyBoundDataList _parent;
 
-        public OneStringParser(string settingString)
+        public OneStringParser(string settingString,IKeyBoundDataList parent)
         {
             this._settingString = settingString;
             //this._valuesString = strings.Values;
 
             //this._keysString = strings.Keys;
-
+            this._parent = parent;
         }
 
       
@@ -29,7 +31,7 @@ namespace JohnBPearson.KeyBindingButler.Model
             {
                 if (this._items == null)
                 {
-                    this.setParsed();
+                    this.setParsed(this._parent);
                 }
                 return this._items;
             }
@@ -44,17 +46,17 @@ namespace JohnBPearson.KeyBindingButler.Model
             {
                 if (this._keys == null)
                 {
-                    this.setParsed();
+                    this.setParsed(this._parent);
                 }
                 return this._keys;
             }
             private set { _keys = value; }
         }
 
-        private void setParsed()
+        private void setParsed(IKeyBoundDataList parent)
         {
             this.initializeLazyLoad();
-            this._items = this.parse();
+            this._items = this.parse(parent);
 
         }
 
@@ -63,14 +65,14 @@ namespace JohnBPearson.KeyBindingButler.Model
             this._keys = new List<string>();
             this._items = new List<IKeyBoundData>();
         }
-        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> parse()
+        private List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> parse(IKeyBoundDataList parent)
         {
             
            // string[] delims = { delim };
             var resultList = new List<IKeyBoundData>();
             //   var letters = this._keysString.Split(delims, 100, StringSplitOptions.None).Clone();
             char[] delimChars = { delimChar };
-            char[] itemDelims = { itemdeliminaterChar };
+            char[] itemDelims = { itemDelimiterChar };
 
             var splitString = this._settingString.Split(delimChars, StringSplitOptions.RemoveEmptyEntries);
 
@@ -84,7 +86,7 @@ namespace JohnBPearson.KeyBindingButler.Model
                     {
                        data = keyValue[1];
                     }
-                    var pair = KeyBoundData.Create(keyValue[0].ToCharArray()[0], data);
+                    var pair = KeyBoundData.Create(parent, keyValue[0].ToCharArray()[0], data);
                     if(this.Keys == null)
                     {
                         this.Keys = new List<string>();
@@ -123,7 +125,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         }
         //private const string delim = "|";
         private const char delimChar = '|';
-        private const char itemdeliminaterChar = ',';
+        private const char itemDelimiterChar = ',';
         internal string updateString(List<JohnBPearson.KeyBindingButler.Model.IKeyBoundData> items)
         {
             var result = 0;

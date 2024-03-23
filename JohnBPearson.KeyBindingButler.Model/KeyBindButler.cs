@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +11,13 @@ namespace JohnBPearson.KeyBindingButler.Model
     public class KeyBindingButler : ButlerBase
     {
 
-        private Parser _userSettingsHelper;
+        private Parser _userSettingsParser;
         private List<IKeyBoundData> _items = new List<IKeyBoundData>();
 
         public KeyBindingButler(KeyAndDataStringLiterals strings, string hisName) : base(hisName)
         {
-            this._userSettingsHelper = new Parser(strings);
-            this._items = this._userSettingsHelper.Items;
+            this._userSettingsParser = new Parser(strings);
+            this._items = this._userSettingsParser.Items;
 
         }
 
@@ -25,9 +25,9 @@ namespace JohnBPearson.KeyBindingButler.Model
         {
             get
             {
-                if (this._userSettingsHelper != null)
+                if (this._userSettingsParser != null)
                 {
-                    return this._userSettingsHelper.Keys;
+                    return this._userSettingsParser.Keys;
                 }
                 else return null;
             }
@@ -35,20 +35,7 @@ namespace JohnBPearson.KeyBindingButler.Model
         public IEnumerable<IKeyBoundData> Items
         { get { return this._items; } }
 
-        public void Update(IKeyBoundData newItem, IKeyBoundData oldItem)
-        {
-
-            if(newItem.Equals(oldItem))
-            {
-
-                oldItem.Update(newItem.Data.Value);
-            }
-          //  var newKeyBoundValue = KeyBoundData.CreateForReplace(newItem.Data, oldItem);
-            var index = this._items.IndexOf(oldItem);
-            this._items.RemoveAt(index);
-            this._items[index] = newItem;
-            //  return this._items;
-        }
+        
 
         public KeyAndDataStringLiterals PrepareDataForSave()
         {
@@ -71,3 +58,4 @@ namespace JohnBPearson.KeyBindingButler.Model
     }
 }
 
+*/

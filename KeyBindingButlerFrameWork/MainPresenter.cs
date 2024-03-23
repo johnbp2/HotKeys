@@ -31,10 +31,12 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             GlobalHotKey.removeAllRegistration();
             registerHotKeys(keyBoundValueList.Items);
         }
+        }
         public int executeAutoSave(bool overrideAutoSaveSetting)
         {
             var strings = this.keyBoundValueList.PrepareDataForSave();
             Properties.Settings.Default.BindableValues = strings.Values;
+            Properties.Settings.Default.Descriptions = strings.Descriptions;
             Properties.Settings.Default.Save();
             this.LoadHotKeyValues();
             GlobalHotKey.removeAllRegistration();
@@ -76,7 +78,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             var strings = new KeyAndDataStringLiterals();
             strings.Values = Properties.Settings.Default.BindableValues;
             strings.Keys = Properties.Settings.Default.BindableKeys;
-            
+            strings.Descriptions = Properties.Settings.Default.Descriptions;
             this.keyBoundValueList = new JohnBPearson.KeyBindingButler.Model.KeyBoundDataList(strings);
             return this.keyBoundValueList;
         }

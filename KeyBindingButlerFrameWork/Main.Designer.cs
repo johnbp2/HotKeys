@@ -42,13 +42,19 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentFlowPanel1 = new JohnBPearson.Windows.Forms.Controls.TransparentFlowPanel();
+            this.lblKey = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
             this.cbHotkeySelection = new System.Windows.Forms.ComboBox();
+            this.templatedLabel1 = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
+            this.tbDesc = new System.Windows.Forms.TextBox();
             this.transparentPanel2 = new JohnBPearson.Windows.Forms.Controls.TransparentPanel();
-            this.notBetterButton2 = new JohnBPearson.Windows.Forms.Controls.NotBetterButton();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblGuildAd = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
-            this.lblKey = new JohnBPearson.Windows.Forms.Controls.TemplatedLabel();
+            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
+            this.test1 = new JohnBPearson.Windows.Forms.Controls.test();
+            this.btnReload = new System.Windows.Forms.Button();
+            this.lblDescription = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.transparentFlowPanel1.SuspendLayout();
             this.transparentPanel2.SuspendLayout();
@@ -71,7 +77,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1036, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +92,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -108,12 +114,27 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // 
             this.transparentFlowPanel1.Controls.Add(this.lblKey);
             this.transparentFlowPanel1.Controls.Add(this.cbHotkeySelection);
+            this.transparentFlowPanel1.Controls.Add(this.templatedLabel1);
+            this.transparentFlowPanel1.Controls.Add(this.lblDescription);
+            this.transparentFlowPanel1.Controls.Add(this.tbDesc);
             this.transparentFlowPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.transparentFlowPanel1.Location = new System.Drawing.Point(42, 39);
             this.transparentFlowPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.transparentFlowPanel1.Name = "transparentFlowPanel1";
-            this.transparentFlowPanel1.Size = new System.Drawing.Size(408, 78);
+            this.transparentFlowPanel1.Size = new System.Drawing.Size(321, 168);
             this.transparentFlowPanel1.TabIndex = 2;
+            // 
+            // lblKey
+            // 
+            this.lblKey.AutoSize = true;
+            this.lblKey.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblKey.Location = new System.Drawing.Point(3, 0);
+            this.lblKey.MinimumSize = new System.Drawing.Size(5, 10);
+            this.lblKey.Name = "lblKey";
+            this.lblKey.Size = new System.Drawing.Size(5, 24);
+            this.lblKey.TabIndex = 9;
+            this.lblKey.Template = null;
+            this.lblKey.TemplateValues = ((System.Collections.Generic.List<string>)(resources.GetObject("lblKey.TemplateValues")));
             // 
             // cbHotkeySelection
             // 
@@ -126,54 +147,61 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.cbHotkeySelection.TextUpdate += new System.EventHandler(this.cbHotkeySelection_TextUpdate);
             this.cbHotkeySelection.SelectedValueChanged += new System.EventHandler(this.cbHotkeySelection_SelectedValueChanged);
             // 
+            // templatedLabel1
+            // 
+            this.templatedLabel1.AutoSize = true;
+            this.templatedLabel1.Location = new System.Drawing.Point(3, 68);
+            this.templatedLabel1.Name = "templatedLabel1";
+            this.templatedLabel1.Size = new System.Drawing.Size(0, 24);
+            this.templatedLabel1.TabIndex = 10;
+            this.templatedLabel1.Template = null;
+            this.templatedLabel1.TemplateValues = null;
+            // 
+            // tbDesc
+            // 
+            this.tbDesc.Location = new System.Drawing.Point(3, 119);
+            this.tbDesc.Multiline = true;
+            this.tbDesc.Name = "tbDesc";
+            this.tbDesc.Size = new System.Drawing.Size(248, 32);
+            this.tbDesc.TabIndex = 7;
+            this.tbDesc.TextChanged += new System.EventHandler(this.tbDesc_TextChanged);
+            this.tbDesc.Leave += new System.EventHandler(this.tbDesc_Leave);
+            // 
             // transparentPanel2
             // 
-            this.transparentPanel2.Controls.Add(this.notBetterButton2);
+            this.transparentPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.transparentPanel2.Controls.Add(this.btnReload);
+            this.transparentPanel2.Controls.Add(this.btnCopy);
             this.transparentPanel2.Controls.Add(this.btnSave);
             this.transparentPanel2.Controls.Add(this.lblGuildAd);
             this.transparentPanel2.Controls.Add(this.tbValue);
-            this.transparentPanel2.Location = new System.Drawing.Point(11, 128);
+            this.transparentPanel2.Location = new System.Drawing.Point(11, 219);
             this.transparentPanel2.Margin = new System.Windows.Forms.Padding(6);
             this.transparentPanel2.Name = "transparentPanel2";
-            this.transparentPanel2.Size = new System.Drawing.Size(917, 238);
+            this.transparentPanel2.Size = new System.Drawing.Size(573, 203);
             this.transparentPanel2.TabIndex = 1;
             // 
-            // notBetterButton2
+            // btnCopy
             // 
-            this.notBetterButton2.DisplayText = "Save";
-            this.notBetterButton2.EndColor = System.Drawing.Color.DarkBlue;
-            this.notBetterButton2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.notBetterButton2.ForeColor = System.Drawing.Color.White;
-            this.notBetterButton2.GradientAngle = 90;
-            this.notBetterButton2.Location = new System.Drawing.Point(845, 147);
-            this.notBetterButton2.MouseClickColor1 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton2.MouseClickColor2 = System.Drawing.Color.Red;
-            this.notBetterButton2.MouseHoverColor1 = System.Drawing.Color.Yellow;
-            this.notBetterButton2.MouseHoverColor2 = System.Drawing.Color.DarkOrange;
-            this.notBetterButton2.Name = "notBetterButton2";
-            this.notBetterButton2.Size = new System.Drawing.Size(69, 41);
-            this.notBetterButton2.StartColor = System.Drawing.Color.LightGreen;
-            this.notBetterButton2.TabIndex = 4;
-            this.notBetterButton2.Text = "Save";
-            this.notBetterButton2.TextLocation_X = 76;
-            this.notBetterButton2.TextLocation_Y = 24;
-            this.notBetterButton2.Transparent1 = 150;
-            this.notBetterButton2.Transparent2 = 150;
-            this.notBetterButton2.UseVisualStyleBackColor = true;
-            this.notBetterButton2.Visible = false;
-            this.notBetterButton2.Click += new System.EventHandler(this.notBetterButton2_Click);
+            this.btnCopy.Enabled = false;
+            this.btnCopy.Location = new System.Drawing.Point(406, 46);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(97, 32);
+            this.btnCopy.TabIndex = 5;
+            this.btnCopy.Text = "Copy ";
+            this.btnCopy.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.Location = new System.Drawing.Point(832, 100);
+            this.btnSave.Location = new System.Drawing.Point(406, 112);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(79, 37);
+            this.btnSave.Size = new System.Drawing.Size(157, 37);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblGuildAd
@@ -188,8 +216,8 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             // tbValue
             // 
             this.tbValue.BackColor = System.Drawing.SystemColors.Info;
-            this.tbValue.Location = new System.Drawing.Point(31, 46);
-            this.tbValue.Margin = new System.Windows.Forms.Padding(6);
+            this.tbValue.Location = new System.Drawing.Point(0, 7);
+            this.tbValue.Margin = new System.Windows.Forms.Padding(0);
             this.tbValue.Multiline = true;
             this.tbValue.Name = "tbValue";
             this.tbValue.Size = new System.Drawing.Size(363, 142);
@@ -197,17 +225,35 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.tbValue.TabStop = false;
             this.tbValue.Leave += new System.EventHandler(this.tbValue_Leave);
             // 
-            // lblKey
+            // elementHost2
             // 
-            this.lblKey.AutoSize = true;
-            this.lblKey.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblKey.Location = new System.Drawing.Point(3, 0);
-            this.lblKey.MinimumSize = new System.Drawing.Size(5, 10);
-            this.lblKey.Name = "lblKey";
-            this.lblKey.Size = new System.Drawing.Size(5, 24);
-            this.lblKey.TabIndex = 9;
-            this.lblKey.Template = null;
-            this.lblKey.TemplateValues = ((System.Collections.Generic.List<string>)(resources.GetObject("lblKey.TemplateValues")));
+            this.elementHost2.Location = new System.Drawing.Point(339, 55);
+            this.elementHost2.Name = "elementHost2";
+            this.elementHost2.Size = new System.Drawing.Size(200, 100);
+            this.elementHost2.TabIndex = 9;
+            this.elementHost2.Text = "elementHost2";
+            this.elementHost2.Visible = false;
+            this.elementHost2.Child = this.test1;
+            // 
+            // btnReload
+            // 
+            this.btnReload.Enabled = false;
+            this.btnReload.Location = new System.Drawing.Point(406, -2);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(97, 32);
+            this.btnReload.TabIndex = 6;
+            this.btnReload.Text = "Refresh";
+            this.btnReload.UseVisualStyleBackColor = true;
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.BackColor = System.Drawing.SystemColors.Menu;
+            this.lblDescription.Location = new System.Drawing.Point(3, 92);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(104, 24);
+            this.lblDescription.TabIndex = 6;
+            this.lblDescription.Text = "Description";
             // 
             // Main
             // 
@@ -217,7 +263,8 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1036, 387);
+            this.ClientSize = new System.Drawing.Size(584, 428);
+            this.Controls.Add(this.elementHost2);
             this.Controls.Add(this.transparentFlowPanel1);
             this.Controls.Add(this.transparentPanel2);
             this.Controls.Add(this.menuStrip1);
@@ -261,8 +308,14 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private JohnBPearson.Windows.Forms.Controls.NotBetterButton notBetterButton2;
         private TemplatedLabel lblKey;
+        private System.Windows.Forms.Button btnCopy;
+        private TemplatedLabel templatedLabel1;
+        private System.Windows.Forms.TextBox tbDesc;
+        private System.Windows.Forms.Integration.ElementHost elementHost2;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Button btnReload;
+        private test test1;
     }
 }
 
