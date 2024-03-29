@@ -25,13 +25,13 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
         public Main Form { get { return this._main; }  set { this._main = value; } }
 
 
-        public void updateItem(IKeyBoundData oldItem, string newData)
+        public void updateItem(IKeyBoundData oldItem, string newData, string description)
         {
-            oldItem.Update(newData);
+            oldItem.Update(newData, description);
             GlobalHotKey.removeAllRegistration();
             registerHotKeys(keyBoundValueList.Items);
         }
-        }
+        
         public int executeAutoSave(bool overrideAutoSaveSetting)
         {
             var strings = this.keyBoundValueList.PrepareDataForSave();
