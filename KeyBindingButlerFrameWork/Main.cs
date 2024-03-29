@@ -269,7 +269,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             if (this.selectedKeyBoundValue != null) {
                 var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
               
-                this.presenter.replaceItem(itemToUpdate, tbValue.Text, "");
+                this.presenter.updateItem(itemToUpdate, tbValue.Text, itemToUpdate.Description.Value);
          
             }
         }
@@ -323,7 +323,7 @@ namespace JohnBPearson.Windows.Forms.KeyBindingButler
             {
                 var itemToUpdate = this.presenter.findKeyBoundValue(this.selectedKeyBoundValue);
 
-                this.presenter.replaceItem(itemToUpdate, newValue, newDescription);
+                this.presenter.updateItem(itemToUpdate, newValue, newDescription);
 
             }
         }
